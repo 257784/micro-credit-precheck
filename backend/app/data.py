@@ -1,11 +1,16 @@
+"""加载虚构教学数据，并验证跨对象引用与只读查询关系。"""
+
+from datetime import datetime
 from pathlib import Path
 
-from .models import ApplicationDetail, ApplicationSummary, SeedData
+from .models import ApplicationDetail, ApplicationSummary, Report, SeedData
 
 SEED_PATH = Path(__file__).resolve().parents[2] / "mock_data" / "seed.json"
 
 
 def load_seed(path: Path = SEED_PATH) -> SeedData:
+    """读取并校验样例；ID 重复或引用失效时拒绝启动服务。"""
+
     data = SeedData.model_validate_json(path.read_text(encoding="utf-8"))
     enterprises = {item.enterprise_id: item for item in data.enterprises}
     applications = {item.application_id: item for item in data.applications}
@@ -36,6 +41,7 @@ def load_seed(path: Path = SEED_PATH) -> SeedData:
         if report.application_id not in applications:
             raise ValueError(f"Unknown application for {report.report_id}")
         for item in report.items:
+            # 证据必须属于当前申请，防止报告展示其他企业的材料。
             for evidence in item.evidence:
                 material = materials.get(evidence.material_id)
                 if material is None or material.application_id != report.application_id:
@@ -53,16 +59,23 @@ def load_seed(path: Path = SEED_PATH) -> SeedData:
 
 
 class SeedRepository:
+    """为 API 提供只读查询；后续可替换为 MySQL 实现。"""
+
     def __init__(self, data: SeedData):
         self.data = data
         self.enterprises = {item.enterprise_id: item for item in data.enterprises}
         self.applications = {item.application_id: item for item in data.applications}
 
     def list_applications(self) -> list[ApplicationSummary]:
-        latest_reports = {}
+        """返回申请摘要，并附上每笔申请最近一次预审的处理状态。"""
+
+        latest_reports: dict[str, Report] = {}
         for report in self.data.reports:
             current = latest_reports.get(report.application_id)
-            if current is None or report.generated_at > current.generated_at:
+            # 解析带时区的时间，避免不同 UTC 偏移下直接比较字符串出错。
+            if current is None or datetime.fromisoformat(
+                report.generated_at
+            ) > datetime.fromisoformat(current.generated_at):
                 latest_reports[report.application_id] = report
         return [
             ApplicationSummary(
@@ -78,6 +91,8 @@ class SeedRepository:
         ]
 
     def get_application(self, application_id: str) -> ApplicationDetail | None:
+        """按申请 ID 汇集所属企业、材料和历次报告。"""
+
         application = self.applications.get(application_id)
         if application is None:
             return None

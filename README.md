@@ -23,6 +23,8 @@
 
 当前已提供只读的虚构申请、企业、材料和 AI 报告样例，前端可从申请列表查看详情。数据结构与存储取舍见 [核心数据对象与只读接口](docs/data-contract.md)。人工复核提交、MySQL 持久化和真实材料预览将在后续步骤实现。
 
+代码风格、注释约定和提交前检查见 [F2 代码规范](docs/coding-standards.md)。
+
 ## 本地启动
 
 首次创建后端虚拟环境（在 `backend` 目录）：`python -m venv .venv`。PowerShell 中可用 `.\.venv\Scripts\Activate.ps1` 激活；如果执行策略阻止激活，可直接运行 `.\.venv\Scripts\python.exe`。`.venv` 已被 Git 忽略。安装 uv 后运行 `python -m uv sync`，由 uv 管理这个环境及 `pyproject.toml` 中的依赖。使用 `python -m uv` 不要求将用户级 Scripts 目录加入 PATH。

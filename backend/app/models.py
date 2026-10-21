@@ -1,3 +1,5 @@
+"""F2 只读接口和教学数据使用的对象结构。"""
+
 from pydantic import BaseModel, Field
 
 
@@ -10,6 +12,8 @@ class Enterprise(BaseModel):
 
 
 class Application(BaseModel):
+    """一笔申请只对应一种教学产品需求，金额单位为元。"""
+
     application_id: str
     enterprise_id: str
     product_type: str
@@ -45,6 +49,8 @@ class EvidenceRef(BaseModel):
 
 
 class ReportItem(BaseModel):
+    """一条预审线索；证据和知识依据供人工核验，不是审批结论。"""
+
     item_id: str
     item_type: str
     field_name: str
@@ -59,6 +65,8 @@ class ReportItem(BaseModel):
 
 
 class Report(BaseModel):
+    """一次预审运行的结果；失败时保留原因，不能按空报告处理。"""
+
     report_id: str
     application_id: str
     generated_at: str
@@ -82,6 +90,8 @@ class ApplicationSummary(Application):
 
 
 class ApplicationDetail(BaseModel):
+    """同一申请下的企业、材料和历次报告。"""
+
     application: Application
     enterprise: Enterprise
     materials: list[Material]

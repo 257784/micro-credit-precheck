@@ -8,6 +8,7 @@ function formatTime(value) {
 }
 
 function reportLabel(status) {
+  // 失败和无报告必须明确标识，不能被当作“没有关注项”。
   if (status === 'failed') return '解析失败';
   if (status === 'needs_human_review') return '待人工核验';
   return status || '暂无报告';
@@ -43,6 +44,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // 切换申请时取消旧请求，避免较慢的响应覆盖当前详情。
     if (!selectedId) return undefined;
     const controller = new AbortController();
     setDetail(null);
