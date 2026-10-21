@@ -22,7 +22,7 @@ def health() -> dict[str, str]:
 def list_enterprises() -> list[Enterprise]:
     """列出虚构企业客户。"""
 
-    return repository.data.enterprises
+    return repository.list_enterprises()
 
 
 @app.get("/api/applications", response_model=list[ApplicationSummary])

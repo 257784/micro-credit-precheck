@@ -1,30 +1,174 @@
-:root { font-family: system-ui, sans-serif; color: #243244; background: #f5f7fb; }
-* { box-sizing: border-box; }
-body { margin: 0; }
-.page { max-width: 1280px; margin: 0 auto; padding: 32px 24px 64px; }
-.page-header { margin-bottom: 28px; }
-.page-header h1 { margin: 4px 0 8px; font-size: 30px; }
-.page-header p { margin: 0; color: #59697a; }
-.eyebrow { color: #2466a5 !important; font-weight: 700; letter-spacing: .04em; }
-.columns { display: grid; grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); gap: 20px; align-items: start; }
-.panel { background: white; border: 1px solid #dae2eb; border-radius: 12px; padding: 20px; }
-.panel h2 { margin: 0 0 18px; font-size: 21px; }
-.panel h3 { margin: 0 0 12px; font-size: 17px; }
-.detail section + section { border-top: 1px solid #e7edf3; margin-top: 24px; padding-top: 24px; }
-.application-list { display: grid; gap: 10px; }
-.application-card { width: 100%; display: grid; gap: 8px; text-align: left; color: inherit; background: #fff; border: 1px solid #dce4ed; border-radius: 9px; padding: 14px; cursor: pointer; font: inherit; }
-.application-card:hover, .application-card:focus-visible { border-color: #4385bd; }
-.application-card.selected { border-color: #2466a5; background: #f0f7ff; }
-.card-top { display: flex; justify-content: space-between; gap: 8px; }
-.card-top span { color: #2466a5; white-space: nowrap; }
-.application-card > span:not(.card-top) { color: #59697a; font-size: 14px; }
-.facts { display: grid; grid-template-columns: 100px 1fr; gap: 10px 16px; margin: 0; }
-.facts dt { color: #667586; }
-.facts dd { margin: 0; overflow-wrap: anywhere; }
-.record { border: 1px solid #e1e8ef; border-radius: 8px; padding: 14px; margin-top: 10px; }
-.record p { margin: 8px 0; }
-.record small { color: #667586; }
-.finding { background: #f7f9fc; border-radius: 7px; padding: 12px; margin-top: 12px; overflow-wrap: anywhere; }
-.finding p { margin: 8px 0 0; }
-.notice { color: #9c3d22; background: #fff2ec; padding: 10px; border-radius: 6px; }
-@media (max-width: 760px) { .columns { grid-template-columns: 1fr; } .page { padding: 20px 14px 48px; } }
+:root {
+  font-family: system-ui, sans-serif;
+  color: #243244;
+  background: #f5f7fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 4px 0 8px;
+  font-size: 30px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #59697a;
+}
+
+.page-header .eyebrow {
+  color: #2466a5;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panel {
+  padding: 20px;
+  background: white;
+  border: 1px solid #dae2eb;
+  border-radius: 12px;
+}
+
+.panel h2 {
+  margin: 0 0 18px;
+  font-size: 21px;
+}
+
+.panel h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+
+.detail section + section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e7edf3;
+}
+
+.application-list {
+  display: grid;
+  gap: 10px;
+}
+
+.application-card {
+  display: grid;
+  width: 100%;
+  gap: 8px;
+  padding: 14px;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  background: #fff;
+  border: 1px solid #dce4ed;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.application-card:hover,
+.application-card:focus-visible {
+  border-color: #4385bd;
+}
+
+.application-card.selected {
+  background: #f0f7ff;
+  border-color: #2466a5;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card-top span {
+  color: #2466a5;
+  white-space: nowrap;
+}
+
+.application-card > span:not(.card-top) {
+  color: #59697a;
+  font-size: 14px;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 10px 16px;
+  margin: 0;
+}
+
+.facts dt {
+  color: #667586;
+}
+
+.facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.record {
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid #e1e8ef;
+  border-radius: 8px;
+}
+
+.record p {
+  margin: 8px 0;
+}
+
+.record small {
+  color: #667586;
+}
+
+.finding {
+  margin-top: 12px;
+  padding: 12px;
+  overflow-wrap: anywhere;
+  background: #f7f9fc;
+  border-radius: 7px;
+}
+
+.finding p {
+  margin: 8px 0 0;
+}
+
+.notice {
+  padding: 10px;
+  color: #9c3d22;
+  background: #fff2ec;
+  border-radius: 6px;
+}
+
+@media (max-width: 760px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+
+  .page {
+    padding: 20px 14px 48px;
+  }
+}

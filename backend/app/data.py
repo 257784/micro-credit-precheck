@@ -3,7 +3,13 @@
 from datetime import datetime
 from pathlib import Path
 
-from .models import ApplicationDetail, ApplicationSummary, Report, SeedData
+from .models import (
+    ApplicationDetail,
+    ApplicationSummary,
+    Enterprise,
+    Report,
+    SeedData,
+)
 
 SEED_PATH = Path(__file__).resolve().parents[2] / "mock_data" / "seed.json"
 
@@ -15,9 +21,7 @@ def load_seed(path: Path = SEED_PATH) -> SeedData:
     enterprises = {item.enterprise_id: item for item in data.enterprises}
     applications = {item.application_id: item for item in data.applications}
     materials = {item.material_id: item for item in data.materials}
-    knowledge = {
-        (item.knowledge_id, item.version): item for item in data.knowledge_items
-    }
+    knowledge = {(item.knowledge_id, item.version): item for item in data.knowledge_items}
 
     for label, items, ids in (
         ("enterprise", data.enterprises, enterprises),
@@ -61,10 +65,15 @@ def load_seed(path: Path = SEED_PATH) -> SeedData:
 class SeedRepository:
     """为 API 提供只读查询；后续可替换为 MySQL 实现。"""
 
-    def __init__(self, data: SeedData):
+    def __init__(self, data: SeedData) -> None:
         self.data = data
         self.enterprises = {item.enterprise_id: item for item in data.enterprises}
         self.applications = {item.application_id: item for item in data.applications}
+
+    def list_enterprises(self) -> list[Enterprise]:
+        """列出所有虚构企业客户。"""
+
+        return self.data.enterprises
 
     def list_applications(self) -> list[ApplicationSummary]:
         """返回申请摘要，并附上每笔申请最近一次预审的处理状态。"""
@@ -73,22 +82,22 @@ class SeedRepository:
         for report in self.data.reports:
             current = latest_reports.get(report.application_id)
             # 解析带时区的时间，避免不同 UTC 偏移下直接比较字符串出错。
-            if current is None or datetime.fromisoformat(
-                report.generated_at
-            ) > datetime.fromisoformat(current.generated_at):
+            report_time = datetime.fromisoformat(report.generated_at)
+            current_time = datetime.fromisoformat(current.generated_at) if current else None
+            if current_time is None or report_time > current_time:
                 latest_reports[report.application_id] = report
-        return [
-            ApplicationSummary(
-                **application.model_dump(),
-                enterprise_name=self.enterprises[application.enterprise_id].enterprise_name,
-                report_status=(
-                    latest_reports[application.application_id].analysis_status
-                    if application.application_id in latest_reports
-                    else None
-                ),
+
+        summaries = []
+        for application in self.data.applications:
+            latest_report = latest_reports.get(application.application_id)
+            summaries.append(
+                ApplicationSummary(
+                    **application.model_dump(),
+                    enterprise_name=self.enterprises[application.enterprise_id].enterprise_name,
+                    report_status=latest_report.analysis_status if latest_report else None,
+                )
             )
-            for application in self.data.applications
-        ]
+        return summaries
 
     def get_application(self, application_id: str) -> ApplicationDetail | None:
         """按申请 ID 汇集所属企业、材料和历次报告。"""
@@ -99,6 +108,14 @@ class SeedRepository:
         return ApplicationDetail(
             application=application,
             enterprise=self.enterprises[application.enterprise_id],
-            materials=[m for m in self.data.materials if m.application_id == application_id],
-            reports=[r for r in self.data.reports if r.application_id == application_id],
+            materials=[
+                material
+                for material in self.data.materials
+                if material.application_id == application_id
+            ],
+            reports=[
+                report
+                for report in self.data.reports
+                if report.application_id == application_id
+            ],
         )
