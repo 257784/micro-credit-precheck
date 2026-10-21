@@ -21,10 +21,16 @@
 | `docs/` | F2 设计与开发文档 |
 | `tests/` | 业务流程与接口测试 |
 
-当前仅建立工程骨架。业务接口、MySQL 表结构、Mock 样例及页面将在后续步骤实现。
+当前先验证首页和后端连通。业务接口、MySQL 表结构、Mock 样例及业务页面将在后续步骤实现。
 
 ## 本地启动
 
-前端：进入 `frontend`，运行 `npm install` 和 `npm run dev`。
+首次创建后端虚拟环境（在 `backend` 目录）：`python -m venv .venv`。PowerShell 中可用 `.\.venv\Scripts\Activate.ps1` 激活；如果执行策略阻止激活，可直接运行 `.\.venv\Scripts\python.exe`。`.venv` 已被 Git 忽略。安装 uv 后运行 `python -m uv sync`，由 uv 管理这个环境及 `pyproject.toml` 中的依赖。使用 `python -m uv` 不要求将用户级 Scripts 目录加入 PATH。
 
-后端：安装 uv 后进入 `backend`，运行 `uv sync` 和 `uv run uvicorn app.main:app --reload`。可访问 `/health` 检查服务。
+前端：进入 `frontend`，将 `.env.example` 复制为 `.env`，运行 `npm install` 和 `npm run dev`，打开终端输出的本地地址。
+
+后端：安装 uv 后进入 `backend`，将 `.env.example` 复制为 `.env`，运行 `python -m uv sync` 和 `python -m uv run --env-file .env uvicorn app.main:app --reload`。可访问 `http://127.0.0.1:8000/api/health` 检查服务。
+
+两个服务需在不同终端启动，前端开发服务通过 `BACKEND_URL` 转发 `/api` 请求。`backend/.env` 中的 `DATABASE_URL` 目前只是后续接入 MySQL 的示例，不会建立数据库连接。
+
+首次安装依赖需要能够访问 Python 与 npm 包源。若当前机器无法联网，可先用已有的 Python 环境执行 `python -m uvicorn app.main:app --reload` 检查后端，但正式的后端依赖管理仍使用 uv。
