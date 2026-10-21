@@ -2,7 +2,7 @@
 
 ## 来源与目标
 
-- 需求来源：上级目录 `06-F2-MVP范围表.md` 的“授信申请列表”和 `06-F2交接清单.md` 的页面交接要求。
+- 需求来源：项目上级目录 `../../06-F2-MVP范围表.md` 的“授信申请列表”和 `../../06-F2交接清单.md` 的页面交接要求。
 - 目标用户：风控专员、客户经理。
 - 要解决的问题：用户需要从虚构申请中找到待处理业务，并在进入详情前确认申请编号、企业、产品、金额、客户经理和状态。
 - 完成后的可观察结果：可以按申请编号、企业名称和状态筛选列表，看到必要字段，并打开选定申请的详情。
@@ -23,7 +23,7 @@
 
 ## 本轮范围
 
-- 允许修改：`frontend/src/App.jsx`、`frontend/src/ApplicationList.jsx`、`frontend/src/App.css`、`frontend/src/formatters.js`、与列表直接相关的前端取数代码及 `tests/` 中必要的验证；若接口契约确需调整，先说明原因。
+- 允许修改：`frontend/src/App.jsx`、`frontend/src/ApplicationList.jsx`、`frontend/src/App.css`、`frontend/src/formatters.js`、与列表直接相关的前端取数代码及 `tests/` 中必要的验证；若接口契约确需调整，先说明原因。页面验证发现经典 JSX 编译缺少 React 导入，允许在 `frontend/src/ApplicationDetail.jsx` 同步修复，以免整个页面空白。
 - 暂不实现：申请创建/上传、真实登录、服务端分页、批量处理、复核提交、正式审批和 MySQL 写入。
 - 必须保持：`GET /api/applications` 与 `GET /api/applications/{application_id}` 的现有字段及关联；客户经理只读跟进的角色边界；全部数据为虚构教学数据。
 
@@ -31,5 +31,5 @@
 
 - 用例1：输入 `APP-DEMO-002` 或“星桥”，列表只显示对应申请；选择后详情中的申请 ID 与列表一致。
 - 用例2：选择“待风控复核”能看到匹配申请；输入不存在的编号显示无匹配提示；后端不可用时显示错误和重试入口。
-- 测试命令：在 F2 根目录运行 `python -m unittest discover -s tests -v`、`git diff --check`；在 `frontend/` 运行 `npm run build`；手动核对搜索、空结果和打开详情。
+- 测试命令：在 F2 根目录运行 `python -m unittest discover -s tests -v`、`node --test tests/application_filters.test.mjs`、`git diff --check`；在 `frontend/` 运行 `npm run build`；手动核对搜索、空结果、错误重试和打开详情。
 - 交付证据：代码 Diff、测试输出、页面正常与异常状态的检查结果，以及未通过项及原因。
