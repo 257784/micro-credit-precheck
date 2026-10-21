@@ -23,7 +23,7 @@
 
 ## 本轮范围
 
-- 允许修改：`frontend/src/App.jsx`、`frontend/src/ApplicationList.jsx`、`frontend/src/App.css`、`frontend/src/formatters.js`、与列表直接相关的前端取数代码及 `tests/` 中必要的验证；若接口契约确需调整，先说明原因。页面验证发现经典 JSX 编译缺少 React 导入，允许在 `frontend/src/ApplicationDetail.jsx` 同步修复，以免整个页面空白。
+- 允许修改：`frontend/src/App.jsx`、`frontend/src/ApplicationList.jsx`、`frontend/src/App.css`、`frontend/src/formatters.js`、与列表直接相关的前端取数代码及 `tests/` 中必要的验证；若接口契约确需调整，先说明原因。页面验证发现经典 JSX 编译缺少 React 导入，允许在 `frontend/src/ApplicationDetail.jsx` 同步修复，以免整个页面空白。新增 `.mjs` 测试需补齐 `.editorconfig` 与 `.gitattributes` 的换行规则。
 - 暂不实现：申请创建/上传、真实登录、服务端分页、批量处理、复核提交、正式审批和 MySQL 写入。
 - 必须保持：`GET /api/applications` 与 `GET /api/applications/{application_id}` 的现有字段及关联；客户经理只读跟进的角色边界；全部数据为虚构教学数据。
 

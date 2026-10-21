@@ -10,7 +10,7 @@ trim_trailing_whitespace = true
 [*.py]
 indent_size = 4
 
-[*.{js,jsx,css,json,html}]
+[*.{js,jsx,mjs,css,json,html}]
 indent_size = 2
 
 [*.md]

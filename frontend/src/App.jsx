@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getJson } from './api.js';
 import ApplicationDetail from './ApplicationDetail.jsx';
 import ApplicationList from './ApplicationList.jsx';
@@ -8,28 +8,42 @@ export default function App() {
   const [applications, setApplications] = useState([]);
   const [listError, setListError] = useState('');
   const [listLoading, setListLoading] = useState(true);
+  const [listReloadKey, setListReloadKey] = useState(0);
   const [selectedId, setSelectedId] = useState(null);
   const [detail, setDetail] = useState(null);
   const [detailError, setDetailError] = useState('');
   const [detailLoading, setDetailLoading] = useState(false);
 
+  const handleSelect = useCallback((applicationId) => {
+    setSelectedId(applicationId);
+    setDetail(null);
+    setDetailError('');
+    setDetailLoading(false);
+  }, []);
+
   useEffect(() => {
     const controller = new AbortController();
+    setListLoading(true);
+    setListError('');
 
     getJson('/api/applications', '申请列表', controller.signal)
       .then((rows) => {
         setApplications(rows);
-        if (rows.length > 0) setSelectedId(rows[0].application_id);
+        handleSelect(rows[0]?.application_id ?? null);
       })
       .catch((error) => {
-        if (error.name !== 'AbortError') setListError(error.message);
+        if (error.name !== 'AbortError') {
+          setApplications([]);
+          handleSelect(null);
+          setListError(error.message);
+        }
       })
       .finally(() => {
         if (!controller.signal.aborted) setListLoading(false);
       });
 
     return () => controller.abort();
-  }, []);
+  }, [handleSelect, listReloadKey]);
 
   useEffect(() => {
     if (!selectedId) return undefined;
@@ -69,7 +83,8 @@ export default function App() {
           applications={applications}
           error={listError}
           loading={listLoading}
-          onSelect={setSelectedId}
+          onRetry={() => setListReloadKey((value) => value + 1)}
+          onSelect={handleSelect}
           selectedId={selectedId}
         />
         <ApplicationDetail
