@@ -20,12 +20,14 @@ def load_seed(path: Path = SEED_PATH) -> SeedData:
     data = SeedData.model_validate_json(path.read_text(encoding="utf-8"))
     enterprises = {item.enterprise_id: item for item in data.enterprises}
     applications = {item.application_id: item for item in data.applications}
+    status_events = {item.event_id: item for item in data.status_events}
     materials = {item.material_id: item for item in data.materials}
     knowledge = {(item.knowledge_id, item.version): item for item in data.knowledge_items}
 
     for label, items, ids in (
         ("enterprise", data.enterprises, enterprises),
         ("application", data.applications, applications),
+        ("status event", data.status_events, status_events),
         ("material", data.materials, materials),
     ):
         if len(items) != len(ids):
@@ -38,6 +40,12 @@ def load_seed(path: Path = SEED_PATH) -> SeedData:
     for application in data.applications:
         if application.enterprise_id not in enterprises:
             raise ValueError(f"Unknown enterprise for {application.application_id}")
+    for event in data.status_events:
+        if event.application_id not in applications:
+            raise ValueError(f"Unknown application for {event.event_id}")
+        event_time = datetime.fromisoformat(event.occurred_at)
+        if event_time.utcoffset() is None:
+            raise ValueError(f"Missing timezone for {event.event_id}")
     for material in data.materials:
         if material.application_id not in applications:
             raise ValueError(f"Unknown application for {material.material_id}")
@@ -108,6 +116,14 @@ class SeedRepository:
         return ApplicationDetail(
             application=application,
             enterprise=self.enterprises[application.enterprise_id],
+            status_history=sorted(
+                (
+                    event
+                    for event in self.data.status_events
+                    if event.application_id == application_id
+                ),
+                key=lambda event: datetime.fromisoformat(event.occurred_at),
+            ),
             materials=[
                 material
                 for material in self.data.materials

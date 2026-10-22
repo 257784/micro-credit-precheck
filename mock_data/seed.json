@@ -64,6 +64,56 @@
       "submitted_at": "2026-10-20T10:00:00+08:00"
     }
   ],
+  "status_events": [
+    {
+      "event_id": "EVT-DEMO-001-1",
+      "application_id": "APP-DEMO-001",
+      "event_label": "申请已提交",
+      "occurred_at": "2026-10-17T09:30:00+08:00"
+    },
+    {
+      "event_id": "EVT-DEMO-001-2",
+      "application_id": "APP-DEMO-001",
+      "event_label": "进入待风控复核",
+      "occurred_at": "2026-10-17T09:34:00+08:00"
+    },
+    {
+      "event_id": "EVT-DEMO-002-1",
+      "application_id": "APP-DEMO-002",
+      "event_label": "申请已提交",
+      "occurred_at": "2026-10-18T14:20:00+08:00"
+    },
+    {
+      "event_id": "EVT-DEMO-002-2",
+      "application_id": "APP-DEMO-002",
+      "event_label": "进入待风控复核",
+      "occurred_at": "2026-10-18T14:24:00+08:00"
+    },
+    {
+      "event_id": "EVT-DEMO-003-1",
+      "application_id": "APP-DEMO-003",
+      "event_label": "申请已提交",
+      "occurred_at": "2026-10-19T11:10:00+08:00"
+    },
+    {
+      "event_id": "EVT-DEMO-003-2",
+      "application_id": "APP-DEMO-003",
+      "event_label": "进入待风控复核",
+      "occurred_at": "2026-10-19T11:14:00+08:00"
+    },
+    {
+      "event_id": "EVT-DEMO-004-1",
+      "application_id": "APP-DEMO-004",
+      "event_label": "申请已提交",
+      "occurred_at": "2026-10-20T10:00:00+08:00"
+    },
+    {
+      "event_id": "EVT-DEMO-004-2",
+      "application_id": "APP-DEMO-004",
+      "event_label": "进入待风控复核",
+      "occurred_at": "2026-10-20T10:04:00+08:00"
+    }
+  ],
   "materials": [
     {
       "material_id": "MAT-DEMO-001",

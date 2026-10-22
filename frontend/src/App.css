@@ -38,11 +38,28 @@ body {
   letter-spacing: 0.04em;
 }
 
-.columns {
-  display: grid;
-  grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
-  gap: 20px;
-  align-items: start;
+.list-view {
+  max-width: 760px;
+}
+
+.detail-view {
+  max-width: 960px;
+}
+
+.back-button {
+  margin-top: 16px;
+  padding: 8px 0;
+  color: #2466a5;
+  font: inherit;
+  font-weight: 700;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.back-button:hover,
+.back-button:focus-visible {
+  text-decoration: underline;
 }
 
 .panel {
@@ -66,6 +83,95 @@ body {
   margin-top: 24px;
   padding-top: 24px;
   border-top: 1px solid #e7edf3;
+}
+
+.detail-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.detail-summary strong {
+  font-size: 18px;
+}
+
+.detail-summary p {
+  margin: 6px 0 0;
+  color: #667586;
+}
+
+.status-badge {
+  flex: none;
+  padding: 6px 10px;
+  color: #18578f;
+  background: #edf6ff;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.detail-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.detail-nav a {
+  padding: 7px 10px;
+  color: #2466a5;
+  background: #f0f7ff;
+  border-radius: 7px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.detail-nav a:hover,
+.detail-nav a:focus-visible {
+  outline: 2px solid #2466a5;
+  outline-offset: 2px;
+}
+
+.timeline {
+  margin: 0;
+  padding: 0 0 0 20px;
+  border-left: 2px solid #c7d9eb;
+  list-style: none;
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 18px 14px;
+}
+
+.timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.timeline li::before {
+  position: absolute;
+  top: 5px;
+  left: -26px;
+  width: 10px;
+  height: 10px;
+  background: #2466a5;
+  border-radius: 50%;
+  content: '';
+}
+
+.timeline time {
+  display: block;
+  margin-top: 4px;
+  color: #667586;
+  font-size: 14px;
+}
+
+.helper-text {
+  margin-bottom: 0;
+  color: #667586;
+  font-size: 13px;
 }
 
 .application-list {
@@ -202,11 +308,11 @@ body {
 }
 
 @media (max-width: 760px) {
-  .columns {
-    grid-template-columns: 1fr;
-  }
-
   .page {
     padding: 20px 14px 48px;
+  }
+
+  .detail-summary {
+    flex-direction: column;
   }
 }

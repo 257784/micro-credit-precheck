@@ -24,6 +24,15 @@ class Application(BaseModel):
     submitted_at: str
 
 
+class StatusEvent(BaseModel):
+    """一条虚构进度事件，不代表正式审计记录。"""
+
+    event_id: str
+    application_id: str
+    event_label: str
+    occurred_at: str
+
+
 class Material(BaseModel):
     material_id: str
     application_id: str
@@ -79,6 +88,7 @@ class Report(BaseModel):
 class SeedData(BaseModel):
     enterprises: list[Enterprise]
     applications: list[Application]
+    status_events: list[StatusEvent]
     materials: list[Material]
     knowledge_items: list[KnowledgeItem]
     reports: list[Report]
@@ -94,5 +104,6 @@ class ApplicationDetail(BaseModel):
 
     application: Application
     enterprise: Enterprise
+    status_history: list[StatusEvent]
     materials: list[Material]
     reports: list[Report]

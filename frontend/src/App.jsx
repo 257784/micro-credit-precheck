@@ -4,22 +4,39 @@ import ApplicationDetail from './ApplicationDetail.jsx';
 import ApplicationList from './ApplicationList.jsx';
 import './App.css';
 
+function applicationIdFromUrl() {
+  if (typeof window === 'undefined') return null;
+  return new URLSearchParams(window.location.search).get('application');
+}
+
 export default function App() {
   const [applications, setApplications] = useState([]);
   const [listError, setListError] = useState('');
   const [listLoading, setListLoading] = useState(true);
   const [listReloadKey, setListReloadKey] = useState(0);
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(applicationIdFromUrl);
   const [detail, setDetail] = useState(null);
   const [detailError, setDetailError] = useState('');
   const [detailLoading, setDetailLoading] = useState(false);
+  const [detailReloadKey, setDetailReloadKey] = useState(0);
 
   const handleSelect = useCallback((applicationId) => {
+    const url = new URL(window.location.href);
+    if (applicationId) url.searchParams.set('application', applicationId);
+    else url.searchParams.delete('application');
+    if (url.href !== window.location.href) window.history.pushState(null, '', url.href);
+
     setSelectedId(applicationId);
     setDetail(null);
     setDetailError('');
     setDetailLoading(false);
   }, []);
+
+  useEffect(() => {
+    const handlePopState = () => handleSelect(applicationIdFromUrl());
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [handleSelect]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -29,12 +46,10 @@ export default function App() {
     getJson('/api/applications', '申请列表', controller.signal)
       .then((rows) => {
         setApplications(rows);
-        handleSelect(rows[0]?.application_id ?? null);
       })
       .catch((error) => {
         if (error.name !== 'AbortError') {
           setApplications([]);
-          handleSelect(null);
           setListError(error.message);
         }
       })
@@ -43,7 +58,7 @@ export default function App() {
       });
 
     return () => controller.abort();
-  }, [handleSelect, listReloadKey]);
+  }, [listReloadKey]);
 
   useEffect(() => {
     if (!selectedId) return undefined;
@@ -68,7 +83,7 @@ export default function App() {
       });
 
     return () => controller.abort();
-  }, [selectedId]);
+  }, [selectedId, detailReloadKey]);
 
   return (
     <main className="page">
@@ -76,24 +91,32 @@ export default function App() {
         <p className="eyebrow">F2 · 虚构教学数据</p>
         <h1>授信申请与预审样例</h1>
         <p>从申请进入企业、材料和 AI 预审报告。当前数据只读，尚未接入人工复核提交。</p>
+        {selectedId && (
+          <button type="button" className="back-button" onClick={() => handleSelect(null)}>
+            ← 返回申请列表
+          </button>
+        )}
       </header>
 
-      <div className="columns">
-        <ApplicationList
-          applications={applications}
-          error={listError}
-          loading={listLoading}
-          onRetry={() => setListReloadKey((value) => value + 1)}
-          onSelect={handleSelect}
-          selectedId={selectedId}
-        />
-        <ApplicationDetail
-          detail={detail}
-          error={detailError}
-          loading={detailLoading}
-          selectedId={selectedId}
-          showPrompt={!listLoading && !selectedId}
-        />
+      <div className={selectedId ? 'detail-view' : 'list-view'}>
+        <div hidden={Boolean(selectedId)}>
+          <ApplicationList
+            applications={applications}
+            error={listError}
+            loading={listLoading}
+            onRetry={() => setListReloadKey((value) => value + 1)}
+            onSelect={handleSelect}
+            selectedId={selectedId}
+          />
+        </div>
+        {selectedId && (
+          <ApplicationDetail
+            detail={detail}
+            error={detailError}
+            loading={detailLoading}
+            onRetry={() => setDetailReloadKey((value) => value + 1)}
+          />
+        )}
       </div>
     </main>
   );

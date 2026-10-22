@@ -16,6 +16,19 @@ class SeedDataTests(unittest.TestCase):
     def test_relationships_and_four_review_states(self):
         applications = self.repository.list_applications()
         self.assertEqual(len(applications), 4)
+        for application in applications:
+            detail = self.repository.get_application(application.application_id)
+            self.assertEqual(len(detail.status_history), 2)
+            self.assertTrue(
+                all(event.application_id == application.application_id for event in detail.status_history)
+            )
+            self.assertTrue(
+                all(material.application_id == application.application_id for material in detail.materials)
+            )
+            self.assertTrue(
+                all(report.application_id == application.application_id for report in detail.reports)
+            )
+            self.assertEqual(detail.status_history[0].occurred_at, application.submitted_at)
         self.assertEqual(
             self.repository.get_application("APP-DEMO-001").enterprise.enterprise_id,
             self.repository.get_application("APP-DEMO-004").enterprise.enterprise_id,
@@ -44,6 +57,24 @@ class SeedDataTests(unittest.TestCase):
             path = Path(directory) / "invalid-seed.json"
             path.write_text(data.model_dump_json(), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Invalid material reference"):
+                load_seed(path)
+
+    def test_rejects_status_event_for_unknown_application(self):
+        data = load_seed()
+        data.status_events[0].application_id = "APP-UNKNOWN"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "invalid-seed.json"
+            path.write_text(data.model_dump_json(), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Unknown application for EVT-DEMO-001-1"):
+                load_seed(path)
+
+    def test_rejects_status_event_without_timezone(self):
+        data = load_seed()
+        data.status_events[0].occurred_at = "2026-10-17T09:30:00"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "invalid-seed.json"
+            path.write_text(data.model_dump_json(), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Missing timezone for EVT-DEMO-001-1"):
                 load_seed(path)
 
 
