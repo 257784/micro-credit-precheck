@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import re
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -97,29 +96,21 @@ def post_result(event: dict) -> dict | None:
     if paths and not any(Path(path).suffix.lower() in CODE_SUFFIXES for path in paths):
         return None
 
-    checks = [
-        ("lint: working-tree whitespace", ["git", "diff", "--check"]),
-        ("lint: staged whitespace", ["git", "diff", "--cached", "--check"]),
-        ("Python syntax", [sys.executable, "-m", "compileall", "-q", "backend/app", "tests"]),
-        ("Python unit tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"]),
-        ("JavaScript unit tests", ["node", "--test", "tests/application_filters.test.mjs"]),
-        ("frontend build", [shutil.which("npm") or "npm", "--prefix", "frontend", "run", "build"]),
-    ]
-    for label, command in checks:
-        try:
-            result = subprocess.run(
-                command, cwd=REPO_ROOT, capture_output=True, text=True, timeout=90, check=False
-            )
-            if result.returncode == 0:
-                continue
-            detail = (result.stdout + result.stderr).strip()[-1800:]
-        except (OSError, subprocess.TimeoutExpired) as error:
-            detail = str(error)
-        return {
-            "decision": "block",
-            "reason": f"{label} 失败。请先修复并重新运行检查，再继续开发。\n{detail}",
-        }
-    return None
+    try:
+        result = subprocess.run(
+            [sys.executable, str(REPO_ROOT / "scripts/check_project.py")],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            timeout=90,
+            check=False,
+        )
+        if result.returncode == 0:
+            return None
+        detail = (result.stdout + result.stderr).strip()[-1800:]
+    except (OSError, subprocess.TimeoutExpired) as error:
+        detail = str(error)
+    return {"decision": "block", "reason": f"项目检查失败。请先修复并重新运行检查，再继续开发。\n{detail}"}
 
 
 def main() -> None:

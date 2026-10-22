@@ -7,7 +7,7 @@
 - 前端：`frontend/src/` 是 React 页面、组件和取数代码；`frontend/package.json` 管理 Vite 命令和依赖。
 - 后端：`backend/app/main.py` 是 FastAPI 入口；`backend/app/data.py` 负责数据访问与关联校验；`backend/app/models.py` 定义对象和响应结构；`backend/pyproject.toml` 与 `backend/uv.lock` 管理 Python 依赖。
 - 测试：`tests/`。
-- 业务规则和接口契约：每轮任务卡存放在 `specs/`，当前为 `specs/03-codex-write-hooks.md`，新任务参考 `specs/TEMPLATE.md`；上级目录 `../06-F2-MVP范围表.md`、`../06-F2交接清单.md`；接口及对象说明 `docs/data-contract.md`；代码约定 `docs/coding-standards.md`。虚构数据在 `mock_data/seed.json`。
+- 业务规则和接口契约：每轮任务卡存放在 `specs/`，当前为 `specs/04-shared-hook-checks.md`，新任务参考 `specs/TEMPLATE.md`；上级目录 `../06-F2-MVP范围表.md`、`../06-F2交接清单.md`；接口及对象说明 `docs/data-contract.md`；代码约定 `docs/coding-standards.md`。虚构数据在 `mock_data/seed.json`。
 
 # 开始任务前
 
@@ -24,6 +24,6 @@
 
 # 验证与交付
 
-- 在 F2 根目录运行 `python -m unittest discover -s tests -v` 和 `git diff --check`；修改前端时在 `frontend/` 运行 `npm run build`，有 JavaScript 单元测试时再运行任务卡列出的命令。
+- 在 F2 根目录运行 `python scripts/check_project.py`，统一检查空白、Python 语法与单元测试、JavaScript 单元测试及前端构建；需要定位失败时再运行对应的单项命令。
 - 检查 Diff、相关接口和页面的正常、空值与错误状态；失败时保留真实结果，不把未运行的检查写成通过。
 - 交付时说明修改文件、可观察行为、测试结果与剩余风险；保持每次提交聚焦本轮任务。

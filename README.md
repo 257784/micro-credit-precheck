@@ -29,13 +29,13 @@
 
 首次克隆仓库后，在 F2 根目录运行 `git config --local core.hooksPath .githooks` 启用仓库内的 hook。该配置只对本机当前仓库生效；可用 `git config --local --get core.hooksPath` 确认。
 
-之后每次执行 `git commit`，`.githooks/pre-commit` 会检查暂存区空白、运行 Python 和 JavaScript 测试，并构建前端。任一步失败都会停止提交；修复后重新提交。Git Bash 中可运行 `sh .githooks/pre-commit` 手动检查；本机默认安装位置的 PowerShell 命令是 `& 'C:\Program Files\Git\bin\bash.exe' .githooks/pre-commit`。Git hook 在提交时执行；如需每次保存文件后运行测试，需要单独配置编辑器任务或文件监视器。
+之后每次执行 `git commit`，`.githooks/pre-commit` 会调用共用的 `scripts/check_project.py`；任一步失败都会停止提交，修复后重新提交。手动运行 `python scripts/check_project.py` 即可执行相同检查。Git hook 在提交时执行；如需每次保存文件后运行测试，需要单独配置编辑器任务或文件监视器。
 
 ## Codex 写入前后检查
 
 F2 项目的 `.codex/hooks.json` 配置了 Codex `PreToolUse` 和 `PostToolUse`。请将 **F2 目录作为 Codex 项目打开**，在 Codex 中用 `/hooks` 审查并信任项目 hook。它们与上面的 Git `pre-commit` 相互独立。
 
-写入前，hook 检查 `apply_patch` 和常见命令行写入：如果新增内容出现密码/令牌赋值，或识别出的目标路径被 `.gitignore` 忽略，则拒绝该操作。写入代码后，会运行空白检查、Python 语法检查、Python/JavaScript 单元测试及前端构建；失败结果返回给 Agent，请先修复再继续。当前的“lint”是空白与语法基础检查，项目尚未安装 Ruff 或 ESLint。
+写入前，hook 检查 `apply_patch` 和常见命令行写入：如果新增内容出现密码/令牌赋值，或识别出的目标路径被 `.gitignore` 忽略，则拒绝该操作。写入代码后，Codex 也调用 `scripts/check_project.py` 运行空白检查、Python 语法检查、Python/JavaScript 单元测试及前端构建；失败结果返回给 Agent，请先修复再继续。当前的“lint”是空白与语法基础检查，项目尚未安装 Ruff 或 ESLint。
 
 这些 hook 只覆盖 Codex 支持的工具事件及脚本能识别的写法；复杂脚本、其他程序写入和用户手工修改仍需 Git 提交前检查与人工审查。`PostToolUse` 也不能撤销已经完成的写入。
 
