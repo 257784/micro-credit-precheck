@@ -25,6 +25,12 @@
 
 代码风格、注释约定和提交前检查见 [F2 代码规范](docs/coding-standards.md)。
 
+## 提交前自动测试
+
+首次克隆仓库后，在 F2 根目录运行 `git config --local core.hooksPath .githooks` 启用仓库内的 hook。该配置只对本机当前仓库生效；可用 `git config --local --get core.hooksPath` 确认。
+
+之后每次执行 `git commit`，`.githooks/pre-commit` 会检查暂存区空白、运行 Python 和 JavaScript 测试，并构建前端。任一步失败都会停止提交；修复后重新提交。Git Bash 中可运行 `sh .githooks/pre-commit` 手动检查；本机默认安装位置的 PowerShell 命令是 `& 'C:\Program Files\Git\bin\bash.exe' .githooks/pre-commit`。Git hook 在提交时执行；如需每次保存文件后运行测试，需要单独配置编辑器任务或文件监视器。
+
 ## 本地启动
 
 首次创建后端虚拟环境（在 `backend` 目录）：`python -m venv .venv`。PowerShell 中可用 `.\.venv\Scripts\Activate.ps1` 激活；如果执行策略阻止激活，可直接运行 `.\.venv\Scripts\python.exe`。`.venv` 已被 Git 忽略。安装 uv 后运行 `python -m uv sync`，由 uv 管理这个环境及 `pyproject.toml` 中的依赖。使用 `python -m uv` 不要求将用户级 Scripts 目录加入 PATH。

@@ -1,0 +1,20 @@
+#!/bin/sh
+# Run the project's existing checks before each commit.
+set -e
+
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root"
+
+echo '[pre-commit] Check staged whitespace'
+git diff --cached --check
+
+echo '[pre-commit] Run Python tests'
+python -m unittest discover -s tests -v
+
+echo '[pre-commit] Run JavaScript tests'
+node --test tests/application_filters.test.mjs
+
+echo '[pre-commit] Build frontend'
+npm --prefix frontend run build
+
+echo '[pre-commit] All checks passed'
