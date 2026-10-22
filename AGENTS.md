@@ -7,7 +7,7 @@
 - 前端：`frontend/src/` 是 React 页面、组件和取数代码；`frontend/package.json` 管理 Vite 命令和依赖。
 - 后端：`backend/app/main.py` 是 FastAPI 入口；`backend/app/data.py` 负责数据访问与关联校验；`backend/app/models.py` 定义对象和响应结构；`backend/pyproject.toml` 与 `backend/uv.lock` 管理 Python 依赖。
 - 测试：`tests/`。
-- 业务规则和接口契约：每轮任务卡存放在 `specs/`，当前为 `specs/02-pre-commit-tests.md`，新任务参考 `specs/TEMPLATE.md`；上级目录 `../06-F2-MVP范围表.md`、`../06-F2交接清单.md`；接口及对象说明 `docs/data-contract.md`；代码约定 `docs/coding-standards.md`。虚构数据在 `mock_data/seed.json`。
+- 业务规则和接口契约：每轮任务卡存放在 `specs/`，当前为 `specs/03-codex-write-hooks.md`，新任务参考 `specs/TEMPLATE.md`；上级目录 `../06-F2-MVP范围表.md`、`../06-F2交接清单.md`；接口及对象说明 `docs/data-contract.md`；代码约定 `docs/coding-standards.md`。虚构数据在 `mock_data/seed.json`。
 
 # 开始任务前
 

@@ -1,0 +1,33 @@
+{
+  "description": "Check writes and verify code changes in the F2 project.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(Bash|apply_patch)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import pathlib,runpy,subprocess;runpy.run_path(str(pathlib.Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip())/'.codex/hooks/policy.py'),run_name='__main__')\" pre",
+            "commandWindows": "python -c \"import pathlib,runpy,subprocess;runpy.run_path(str(pathlib.Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip())/'.codex/hooks/policy.py'),run_name='__main__')\" pre",
+            "timeout": 15,
+            "statusMessage": "Checking write policy"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "^(Bash|apply_patch)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -c \"import pathlib,runpy,subprocess;runpy.run_path(str(pathlib.Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip())/'.codex/hooks/policy.py'),run_name='__main__')\" post",
+            "commandWindows": "python -c \"import pathlib,runpy,subprocess;runpy.run_path(str(pathlib.Path(subprocess.check_output(['git','rev-parse','--show-toplevel'],text=True).strip())/'.codex/hooks/policy.py'),run_name='__main__')\" post",
+            "timeout": 120,
+            "statusMessage": "Running code checks"
+          }
+        ]
+      }
+    ]
+  }
+}
