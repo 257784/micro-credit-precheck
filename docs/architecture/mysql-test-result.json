@@ -1,0 +1,9 @@
+{
+  "storage_tests": 9,
+  "storage_passed": true,
+  "workflow_tests": 1,
+  "workflow_cases": 3,
+  "workflows_passed": true,
+  "backend": "MySQL",
+  "isolated_database": true
+}

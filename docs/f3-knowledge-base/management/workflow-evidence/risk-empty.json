@@ -1,0 +1,528 @@
+{
+  "run_id": "e8077f3168a74f069889abe7dcb8f050",
+  "application_id": "APP-DEMO-003",
+  "generated_at": "2026-10-28T09:32:42.408827+00:00",
+  "material_snapshot": [],
+  "risk_items": [
+    {
+      "item_id": "material-1",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "suggested_human_action": "核对或补交：授信申请表；完整可选组合：授信申请表",
+      "title": "material_evidence_gap",
+      "rule_id": "material-1",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第二条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-2",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "suggested_human_action": "核对或补交：主体登记资料；完整可选组合：主体登记资料",
+      "title": "material_evidence_gap",
+      "rule_id": "material-2",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第二条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-3",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "suggested_human_action": "核对或补交：经营情况说明；完整可选组合：经营情况说明",
+      "title": "material_evidence_gap",
+      "rule_id": "material-3",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第二条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-4",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第三条"
+      ],
+      "suggested_human_action": "核对或补交：收款分类说明、经营账户收款记录；完整可选组合：（（经营账户收款记录 ＋ 收款分类说明） 或 （销售台账 ＋ （对应订单 或 对应发票） ＋ 收入资料对应关系说明））",
+      "title": "material_evidence_gap",
+      "rule_id": "material-4",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第三条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-5",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第三条"
+      ],
+      "suggested_human_action": "核对或补交：资金用途说明；完整可选组合：资金用途说明",
+      "title": "material_evidence_gap",
+      "rule_id": "material-5",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第三条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-6",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "本申请材料列表为空。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": null,
+      "suggested_human_action": "请核对申请材料并补交清单要求的资料。",
+      "title": "material_evidence_gap",
+      "rule_id": "material-6",
+      "evidence": [],
+      "policy_refs": []
+    },
+    {
+      "item_id": "material-7",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "条件未明确，不默认免交或必交。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第三条"
+      ],
+      "suggested_human_action": "请确认：是否以具体订单或合同为用途依据",
+      "title": "material_evidence_gap",
+      "rule_id": "material-7",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第三条"
+        ]
+      ]
+    }
+  ],
+  "need_human_review": true,
+  "material_run_status": "completed_with_issues",
+  "node_trace": [
+    {
+      "node_id": "snapshot",
+      "status": "executed",
+      "branch": "continue",
+      "elapsed_ms": 16.513
+    },
+    {
+      "node_id": "materials",
+      "status": "executed",
+      "branch": "continue",
+      "elapsed_ms": 16.621
+    },
+    {
+      "node_id": "policy",
+      "status": "executed",
+      "branch": "continue",
+      "elapsed_ms": 0.005
+    },
+    {
+      "node_id": "deterministic",
+      "status": "executed",
+      "branch": "fixture_checked",
+      "elapsed_ms": 0.033
+    },
+    {
+      "node_id": "model",
+      "status": "executed",
+      "branch": "disabled",
+      "elapsed_ms": 32.803
+    },
+    {
+      "node_id": "validate",
+      "status": "executed",
+      "branch": "continue",
+      "elapsed_ms": 0.014
+    },
+    {
+      "node_id": "aggregate",
+      "status": "executed",
+      "branch": "continue",
+      "elapsed_ms": 0.003
+    }
+  ],
+  "limitations": [
+    "教学摘录不能替代全文解析和人工核验。",
+    "当前申请没有可供主体、收入和金额口径核对的结构化材料事实；相关判断未评估。",
+    "本次未执行政策检索或AI辅助分析。"
+  ],
+  "workflow_version": "1.0",
+  "rule_version": "1.0",
+  "model_status": "disabled",
+  "retrieval_status": "not_run",
+  "missing_info": [
+    {
+      "item_id": "material-1",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "suggested_human_action": "核对或补交：授信申请表；完整可选组合：授信申请表",
+      "title": "material_evidence_gap",
+      "rule_id": "material-1",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第二条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-2",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "suggested_human_action": "核对或补交：主体登记资料；完整可选组合：主体登记资料",
+      "title": "material_evidence_gap",
+      "rule_id": "material-2",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第二条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-3",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "suggested_human_action": "核对或补交：经营情况说明；完整可选组合：经营情况说明",
+      "title": "material_evidence_gap",
+      "rule_id": "material-3",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第二条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-4",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第三条"
+      ],
+      "suggested_human_action": "核对或补交：收款分类说明、经营账户收款记录；完整可选组合：（（经营账户收款记录 ＋ 收款分类说明） 或 （销售台账 ＋ （对应订单 或 对应发票） ＋ 收入资料对应关系说明））",
+      "title": "material_evidence_gap",
+      "rule_id": "material-4",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第三条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-5",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第三条"
+      ],
+      "suggested_human_action": "核对或补交：资金用途说明；完整可选组合：资金用途说明",
+      "title": "material_evidence_gap",
+      "rule_id": "material-5",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第三条"
+        ]
+      ]
+    },
+    {
+      "item_id": "material-6",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "本申请材料列表为空。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": null,
+      "suggested_human_action": "请核对申请材料并补交清单要求的资料。",
+      "title": "material_evidence_gap",
+      "rule_id": "material-6",
+      "evidence": [],
+      "policy_refs": []
+    },
+    {
+      "item_id": "material-7",
+      "category": "material_evidence_gap",
+      "origin": "rule",
+      "description": "条件未明确，不默认免交或必交。",
+      "material_id": null,
+      "version_no": null,
+      "evidence_location": null,
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第三条"
+      ],
+      "suggested_human_action": "请确认：是否以具体订单或合同为用途依据",
+      "title": "material_evidence_gap",
+      "rule_id": "material-7",
+      "evidence": [],
+      "policy_refs": [
+        [
+          "CC-MAT-001",
+          "1.0",
+          "第三条"
+        ]
+      ]
+    },
+    {
+      "message": "缺少已解析的主体、收入及金额口径事实，需人工核对。"
+    },
+    {
+      "message": "主体名称或登记名称未提供，无法比较。",
+      "source": "fixture"
+    },
+    {
+      "message": "金额或币种、单位、期间、含税口径未完整提供，未计算差异。",
+      "source": "fixture"
+    }
+  ],
+  "human_review_items": [
+    {
+      "item_id": "material-1",
+      "action": "核对或补交：授信申请表；完整可选组合：授信申请表",
+      "evidence": []
+    },
+    {
+      "item_id": "material-2",
+      "action": "核对或补交：主体登记资料；完整可选组合：主体登记资料",
+      "evidence": []
+    },
+    {
+      "item_id": "material-3",
+      "action": "核对或补交：经营情况说明；完整可选组合：经营情况说明",
+      "evidence": []
+    },
+    {
+      "item_id": "material-4",
+      "action": "核对或补交：收款分类说明、经营账户收款记录；完整可选组合：（（经营账户收款记录 ＋ 收款分类说明） 或 （销售台账 ＋ （对应订单 或 对应发票） ＋ 收入资料对应关系说明））",
+      "evidence": []
+    },
+    {
+      "item_id": "material-5",
+      "action": "核对或补交：资金用途说明；完整可选组合：资金用途说明",
+      "evidence": []
+    },
+    {
+      "item_id": "material-6",
+      "action": "请核对申请材料并补交清单要求的资料。",
+      "evidence": []
+    },
+    {
+      "item_id": "material-7",
+      "action": "请确认：是否以具体订单或合同为用途依据",
+      "evidence": []
+    }
+  ],
+  "input_snapshot": {
+    "product": "经营周转贷（教学产品）",
+    "materials": [],
+    "source": "fixture"
+  },
+  "run_status": "insufficient_evidence",
+  "income_period": {
+    "start": "2025-10-01",
+    "end": "2025-12-31",
+    "basis": "申请提交日期前三个完整自然月"
+  },
+  "material_node_trace": [
+    {
+      "node_id": "N01",
+      "type": "validate",
+      "status": "executed",
+      "branch": "empty_materials",
+      "input_count": 0,
+      "output_count": 1,
+      "elapsed_ms": 0.009
+    },
+    {
+      "node_id": "N02",
+      "type": "snapshot",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.006
+    },
+    {
+      "node_id": "N03",
+      "type": "match",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.002
+    },
+    {
+      "node_id": "N04",
+      "type": "model_hint",
+      "status": "skipped",
+      "branch": "no_unclassified_materials",
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.003
+    },
+    {
+      "node_id": "N05",
+      "type": "readability",
+      "status": "executed",
+      "branch": "file_issues_recorded",
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.002
+    },
+    {
+      "node_id": "N06",
+      "type": "requirements",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 6,
+      "elapsed_ms": 0.077
+    },
+    {
+      "node_id": "N07",
+      "type": "fields",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.015
+    },
+    {
+      "node_id": "N08",
+      "type": "aggregate",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.029
+    }
+  ]
+}

@@ -1,0 +1,360 @@
+{
+  "run_id": "713845743415410f992a250ea19897d3",
+  "application_id": "APP-MOCK-EMPTY",
+  "workflow_id": "material-completeness",
+  "workflow_version": "1.0",
+  "rules_version": "1.0",
+  "input_mode": "mock_parsed",
+  "generated_at": "2026-10-28T08:31:25.055446+00:00",
+  "run_status": "completed_with_issues",
+  "conditions": {
+    "uses_order_contract": null,
+    "is_used_equipment": null
+  },
+  "material_snapshot": [],
+  "skipped_versions": [],
+  "name_hints": [],
+  "checklist": [
+    {
+      "code": "M-C01",
+      "name": "授信申请表",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "requirement": "授信申请表",
+      "condition": null,
+      "materials": [],
+      "status": "missing",
+      "combination": {
+        "state": "missing",
+        "matched": [],
+        "missing": [
+          "M-C01"
+        ],
+        "pending": []
+      },
+      "readability": "not_available",
+      "field_status": "not_available"
+    },
+    {
+      "code": "M-C02",
+      "name": "主体登记资料",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "requirement": "主体登记资料",
+      "condition": null,
+      "materials": [],
+      "status": "missing",
+      "combination": {
+        "state": "missing",
+        "matched": [],
+        "missing": [
+          "M-C02"
+        ],
+        "pending": []
+      },
+      "readability": "not_available",
+      "field_status": "not_available"
+    },
+    {
+      "code": "M-C03",
+      "name": "经营情况说明",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ],
+      "requirement": "经营情况说明",
+      "condition": null,
+      "materials": [],
+      "status": "missing",
+      "combination": {
+        "state": "missing",
+        "matched": [],
+        "missing": [
+          "M-C03"
+        ],
+        "pending": []
+      },
+      "readability": "not_available",
+      "field_status": "not_available"
+    },
+    {
+      "code": "M-E01",
+      "name": "设备采购计划",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第四条"
+      ],
+      "requirement": "设备采购计划",
+      "condition": null,
+      "materials": [],
+      "status": "missing",
+      "combination": {
+        "state": "missing",
+        "matched": [],
+        "missing": [
+          "M-E01"
+        ],
+        "pending": []
+      },
+      "readability": "not_available",
+      "field_status": "not_available"
+    },
+    {
+      "code": "M-E02",
+      "name": "采购价格依据",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第四条"
+      ],
+      "requirement": "（已签采购合同 或 （设备报价单 ＋ 未签约说明））",
+      "condition": null,
+      "materials": [],
+      "status": "missing",
+      "combination": {
+        "state": "missing",
+        "matched": [],
+        "missing": [
+          "D-SIGNED"
+        ],
+        "pending": [],
+        "alternatives": [
+          {
+            "state": "missing",
+            "matched": [],
+            "missing": [
+              "D-SIGNED"
+            ],
+            "pending": []
+          },
+          {
+            "state": "missing",
+            "matched": [],
+            "missing": [
+              "D-QUOTE",
+              "D-UNSIGNED"
+            ],
+            "pending": []
+          }
+        ]
+      },
+      "readability": "not_available",
+      "field_status": "not_available"
+    },
+    {
+      "code": "M-E03",
+      "name": "二手设备使用及来源说明",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第四条"
+      ],
+      "requirement": "二手设备使用及来源说明",
+      "condition": "is_used_equipment",
+      "materials": [],
+      "status": "pending_condition",
+      "readability": "not_available",
+      "field_status": "pending"
+    }
+  ],
+  "missing_items": [
+    {
+      "kind": "missing",
+      "code": "M-C01",
+      "message": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "field": null,
+      "evidence_location": null,
+      "action": "核对或补交：授信申请表；完整可选组合：授信申请表",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ]
+    },
+    {
+      "kind": "missing",
+      "code": "M-C02",
+      "message": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "field": null,
+      "evidence_location": null,
+      "action": "核对或补交：主体登记资料；完整可选组合：主体登记资料",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ]
+    },
+    {
+      "kind": "missing",
+      "code": "M-C03",
+      "message": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "field": null,
+      "evidence_location": null,
+      "action": "核对或补交：经营情况说明；完整可选组合：经营情况说明",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第二条"
+      ]
+    },
+    {
+      "kind": "missing",
+      "code": "M-E01",
+      "message": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "field": null,
+      "evidence_location": null,
+      "action": "核对或补交：设备采购计划；完整可选组合：设备采购计划",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第四条"
+      ]
+    },
+    {
+      "kind": "missing",
+      "code": "M-E02",
+      "message": "按已确定声明未找到所需材料/组合；可满足任一允许方案。",
+      "material_id": null,
+      "version_no": null,
+      "field": null,
+      "evidence_location": null,
+      "action": "核对或补交：已签采购合同；完整可选组合：（已签采购合同 或 （设备报价单 ＋ 未签约说明））",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第四条"
+      ]
+    }
+  ],
+  "abnormal_items": [
+    {
+      "kind": "empty_materials",
+      "code": null,
+      "message": "本申请材料列表为空。",
+      "material_id": null,
+      "version_no": null,
+      "field": null,
+      "evidence_location": null,
+      "action": "请核对申请材料并补交清单要求的资料。",
+      "policy_ref": null
+    }
+  ],
+  "pending_items": [
+    {
+      "kind": "pending_condition",
+      "code": "M-E03",
+      "message": "条件未明确，不默认免交或必交。",
+      "material_id": null,
+      "version_no": null,
+      "field": null,
+      "evidence_location": null,
+      "action": "请确认：设备是否为二手",
+      "policy_ref": [
+        "CC-MAT-001",
+        "1.0",
+        "第四条"
+      ]
+    }
+  ],
+  "warnings": [],
+  "node_trace": [
+    {
+      "node_id": "N01",
+      "type": "validate",
+      "status": "executed",
+      "branch": "empty_materials",
+      "input_count": 0,
+      "output_count": 1,
+      "elapsed_ms": 0.016
+    },
+    {
+      "node_id": "N02",
+      "type": "snapshot",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.009
+    },
+    {
+      "node_id": "N03",
+      "type": "match",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.004
+    },
+    {
+      "node_id": "N04",
+      "type": "model_hint",
+      "status": "skipped",
+      "branch": "no_unclassified_materials",
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.003
+    },
+    {
+      "node_id": "N05",
+      "type": "readability",
+      "status": "executed",
+      "branch": "file_issues_recorded",
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.003
+    },
+    {
+      "node_id": "N06",
+      "type": "requirements",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 6,
+      "elapsed_ms": 0.104
+    },
+    {
+      "node_id": "N07",
+      "type": "fields",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.016
+    },
+    {
+      "node_id": "N08",
+      "type": "aggregate",
+      "status": "executed",
+      "branch": null,
+      "input_count": 0,
+      "output_count": 0,
+      "elapsed_ms": 0.037
+    }
+  ],
+  "suggested_actions": [
+    "核对或补交：授信申请表；完整可选组合：授信申请表",
+    "核对或补交：主体登记资料；完整可选组合：主体登记资料",
+    "核对或补交：经营情况说明；完整可选组合：经营情况说明",
+    "核对或补交：设备采购计划；完整可选组合：设备采购计划",
+    "核对或补交：已签采购合同；完整可选组合：（已签采购合同 或 （设备报价单 ＋ 未签约说明））",
+    "请核对申请材料并补交清单要求的资料。",
+    "请确认：设备是否为二手"
+  ],
+  "notice": "按F3虚构教学清单演示；已声明提交不代表内容真实或充分，不改变审批或复核状态。"
+}

@@ -1,0 +1,175 @@
+{
+  "mode": "controlled_ASGI_fixture_not_live_DeepSeek",
+  "note": "Real ASGI/SSE path, fixture model and fixture retrieval; 40ms artificial pause only to test event ordering, not a performance measurement.",
+  "first_statement_seconds": 0.05251640000005864,
+  "done_seconds": 0.10304999999971187,
+  "events": [
+    {
+      "event": "meta",
+      "seconds": 0.05133690000002389,
+      "upstream_finished": false,
+      "data": {
+        "replayed": false,
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 1
+      }
+    },
+    {
+      "event": "status",
+      "seconds": 0.052131599999484024,
+      "upstream_finished": false,
+      "data": {
+        "stage": "routing",
+        "message": "正在理解你的需求…",
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 2
+      }
+    },
+    {
+      "event": "scope",
+      "seconds": 0.052231900000151654,
+      "upstream_finished": false,
+      "data": {
+        "label": "设备更新贷（教学产品）",
+        "basis": "explicit_name",
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 3
+      }
+    },
+    {
+      "event": "status",
+      "seconds": 0.05229989999952522,
+      "upstream_finished": false,
+      "data": {
+        "stage": "retrieval",
+        "message": "正在检索本轮适用条款…",
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 4
+      }
+    },
+    {
+      "event": "sources",
+      "seconds": 0.05238099999951373,
+      "upstream_finished": false,
+      "data": {
+        "sources": [
+          {
+            "source_id": "S1",
+            "chunk_id": "unit-chunk",
+            "document_id": "CC-POL-002",
+            "version": "1.0",
+            "clause": "第五条",
+            "title": "虚构设备政策",
+            "source_path": "corpus/unit.md",
+            "source_line": 30,
+            "text": "标题\n\n尚未签约的，可提交供应商出具的报价单及未签约说明；报价单不证明合同已成立。",
+            "cosine_distance": 0.2
+          }
+        ],
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 5
+      }
+    },
+    {
+      "event": "status",
+      "seconds": 0.05244519999996555,
+      "upstream_finished": false,
+      "data": {
+        "stage": "generating",
+        "message": "正在生成并核对引用…",
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 6
+      }
+    },
+    {
+      "event": "statement",
+      "seconds": 0.05251640000005864,
+      "upstream_finished": false,
+      "data": {
+        "statement_index": 0,
+        "statement": {
+          "text": "未签约可按条款提交报价单与说明。",
+          "evidence": [
+            {
+              "source_id": "S1",
+              "quote": "尚未签约的，可提交供应商出具的报价单及未签约说明；报价单不证明合同已成立。"
+            }
+          ]
+        },
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 7
+      }
+    },
+    {
+      "event": "done",
+      "seconds": 0.10304999999971187,
+      "upstream_finished": true,
+      "data": {
+        "response": {
+          "status": "answered",
+          "answer": "未签约可按条款提交报价单与说明。 [S1]",
+          "statements": [
+            {
+              "text": "未签约可按条款提交报价单与说明。",
+              "evidence": [
+                {
+                  "source_id": "S1",
+                  "quote": "尚未签约的，可提交供应商出具的报价单及未签约说明；报价单不证明合同已成立。"
+                }
+              ]
+            }
+          ],
+          "missing_information": [],
+          "sources": [
+            {
+              "source_id": "S1",
+              "chunk_id": "unit-chunk",
+              "document_id": "CC-POL-002",
+              "version": "1.0",
+              "clause": "第五条",
+              "title": "虚构设备政策",
+              "source_path": "corpus/unit.md",
+              "source_line": 30,
+              "text": "标题\n\n尚未签约的，可提交供应商出具的报价单及未签约说明；报价单不证明合同已成立。",
+              "cosine_distance": 0.2
+            }
+          ],
+          "cited_source_ids": [
+            "S1"
+          ],
+          "warnings": [],
+          "model": "deepseek-flash",
+          "prompt_version": "policy-conversation-v1",
+          "retrieval_k": 8,
+          "context_k": 6,
+          "elapsed_seconds": 0.07255290000011883,
+          "error_code": null,
+          "notice": "仅依据虚构教学政策解释，不构成授信、审批或放款决定。"
+        },
+        "route": {
+          "intent": "policy_question",
+          "resolved_product_id": "equipment",
+          "basis": "explicit_name"
+        },
+        "conversation_id": "abcea704f8764f888f34ea121f53365f",
+        "request_id": "trace_request_001",
+        "message_id": "7f9b4c3d9f814e009aeeee6bbb81a25d",
+        "seq": 8
+      }
+    }
+  ]
+}

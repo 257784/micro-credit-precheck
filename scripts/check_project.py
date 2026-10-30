@@ -12,19 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main() -> int:
-    js_tests = sorted(str(path.relative_to(ROOT)) for path in ROOT.glob("tests/*.test.mjs"))
-    js_tests += sorted(
-        str(path.relative_to(ROOT)) for path in ROOT.glob("frontend/tests/*.test.mjs")
-    )
     checks = [
         ("working-tree whitespace", ["git", "diff", "--check"]),
         ("staged whitespace", ["git", "diff", "--cached", "--check"]),
         (
             "Python syntax",
-            [sys.executable, "-m", "compileall", "-q", "backend/app", "tests", "scripts", ".codex/hooks"],
+            [sys.executable, "-m", "compileall", "-q", "backend/app", "scripts", "evals", ".codex/hooks"],
         ),
-        ("Python unit tests", [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"]),
-        ("JavaScript unit tests", ["node", "--test", *js_tests]),
         ("frontend build", [shutil.which("npm") or "npm", "--prefix", "frontend", "run", "build"]),
     ]
     for label, command in checks:

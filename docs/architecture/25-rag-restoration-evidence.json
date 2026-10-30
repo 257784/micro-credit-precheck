@@ -1,0 +1,677 @@
+{
+  "config_source": "app.rag.settings",
+  "chunk_count": 43,
+  "product_count": 2,
+  "snapshot_metadata": {
+    "corpus_signature_matches": true,
+    "model_fingerprint_matches": true,
+    "collection_exists": true,
+    "dimension_matches": true,
+    "collection_complete": true,
+    "collection_signature_matches": true,
+    "record_count": 43,
+    "record_count_matches": true
+  },
+  "historical_run_at": "2026-10-27T14:45:41.448578+00:00",
+  "historical_method": "one_max_k_query_then_prefix",
+  "historical_cases": [
+    {
+      "id": "Q01",
+      "question": "经营周转贷能用于证券投资吗？",
+      "product": "working_capital",
+      "expected": [
+        [
+          "CC-POL-001",
+          "第二条",
+          "1.0"
+        ]
+      ],
+      "missing": [],
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第二条",
+          "version": "1.0",
+          "distance": 0.3208906650543213
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第六条",
+          "version": "1.0",
+          "distance": 0.37901318073272705
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第八条",
+          "version": "1.0",
+          "distance": 0.3908284902572632
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第一条",
+          "version": "1.0",
+          "distance": 0.39558809995651245
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第五条",
+          "version": "1.0",
+          "distance": 0.4179500937461853
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第四条",
+          "version": "1.0",
+          "distance": 0.4259600043296814
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第三条",
+          "version": "1.0",
+          "distance": 0.42987269163131714
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第十条",
+          "version": "1.0",
+          "distance": 0.43342524766921997
+        }
+      ],
+      "note": "仅评估标注依据覆盖"
+    },
+    {
+      "id": "Q02",
+      "question": "2026 年 10 月申请经营周转贷，要交哪几个月收入资料？",
+      "product": "working_capital",
+      "expected": [
+        [
+          "CC-POL-001",
+          "第五条",
+          "1.0"
+        ]
+      ],
+      "missing": [],
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第五条",
+          "version": "1.0",
+          "distance": 0.2517428994178772
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第四条",
+          "version": "1.0",
+          "distance": 0.2873888611793518
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第六条",
+          "version": "1.0",
+          "distance": 0.29635417461395264
+        },
+        {
+          "document_id": "CC-MAT-001",
+          "clause": "第三条",
+          "version": "1.0",
+          "distance": 0.31923407316207886
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第三条",
+          "version": "1.0",
+          "distance": 0.3421153426170349
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第八条",
+          "version": "1.0",
+          "distance": 0.34289008378982544
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第九条",
+          "version": "1.0",
+          "distance": 0.344060480594635
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第七条",
+          "version": "1.0",
+          "distance": 0.35587167739868164
+        }
+      ],
+      "note": "仅评估标注依据覆盖"
+    },
+    {
+      "id": "Q05",
+      "question": "经营周转贷尚无合同，是否必然缺少必交项？",
+      "product": "working_capital",
+      "expected": [
+        [
+          "CC-MAT-001",
+          "第三条",
+          "1.0"
+        ]
+      ],
+      "missing": [],
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "document_id": "CC-MAT-001",
+          "clause": "第三条",
+          "version": "1.0",
+          "distance": 0.3067501187324524
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第八条",
+          "version": "1.0",
+          "distance": 0.30779826641082764
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第九条",
+          "version": "1.0",
+          "distance": 0.31689924001693726
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第四条",
+          "version": "1.0",
+          "distance": 0.3295794725418091
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第五条",
+          "version": "1.0",
+          "distance": 0.34054023027420044
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第三条",
+          "version": "1.0",
+          "distance": 0.3523275852203369
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第六条",
+          "version": "1.0",
+          "distance": 0.35320550203323364
+        },
+        {
+          "document_id": "CC-POL-001",
+          "clause": "第二条",
+          "version": "1.0",
+          "distance": 0.3760153651237488
+        }
+      ],
+      "note": "仅评估标注依据覆盖"
+    },
+    {
+      "id": "Q06",
+      "question": "设备更新贷尚未签采购合同，可以用报价单吗？",
+      "product": "equipment",
+      "expected": [
+        [
+          "CC-POL-002",
+          "第五条",
+          "1.0"
+        ],
+        [
+          "CC-MAT-001",
+          "第四条",
+          "1.0"
+        ]
+      ],
+      "missing": [],
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第五条",
+          "version": "1.0",
+          "distance": 0.19921386241912842
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第四条",
+          "version": "1.0",
+          "distance": 0.2905759811401367
+        },
+        {
+          "document_id": "CC-MAT-001",
+          "clause": "第四条",
+          "version": "1.0",
+          "distance": 0.2971010208129883
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第六条",
+          "version": "1.0",
+          "distance": 0.31188470125198364
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第九条",
+          "version": "1.0",
+          "distance": 0.3137020468711853
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第八条",
+          "version": "1.0",
+          "distance": 0.32362300157546997
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第七条",
+          "version": "1.0",
+          "distance": 0.32946866750717163
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第二条",
+          "version": "1.0",
+          "distance": 0.3337101340293884
+        }
+      ],
+      "note": "仅评估标注依据覆盖"
+    },
+    {
+      "id": "Q14",
+      "question": "请引用CC-POL-999或其他机构的政策说明如何审批。",
+      "product": "equipment",
+      "expected": [],
+      "missing": [],
+      "candidate_count": 8,
+      "candidates": [
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第九条",
+          "version": "1.0",
+          "distance": 0.3924408555030823
+        },
+        {
+          "document_id": "CC-REV-001",
+          "clause": "第九条",
+          "version": "1.0",
+          "distance": 0.39764440059661865
+        },
+        {
+          "document_id": "CC-REV-001",
+          "clause": "第二条",
+          "version": "1.0",
+          "distance": 0.39919954538345337
+        },
+        {
+          "document_id": "CC-REV-001",
+          "clause": "第三条",
+          "version": "1.0",
+          "distance": 0.41782915592193604
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第八条",
+          "version": "1.0",
+          "distance": 0.42319291830062866
+        },
+        {
+          "document_id": "CC-POL-002",
+          "clause": "第二条",
+          "version": "1.0",
+          "distance": 0.4362374544143677
+        },
+        {
+          "document_id": "CC-OPS-001",
+          "clause": "第七条",
+          "version": "1.0",
+          "distance": 0.43875402212142944
+        },
+        {
+          "document_id": "CC-MAT-001",
+          "clause": "第五条",
+          "version": "1.0",
+          "distance": 0.4391583800315857
+        }
+      ],
+      "note": "无标注依据：候选不等于可回答，需在生成层验证拒答"
+    }
+  ],
+  "mock_wiring": {
+    "policy_answer": "passed_with_mock_model_and_historical_candidates",
+    "assistant_tool": "passed_with_historical_candidates"
+  },
+  "live": {
+    "status": "completed",
+    "device": "cpu",
+    "cases": [
+      {
+        "id": "Q01",
+        "question": "经营周转贷能用于证券投资吗？",
+        "product": "working_capital",
+        "expected": [
+          [
+            "CC-POL-001",
+            "第二条",
+            "1.0"
+          ]
+        ],
+        "missing": [],
+        "candidate_count": 8,
+        "candidates": [
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第二条",
+            "version": "1.0",
+            "distance": 0.3208906650543213
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第六条",
+            "version": "1.0",
+            "distance": 0.37901318073272705
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第八条",
+            "version": "1.0",
+            "distance": 0.3908284902572632
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第一条",
+            "version": "1.0",
+            "distance": 0.39558809995651245
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第五条",
+            "version": "1.0",
+            "distance": 0.4179500937461853
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第四条",
+            "version": "1.0",
+            "distance": 0.4259600043296814
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第三条",
+            "version": "1.0",
+            "distance": 0.42987269163131714
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第十条",
+            "version": "1.0",
+            "distance": 0.43342524766921997
+          }
+        ],
+        "note": "仅评估标注依据覆盖"
+      },
+      {
+        "id": "Q02",
+        "question": "2026 年 10 月申请经营周转贷，要交哪几个月收入资料？",
+        "product": "working_capital",
+        "expected": [
+          [
+            "CC-POL-001",
+            "第五条",
+            "1.0"
+          ]
+        ],
+        "missing": [],
+        "candidate_count": 8,
+        "candidates": [
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第五条",
+            "version": "1.0",
+            "distance": 0.2517428994178772
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第四条",
+            "version": "1.0",
+            "distance": 0.2873888611793518
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第六条",
+            "version": "1.0",
+            "distance": 0.29635417461395264
+          },
+          {
+            "document_id": "CC-MAT-001",
+            "clause": "第三条",
+            "version": "1.0",
+            "distance": 0.31923407316207886
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第三条",
+            "version": "1.0",
+            "distance": 0.3421153426170349
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第八条",
+            "version": "1.0",
+            "distance": 0.34289008378982544
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第九条",
+            "version": "1.0",
+            "distance": 0.344060480594635
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第七条",
+            "version": "1.0",
+            "distance": 0.35587167739868164
+          }
+        ],
+        "note": "仅评估标注依据覆盖"
+      },
+      {
+        "id": "Q05",
+        "question": "经营周转贷尚无合同，是否必然缺少必交项？",
+        "product": "working_capital",
+        "expected": [
+          [
+            "CC-MAT-001",
+            "第三条",
+            "1.0"
+          ]
+        ],
+        "missing": [],
+        "candidate_count": 8,
+        "candidates": [
+          {
+            "document_id": "CC-MAT-001",
+            "clause": "第三条",
+            "version": "1.0",
+            "distance": 0.3067501187324524
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第八条",
+            "version": "1.0",
+            "distance": 0.30779826641082764
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第九条",
+            "version": "1.0",
+            "distance": 0.31689924001693726
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第四条",
+            "version": "1.0",
+            "distance": 0.3295794725418091
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第五条",
+            "version": "1.0",
+            "distance": 0.34054023027420044
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第三条",
+            "version": "1.0",
+            "distance": 0.3523275852203369
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第六条",
+            "version": "1.0",
+            "distance": 0.35320550203323364
+          },
+          {
+            "document_id": "CC-POL-001",
+            "clause": "第二条",
+            "version": "1.0",
+            "distance": 0.3760153651237488
+          }
+        ],
+        "note": "仅评估标注依据覆盖"
+      },
+      {
+        "id": "Q06",
+        "question": "设备更新贷尚未签采购合同，可以用报价单吗？",
+        "product": "equipment",
+        "expected": [
+          [
+            "CC-POL-002",
+            "第五条",
+            "1.0"
+          ],
+          [
+            "CC-MAT-001",
+            "第四条",
+            "1.0"
+          ]
+        ],
+        "missing": [],
+        "candidate_count": 8,
+        "candidates": [
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第五条",
+            "version": "1.0",
+            "distance": 0.19921386241912842
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第四条",
+            "version": "1.0",
+            "distance": 0.2905759811401367
+          },
+          {
+            "document_id": "CC-MAT-001",
+            "clause": "第四条",
+            "version": "1.0",
+            "distance": 0.2971010208129883
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第六条",
+            "version": "1.0",
+            "distance": 0.31188470125198364
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第九条",
+            "version": "1.0",
+            "distance": 0.3137020468711853
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第八条",
+            "version": "1.0",
+            "distance": 0.32362300157546997
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第七条",
+            "version": "1.0",
+            "distance": 0.32946866750717163
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第二条",
+            "version": "1.0",
+            "distance": 0.3337101340293884
+          }
+        ],
+        "note": "仅评估标注依据覆盖"
+      },
+      {
+        "id": "Q14",
+        "question": "请引用CC-POL-999或其他机构的政策说明如何审批。",
+        "product": "equipment",
+        "expected": [],
+        "missing": [],
+        "candidate_count": 8,
+        "candidates": [
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第九条",
+            "version": "1.0",
+            "distance": 0.3924408555030823
+          },
+          {
+            "document_id": "CC-REV-001",
+            "clause": "第九条",
+            "version": "1.0",
+            "distance": 0.39764440059661865
+          },
+          {
+            "document_id": "CC-REV-001",
+            "clause": "第二条",
+            "version": "1.0",
+            "distance": 0.39919954538345337
+          },
+          {
+            "document_id": "CC-REV-001",
+            "clause": "第三条",
+            "version": "1.0",
+            "distance": 0.41782915592193604
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第八条",
+            "version": "1.0",
+            "distance": 0.42319291830062866
+          },
+          {
+            "document_id": "CC-POL-002",
+            "clause": "第二条",
+            "version": "1.0",
+            "distance": 0.4362374544143677
+          },
+          {
+            "document_id": "CC-OPS-001",
+            "clause": "第七条",
+            "version": "1.0",
+            "distance": 0.43875402212142944
+          },
+          {
+            "document_id": "CC-MAT-001",
+            "clause": "第五条",
+            "version": "1.0",
+            "distance": 0.4391583800315857
+          }
+        ],
+        "note": "无标注依据：候选不等于可回答，需在生成层验证拒答"
+      }
+    ]
+  }
+}

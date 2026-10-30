@@ -1,0 +1,3206 @@
+{
+  "started_at": "2026-10-28T10:25:27.281959+00:00",
+  "mode": "real_backend_no_mock",
+  "cases": {
+    "NORMAL": {
+      "elapsed_seconds": 20.22,
+      "material": {
+        "run_id": "3c7f8add1f9e4654ac5367c225c93a7a",
+        "application_id": "APP-DOC-NORMAL",
+        "workflow_id": "material-completeness",
+        "workflow_version": "1.0",
+        "rules_version": "1.0",
+        "input_mode": "uploaded_documents",
+        "generated_at": "2026-10-28T10:25:27.848153+00:00",
+        "run_status": "completed_with_issues",
+        "conditions": {
+          "uses_order_contract": null,
+          "is_used_equipment": {
+            "value": false,
+            "source": "manual_demo",
+            "location": "采购计划明确全新设备"
+          }
+        },
+        "material_snapshot": [
+          {
+            "material_id": "0279e3391a6f454a85482051aebbabf3",
+            "version_no": 1,
+            "material_type": "设备报价单",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "5b4d39b731cc4b1fb3780933931f3ba0",
+            "version_no": 1,
+            "material_type": "未签约说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "c637875e99db4bf781d8efe373902060",
+            "version_no": 1,
+            "material_type": "授信申请表",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "1a40d4941d4f4c2495979f0af6d4f650",
+            "version_no": 1,
+            "material_type": "主体登记资料",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "590af8c686b44e06bd12b5c0f40b3af2",
+            "version_no": 1,
+            "material_type": "经营情况说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "c58174f24372425e870dde9bc9f09fe9",
+            "version_no": 1,
+            "material_type": "设备采购计划",
+            "parse_status": "parsed"
+          }
+        ],
+        "skipped_versions": [],
+        "name_hints": [],
+        "checklist": [
+          {
+            "code": "M-C01",
+            "name": "授信申请表",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "授信申请表",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "c637875e99db4bf781d8efe373902060",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C01"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-C02",
+            "name": "主体登记资料",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "主体登记资料",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "1a40d4941d4f4c2495979f0af6d4f650",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C02"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-C03",
+            "name": "经营情况说明",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "经营情况说明",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "590af8c686b44e06bd12b5c0f40b3af2",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C03"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-E01",
+            "name": "设备采购计划",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "设备采购计划",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "c58174f24372425e870dde9bc9f09fe9",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-E01"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-E02",
+            "name": "采购价格依据",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "（已签采购合同 或 （设备报价单 ＋ 未签约说明））",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "0279e3391a6f454a85482051aebbabf3",
+                "version_no": 1,
+                "parse_status": "parsed"
+              },
+              {
+                "material_id": "5b4d39b731cc4b1fb3780933931f3ba0",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "D-QUOTE",
+                "D-UNSIGNED"
+              ],
+              "missing": [],
+              "pending": [],
+              "alternatives": [
+                {
+                  "state": "missing",
+                  "matched": [],
+                  "missing": [
+                    "D-SIGNED"
+                  ],
+                  "pending": []
+                },
+                {
+                  "state": "present",
+                  "matched": [
+                    "D-QUOTE",
+                    "D-UNSIGNED"
+                  ],
+                  "missing": [],
+                  "pending": []
+                }
+              ]
+            },
+            "readability": "parsed",
+            "field_status": "pending"
+          },
+          {
+            "code": "M-E03",
+            "name": "二手设备使用及来源说明",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "二手设备使用及来源说明",
+            "condition": "is_used_equipment",
+            "materials": [],
+            "status": "not_applicable",
+            "readability": "not_available",
+            "field_status": "not_available"
+          }
+        ],
+        "missing_items": [],
+        "abnormal_items": [],
+        "pending_items": [
+          {
+            "kind": "sufficiency_review",
+            "code": "M-E02",
+            "message": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "field": null,
+            "evidence_location": null,
+            "action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ]
+          }
+        ],
+        "warnings": [],
+        "node_trace": [
+          {
+            "node_id": "N01",
+            "type": "validate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.022
+          },
+          {
+            "node_id": "N02",
+            "type": "snapshot",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.011
+          },
+          {
+            "node_id": "N03",
+            "type": "match",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.006
+          },
+          {
+            "node_id": "N04",
+            "type": "model_hint",
+            "status": "skipped",
+            "branch": "no_unclassified_materials",
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.002
+          },
+          {
+            "node_id": "N05",
+            "type": "readability",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.042
+          },
+          {
+            "node_id": "N06",
+            "type": "requirements",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 1,
+            "elapsed_ms": 0.076
+          },
+          {
+            "node_id": "N07",
+            "type": "fields",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.06
+          },
+          {
+            "node_id": "N08",
+            "type": "aggregate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.038
+          }
+        ],
+        "suggested_actions": [
+          "人工核验组合对应关系、替代条件和证据充分性。"
+        ],
+        "notice": "按F3虚构教学清单演示；已声明提交不代表内容真实或充分，不改变审批或复核状态。"
+      },
+      "risk": {
+        "run_id": "d5a670375045477dbf2b926799f1e9db",
+        "application_id": "APP-DOC-NORMAL",
+        "generated_at": "2026-10-28T10:25:27.960097+00:00",
+        "material_snapshot": [
+          {
+            "material_id": "0279e3391a6f454a85482051aebbabf3",
+            "version_no": 1,
+            "material_type": "设备报价单",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "5b4d39b731cc4b1fb3780933931f3ba0",
+            "version_no": 1,
+            "material_type": "未签约说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "c637875e99db4bf781d8efe373902060",
+            "version_no": 1,
+            "material_type": "授信申请表",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "1a40d4941d4f4c2495979f0af6d4f650",
+            "version_no": 1,
+            "material_type": "主体登记资料",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "590af8c686b44e06bd12b5c0f40b3af2",
+            "version_no": 1,
+            "material_type": "经营情况说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "c58174f24372425e870dde9bc9f09fe9",
+            "version_no": 1,
+            "material_type": "设备采购计划",
+            "parse_status": "parsed"
+          }
+        ],
+        "risk_items": [
+          {
+            "item_id": "material-1",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "evidence_location": null,
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "suggested_human_action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "title": "material_evidence_gap",
+            "rule_id": "material-1",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第四条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-1",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "采购计划与报价单中的设备、数量、金额单位、税费及附加费用口径需人工核对一致性。",
+            "evidence": [
+              {
+                "material_id": "c58174f24372425e870dde9bc9f09fe9",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第六条"
+            ],
+            "suggested_human_action": "人工核对采购计划与报价单的设备、数量、金额单位、税费及附加费用口径是否一致，并记录差异。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第六条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-2",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "申请金额与设备预算均为120000元，需人工确认用途与资金构成说明。",
+            "evidence": [
+              {
+                "material_id": "c637875e99db4bf781d8efe373902060",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "授信申请表\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n申请产品：设备更新贷（教学产品）\n申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序\n联系人：教学联系人林禾\n提交日期：2026-10-28\n真实性确认：本教学申请与所附虚构材料保持一致；真实业务须另行核验原件",
+                "quote": "申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第六条"
+            ],
+            "suggested_human_action": "人工核对申请金额与设备预算的对应关系及用途说明。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第六条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-3",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "主体名称与统一社会信用代码需与申请表建立对应关系。",
+            "evidence": [
+              {
+                "material_id": "1a40d4941d4f4c2495979f0af6d4f650",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "主体登记资料\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n主体类型：有限责任公司（虚构）\n经营范围：纸制包装加工及包装服务\n经营场所：澄川教学园区三号厂房（虚构地点）",
+                "quote": "主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n主体类型：有限责任公司（虚构）",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "suggested_human_action": "人工核验主体登记资料与授信申请表的主体名称、统一社会信用代码是否对应。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第二条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-4",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "经营情况说明需区分事实陈述与预测，设备投产收益属预测。",
+            "evidence": [
+              {
+                "material_id": "590af8c686b44e06bd12b5c0f40b3af2",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "suggested_human_action": "人工核验经营情况说明中事实陈述与预测的区分，并确认主要业务、经营场所及交易情况。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第二条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-5",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "采购目前处于询价阶段、尚未签订采购合同，需人工确认采购价格依据及后续补件要求。",
+            "evidence": [
+              {
+                "material_id": "5b4d39b731cc4b1fb3780933931f3ba0",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "未签约说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n申请主体：澄川青禾包装科技有限公司（虚构）\n报价编号：QH-Q-20261028\n未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "quote": "未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第九条"
+            ],
+            "suggested_human_action": "人工列出待核验事项，确认报价有效性及是否需要补件。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第九条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-6",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "设备用途、使用场所及与现有业务关系需人工核对。",
+            "evidence": [
+              {
+                "material_id": "c58174f24372425e870dde9bc9f09fe9",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-REV-001",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "人工核验设备用途、使用场所与现有业务的关系，判断是否存在关键证据缺口。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-REV-001",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          }
+        ],
+        "need_human_review": true,
+        "material_run_status": "completed_with_issues",
+        "node_trace": [
+          {
+            "node_id": "snapshot",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 15.392
+          },
+          {
+            "node_id": "materials",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 29.99
+          },
+          {
+            "node_id": "policy",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 0.003
+          },
+          {
+            "node_id": "deterministic",
+            "status": "executed",
+            "branch": "facts_unavailable",
+            "elapsed_ms": 0.001
+          },
+          {
+            "node_id": "model",
+            "status": "executed",
+            "branch": "completed",
+            "elapsed_ms": 20154.471
+          },
+          {
+            "node_id": "validate",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 1.357
+          },
+          {
+            "node_id": "aggregate",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 0.004
+          }
+        ],
+        "limitations": [
+          "教学摘录不能替代全文解析和人工核验。",
+          "模型仅基于教学摘录提出线索，引用校验不保证语义正确。"
+        ],
+        "workflow_version": "1.0",
+        "rule_version": "1.0",
+        "model_status": "completed",
+        "retrieval_status": "completed",
+        "missing_info": [
+          {
+            "item_id": "material-1",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "evidence_location": null,
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "suggested_human_action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "title": "material_evidence_gap",
+            "rule_id": "material-1",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第四条"
+              ]
+            ]
+          }
+        ],
+        "human_review_items": [
+          {
+            "item_id": "material-1",
+            "action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "evidence": []
+          },
+          {
+            "item_id": "model-1",
+            "action": "人工核对采购计划与报价单的设备、数量、金额单位、税费及附加费用口径是否一致，并记录差异。",
+            "evidence": [
+              {
+                "material_id": "c58174f24372425e870dde9bc9f09fe9",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-2",
+            "action": "人工核对申请金额与设备预算的对应关系及用途说明。",
+            "evidence": [
+              {
+                "material_id": "c637875e99db4bf781d8efe373902060",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "授信申请表\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n申请产品：设备更新贷（教学产品）\n申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序\n联系人：教学联系人林禾\n提交日期：2026-10-28\n真实性确认：本教学申请与所附虚构材料保持一致；真实业务须另行核验原件",
+                "quote": "申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-3",
+            "action": "人工核验主体登记资料与授信申请表的主体名称、统一社会信用代码是否对应。",
+            "evidence": [
+              {
+                "material_id": "1a40d4941d4f4c2495979f0af6d4f650",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "主体登记资料\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n主体类型：有限责任公司（虚构）\n经营范围：纸制包装加工及包装服务\n经营场所：澄川教学园区三号厂房（虚构地点）",
+                "quote": "主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n主体类型：有限责任公司（虚构）",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-4",
+            "action": "人工核验经营情况说明中事实陈述与预测的区分，并确认主要业务、经营场所及交易情况。",
+            "evidence": [
+              {
+                "material_id": "590af8c686b44e06bd12b5c0f40b3af2",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-5",
+            "action": "人工列出待核验事项，确认报价有效性及是否需要补件。",
+            "evidence": [
+              {
+                "material_id": "5b4d39b731cc4b1fb3780933931f3ba0",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "未签约说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n申请主体：澄川青禾包装科技有限公司（虚构）\n报价编号：QH-Q-20261028\n未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "quote": "未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-6",
+            "action": "人工核验设备用途、使用场所与现有业务的关系，判断是否存在关键证据缺口。",
+            "evidence": [
+              {
+                "material_id": "c58174f24372425e870dde9bc9f09fe9",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员",
+                "application_id": "APP-DOC-NORMAL",
+                "source": "teaching_excerpt"
+              }
+            ]
+          }
+        ],
+        "input_snapshot": {
+          "product": "设备更新贷（教学产品）",
+          "materials": [
+            {
+              "material_id": "0279e3391a6f454a85482051aebbabf3",
+              "version_no": 1,
+              "material_type": "设备报价单",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "5b4d39b731cc4b1fb3780933931f3ba0",
+              "version_no": 1,
+              "material_type": "未签约说明",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "c637875e99db4bf781d8efe373902060",
+              "version_no": 1,
+              "material_type": "授信申请表",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "1a40d4941d4f4c2495979f0af6d4f650",
+              "version_no": 1,
+              "material_type": "主体登记资料",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "590af8c686b44e06bd12b5c0f40b3af2",
+              "version_no": 1,
+              "material_type": "经营情况说明",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "c58174f24372425e870dde9bc9f09fe9",
+              "version_no": 1,
+              "material_type": "设备采购计划",
+              "parse_status": "parsed"
+            }
+          ],
+          "source": "legacy_metadata"
+        },
+        "run_status": "completed",
+        "material_node_trace": [
+          {
+            "node_id": "N01",
+            "type": "validate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.025
+          },
+          {
+            "node_id": "N02",
+            "type": "snapshot",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.013
+          },
+          {
+            "node_id": "N03",
+            "type": "match",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.005
+          },
+          {
+            "node_id": "N04",
+            "type": "model_hint",
+            "status": "skipped",
+            "branch": "no_unclassified_materials",
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.003
+          },
+          {
+            "node_id": "N05",
+            "type": "readability",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.067
+          },
+          {
+            "node_id": "N06",
+            "type": "requirements",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 1,
+            "elapsed_ms": 0.091
+          },
+          {
+            "node_id": "N07",
+            "type": "fields",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.076
+          },
+          {
+            "node_id": "N08",
+            "type": "aggregate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.038
+          },
+          {
+            "node_id": "risk_retrieval",
+            "type": "retrieval",
+            "status": "executed",
+            "branch": null,
+            "elapsed_ms": 16655.079
+          },
+          {
+            "node_id": "risk_model",
+            "type": "model",
+            "status": "completed",
+            "branch": null,
+            "elapsed_ms": 3436.624
+          }
+        ]
+      }
+    },
+    "CONTENT": {
+      "elapsed_seconds": 9.81,
+      "material": {
+        "run_id": "f9e7e56be6a44ef38593396598002bcd",
+        "application_id": "APP-DOC-CONTENT",
+        "workflow_id": "material-completeness",
+        "workflow_version": "1.0",
+        "rules_version": "1.0",
+        "input_mode": "uploaded_documents",
+        "generated_at": "2026-10-28T10:26:35.095319+00:00",
+        "run_status": "completed_with_issues",
+        "conditions": {
+          "uses_order_contract": null,
+          "is_used_equipment": {
+            "value": false,
+            "source": "manual_demo",
+            "location": "采购计划明确全新设备"
+          }
+        },
+        "material_snapshot": [
+          {
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "material_type": "设备报价单",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "ed3c46d239d34d0eb77f1417b7c84026",
+            "version_no": 1,
+            "material_type": "未签约说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "34a2bf47329b442baead6f991803f4ae",
+            "version_no": 1,
+            "material_type": "授信申请表",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "2031d0b440ad4fee9e00bf85bd848484",
+            "version_no": 1,
+            "material_type": "主体登记资料",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "1bb2b0849b934fd08b2e7367e138d082",
+            "version_no": 1,
+            "material_type": "经营情况说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "42a7b537e0a741c0a84b659dd6beba4f",
+            "version_no": 1,
+            "material_type": "设备采购计划",
+            "parse_status": "parsed"
+          }
+        ],
+        "skipped_versions": [],
+        "name_hints": [],
+        "checklist": [
+          {
+            "code": "M-C01",
+            "name": "授信申请表",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "授信申请表",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "34a2bf47329b442baead6f991803f4ae",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C01"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-C02",
+            "name": "主体登记资料",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "主体登记资料",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "2031d0b440ad4fee9e00bf85bd848484",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C02"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-C03",
+            "name": "经营情况说明",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "经营情况说明",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "1bb2b0849b934fd08b2e7367e138d082",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C03"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-E01",
+            "name": "设备采购计划",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "设备采购计划",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "42a7b537e0a741c0a84b659dd6beba4f",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-E01"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-E02",
+            "name": "采购价格依据",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "（已签采购合同 或 （设备报价单 ＋ 未签约说明））",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+                "version_no": 1,
+                "parse_status": "parsed"
+              },
+              {
+                "material_id": "ed3c46d239d34d0eb77f1417b7c84026",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "D-QUOTE",
+                "D-UNSIGNED"
+              ],
+              "missing": [],
+              "pending": [],
+              "alternatives": [
+                {
+                  "state": "missing",
+                  "matched": [],
+                  "missing": [
+                    "D-SIGNED"
+                  ],
+                  "pending": []
+                },
+                {
+                  "state": "present",
+                  "matched": [
+                    "D-QUOTE",
+                    "D-UNSIGNED"
+                  ],
+                  "missing": [],
+                  "pending": []
+                }
+              ]
+            },
+            "readability": "parsed",
+            "field_status": "missing_fields"
+          },
+          {
+            "code": "M-E03",
+            "name": "二手设备使用及来源说明",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "二手设备使用及来源说明",
+            "condition": "is_used_equipment",
+            "materials": [],
+            "status": "not_applicable",
+            "readability": "not_available",
+            "field_status": "not_available"
+          }
+        ],
+        "missing_items": [],
+        "abnormal_items": [
+          {
+            "kind": "field_missing",
+            "code": "D-QUOTE",
+            "message": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "field": "供应商",
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.供应商",
+            "action": "请补充可核对的字段：供应商",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ]
+          },
+          {
+            "kind": "field_missing",
+            "code": "D-QUOTE",
+            "message": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "field": "规格",
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.规格",
+            "action": "请补充可核对的字段：规格",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ]
+          },
+          {
+            "kind": "field_missing",
+            "code": "D-QUOTE",
+            "message": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "field": "数量",
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.数量",
+            "action": "请补充可核对的字段：数量",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ]
+          },
+          {
+            "kind": "field_missing",
+            "code": "D-QUOTE",
+            "message": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "field": "价格",
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.价格",
+            "action": "请补充可核对的字段：价格",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ]
+          },
+          {
+            "kind": "field_missing",
+            "code": "D-QUOTE",
+            "message": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "field": "日期",
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.日期",
+            "action": "请补充可核对的字段：日期",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ]
+          }
+        ],
+        "pending_items": [
+          {
+            "kind": "sufficiency_review",
+            "code": "M-E02",
+            "message": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "field": null,
+            "evidence_location": null,
+            "action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ]
+          }
+        ],
+        "warnings": [],
+        "node_trace": [
+          {
+            "node_id": "N01",
+            "type": "validate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.017
+          },
+          {
+            "node_id": "N02",
+            "type": "snapshot",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.009
+          },
+          {
+            "node_id": "N03",
+            "type": "match",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.005
+          },
+          {
+            "node_id": "N04",
+            "type": "model_hint",
+            "status": "skipped",
+            "branch": "no_unclassified_materials",
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.003
+          },
+          {
+            "node_id": "N05",
+            "type": "readability",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.038
+          },
+          {
+            "node_id": "N06",
+            "type": "requirements",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 1,
+            "elapsed_ms": 0.072
+          },
+          {
+            "node_id": "N07",
+            "type": "fields",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 5,
+            "elapsed_ms": 0.061
+          },
+          {
+            "node_id": "N08",
+            "type": "aggregate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.034
+          }
+        ],
+        "suggested_actions": [
+          "请补充可核对的字段：供应商",
+          "请补充可核对的字段：规格",
+          "请补充可核对的字段：数量",
+          "请补充可核对的字段：价格",
+          "请补充可核对的字段：日期",
+          "人工核验组合对应关系、替代条件和证据充分性。"
+        ],
+        "notice": "按F3虚构教学清单演示；已声明提交不代表内容真实或充分，不改变审批或复核状态。"
+      },
+      "risk": {
+        "run_id": "5ba6fc658b094e20a893bd442f208331",
+        "application_id": "APP-DOC-CONTENT",
+        "generated_at": "2026-10-28T10:26:35.209294+00:00",
+        "material_snapshot": [
+          {
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "material_type": "设备报价单",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "ed3c46d239d34d0eb77f1417b7c84026",
+            "version_no": 1,
+            "material_type": "未签约说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "34a2bf47329b442baead6f991803f4ae",
+            "version_no": 1,
+            "material_type": "授信申请表",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "2031d0b440ad4fee9e00bf85bd848484",
+            "version_no": 1,
+            "material_type": "主体登记资料",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "1bb2b0849b934fd08b2e7367e138d082",
+            "version_no": 1,
+            "material_type": "经营情况说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "42a7b537e0a741c0a84b659dd6beba4f",
+            "version_no": 1,
+            "material_type": "设备采购计划",
+            "parse_status": "parsed"
+          }
+        ],
+        "risk_items": [
+          {
+            "item_id": "material-1",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.供应商",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：供应商",
+            "title": "material_evidence_gap",
+            "rule_id": "material-1",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-2",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.规格",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：规格",
+            "title": "material_evidence_gap",
+            "rule_id": "material-2",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-3",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.数量",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：数量",
+            "title": "material_evidence_gap",
+            "rule_id": "material-3",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-4",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.价格",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：价格",
+            "title": "material_evidence_gap",
+            "rule_id": "material-4",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-5",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.日期",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：日期",
+            "title": "material_evidence_gap",
+            "rule_id": "material-5",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-6",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "evidence_location": null,
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "suggested_human_action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "title": "material_evidence_gap",
+            "rule_id": "material-6",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第四条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-1",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "采购计划中的设备总价与授信申请金额一致，但报价单材料未载明具体交易报价，价格依据是否充分需人工核验。",
+            "evidence": [
+              {
+                "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "供应商报价单\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n产品介绍：本设备适用于纸盒包装，具有自动输送功能。本文仅为宣传介绍，未提供具体交易报价。",
+                "quote": "产品介绍：本设备适用于纸盒包装，具有自动输送功能。本文仅为宣传介绍，未提供具体交易报价。",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-REV-001",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请人工核对报价单是否可作为设备价格依据，必要时要求补充有效报价或价格证明。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-REV-001",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-2",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "采购计划列明设备单价、总价、含税及费用构成，需与报价单、申请金额逐项核对口径。",
+            "evidence": [
+              {
+                "material_id": "42a7b537e0a741c0a84b659dd6beba4f",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第六条"
+            ],
+            "suggested_human_action": "请人工核对采购计划与报价单中的设备、数量、金额单位、税费及附加费用口径是否一致。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第六条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-3",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "申请尚处询价阶段、未签订采购合同，采购安排的有效性需人工确认。",
+            "evidence": [
+              {
+                "material_id": "ed3c46d239d34d0eb77f1417b7c84026",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "未签约说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n申请主体：澄川青禾包装科技有限公司（虚构）\n报价编号：QH-Q-20261028\n未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "quote": "未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第九条"
+            ],
+            "suggested_human_action": "请人工核验采购价格依据及采购安排是否可确认，并视情况提出补件要求。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第九条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-4",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "经营情况说明中设备投产收益属预测，需与事实陈述区分并留作审批关注事项。",
+            "evidence": [
+              {
+                "material_id": "1bb2b0849b934fd08b2e7367e138d082",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "suggested_human_action": "请人工确认经营情况说明已区分事实陈述与预测，并记录对核验的影响。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第二条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-5",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "授信申请表用途为购置两台全新QH-P200包装设备，需与采购计划、经营场所建立对应关系。",
+            "evidence": [
+              {
+                "material_id": "34a2bf47329b442baead6f991803f4ae",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "授信申请表\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n申请产品：设备更新贷（教学产品）\n申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序\n联系人：教学联系人林禾\n提交日期：2026-10-28\n真实性确认：本教学申请与所附虚构材料保持一致；真实业务须另行核验原件",
+                "quote": "用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第二条"
+            ],
+            "suggested_human_action": "请人工核对设备用途、使用场所与现有业务关系是否说明清楚。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第二条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-6",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "主体登记资料与申请表主体名称、统一社会信用代码需建立对应关系。",
+            "evidence": [
+              {
+                "material_id": "2031d0b440ad4fee9e00bf85bd848484",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "主体登记资料\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n主体类型：有限责任公司（虚构）\n经营范围：纸制包装加工及包装服务\n经营场所：澄川教学园区三号厂房（虚构地点）",
+                "quote": "主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "suggested_human_action": "请人工核对主体登记资料与授信申请表的主体信息对应关系。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第二条"
+              ]
+            ]
+          }
+        ],
+        "need_human_review": true,
+        "material_run_status": "completed_with_issues",
+        "node_trace": [
+          {
+            "node_id": "snapshot",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 15.779
+          },
+          {
+            "node_id": "materials",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 29.361
+          },
+          {
+            "node_id": "policy",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 0.004
+          },
+          {
+            "node_id": "deterministic",
+            "status": "executed",
+            "branch": "facts_unavailable",
+            "elapsed_ms": 0.001
+          },
+          {
+            "node_id": "model",
+            "status": "executed",
+            "branch": "completed",
+            "elapsed_ms": 9740.033
+          },
+          {
+            "node_id": "validate",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 1.63
+          },
+          {
+            "node_id": "aggregate",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 0.005
+          }
+        ],
+        "limitations": [
+          "教学摘录不能替代全文解析和人工核验。",
+          "模型仅基于教学摘录提出线索，引用校验不保证语义正确。"
+        ],
+        "workflow_version": "1.0",
+        "rule_version": "1.0",
+        "model_status": "completed",
+        "retrieval_status": "completed",
+        "missing_info": [
+          {
+            "item_id": "material-1",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.供应商",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：供应商",
+            "title": "material_evidence_gap",
+            "rule_id": "material-1",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-2",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.规格",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：规格",
+            "title": "material_evidence_gap",
+            "rule_id": "material-2",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-3",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.数量",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：数量",
+            "title": "material_evidence_gap",
+            "rule_id": "material-3",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-4",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.价格",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：价格",
+            "title": "material_evidence_gap",
+            "rule_id": "material-4",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-5",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "字段检查未找到该必需字段的有效值。",
+            "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+            "version_no": 1,
+            "evidence_location": "materials[8ec00c1ca3ab4174993b6672b9d2d5c2].extracted_fields.日期",
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "请补充可核对的字段：日期",
+            "title": "material_evidence_gap",
+            "rule_id": "material-5",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "material-6",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "evidence_location": null,
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "suggested_human_action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "title": "material_evidence_gap",
+            "rule_id": "material-6",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第四条"
+              ]
+            ]
+          },
+          {
+            "message": "D-QUOTE缺少可核对字段：价格",
+            "source": "uploaded_document"
+          },
+          {
+            "message": "D-QUOTE缺少可核对字段：币种",
+            "source": "uploaded_document"
+          },
+          {
+            "message": "计划与报价的币种未确定一致，不能直接计算差异。"
+          },
+          {
+            "message": "D-QUOTE缺少可核对字段：金额单位",
+            "source": "uploaded_document"
+          },
+          {
+            "message": "计划与报价的金额单位未确定一致，不能直接计算差异。"
+          },
+          {
+            "message": "D-QUOTE缺少可核对字段：含税口径",
+            "source": "uploaded_document"
+          },
+          {
+            "message": "计划与报价的含税口径未确定一致，不能直接计算差异。"
+          },
+          {
+            "message": "D-QUOTE缺少可核对字段：费用构成",
+            "source": "uploaded_document"
+          },
+          {
+            "message": "计划与报价的费用构成未确定一致，不能直接计算差异。"
+          }
+        ],
+        "human_review_items": [
+          {
+            "item_id": "material-1",
+            "action": "请补充可核对的字段：供应商",
+            "evidence": []
+          },
+          {
+            "item_id": "material-2",
+            "action": "请补充可核对的字段：规格",
+            "evidence": []
+          },
+          {
+            "item_id": "material-3",
+            "action": "请补充可核对的字段：数量",
+            "evidence": []
+          },
+          {
+            "item_id": "material-4",
+            "action": "请补充可核对的字段：价格",
+            "evidence": []
+          },
+          {
+            "item_id": "material-5",
+            "action": "请补充可核对的字段：日期",
+            "evidence": []
+          },
+          {
+            "item_id": "material-6",
+            "action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "evidence": []
+          },
+          {
+            "item_id": "model-1",
+            "action": "请人工核对报价单是否可作为设备价格依据，必要时要求补充有效报价或价格证明。",
+            "evidence": [
+              {
+                "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "供应商报价单\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n产品介绍：本设备适用于纸盒包装，具有自动输送功能。本文仅为宣传介绍，未提供具体交易报价。",
+                "quote": "产品介绍：本设备适用于纸盒包装，具有自动输送功能。本文仅为宣传介绍，未提供具体交易报价。",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-2",
+            "action": "请人工核对采购计划与报价单中的设备、数量、金额单位、税费及附加费用口径是否一致。",
+            "evidence": [
+              {
+                "material_id": "42a7b537e0a741c0a84b659dd6beba4f",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-3",
+            "action": "请人工核验采购价格依据及采购安排是否可确认，并视情况提出补件要求。",
+            "evidence": [
+              {
+                "material_id": "ed3c46d239d34d0eb77f1417b7c84026",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "未签约说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n申请主体：澄川青禾包装科技有限公司（虚构）\n报价编号：QH-Q-20261028\n未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "quote": "未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-4",
+            "action": "请人工确认经营情况说明已区分事实陈述与预测，并记录对核验的影响。",
+            "evidence": [
+              {
+                "material_id": "1bb2b0849b934fd08b2e7367e138d082",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-5",
+            "action": "请人工核对设备用途、使用场所与现有业务关系是否说明清楚。",
+            "evidence": [
+              {
+                "material_id": "34a2bf47329b442baead6f991803f4ae",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "授信申请表\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n申请产品：设备更新贷（教学产品）\n申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序\n联系人：教学联系人林禾\n提交日期：2026-10-28\n真实性确认：本教学申请与所附虚构材料保持一致；真实业务须另行核验原件",
+                "quote": "用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-6",
+            "action": "请人工核对主体登记资料与授信申请表的主体信息对应关系。",
+            "evidence": [
+              {
+                "material_id": "2031d0b440ad4fee9e00bf85bd848484",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "主体登记资料\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n主体类型：有限责任公司（虚构）\n经营范围：纸制包装加工及包装服务\n经营场所：澄川教学园区三号厂房（虚构地点）",
+                "quote": "主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）",
+                "application_id": "APP-DOC-CONTENT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          }
+        ],
+        "input_snapshot": {
+          "product": "设备更新贷（教学产品）",
+          "materials": [
+            {
+              "material_id": "8ec00c1ca3ab4174993b6672b9d2d5c2",
+              "version_no": 1,
+              "material_type": "设备报价单",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "ed3c46d239d34d0eb77f1417b7c84026",
+              "version_no": 1,
+              "material_type": "未签约说明",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "34a2bf47329b442baead6f991803f4ae",
+              "version_no": 1,
+              "material_type": "授信申请表",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "2031d0b440ad4fee9e00bf85bd848484",
+              "version_no": 1,
+              "material_type": "主体登记资料",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "1bb2b0849b934fd08b2e7367e138d082",
+              "version_no": 1,
+              "material_type": "经营情况说明",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "42a7b537e0a741c0a84b659dd6beba4f",
+              "version_no": 1,
+              "material_type": "设备采购计划",
+              "parse_status": "parsed"
+            }
+          ],
+          "source": "legacy_metadata"
+        },
+        "run_status": "insufficient_evidence",
+        "material_node_trace": [
+          {
+            "node_id": "N01",
+            "type": "validate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.017
+          },
+          {
+            "node_id": "N02",
+            "type": "snapshot",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.04
+          },
+          {
+            "node_id": "N03",
+            "type": "match",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.022
+          },
+          {
+            "node_id": "N04",
+            "type": "model_hint",
+            "status": "skipped",
+            "branch": "no_unclassified_materials",
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.011
+          },
+          {
+            "node_id": "N05",
+            "type": "readability",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.153
+          },
+          {
+            "node_id": "N06",
+            "type": "requirements",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 1,
+            "elapsed_ms": 0.072
+          },
+          {
+            "node_id": "N07",
+            "type": "fields",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 5,
+            "elapsed_ms": 0.067
+          },
+          {
+            "node_id": "N08",
+            "type": "aggregate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.038
+          },
+          {
+            "node_id": "risk_retrieval",
+            "type": "retrieval",
+            "status": "executed",
+            "branch": null,
+            "elapsed_ms": 5601.28
+          },
+          {
+            "node_id": "risk_model",
+            "type": "model",
+            "status": "completed",
+            "branch": null,
+            "elapsed_ms": 4074.433
+          }
+        ]
+      }
+    },
+    "AMOUNT": {
+      "elapsed_seconds": 10.34,
+      "material": {
+        "run_id": "f4942a5adf6b4024bcb3c02bf31bcf76",
+        "application_id": "APP-DOC-AMOUNT",
+        "workflow_id": "material-completeness",
+        "workflow_version": "1.0",
+        "rules_version": "1.0",
+        "input_mode": "uploaded_documents",
+        "generated_at": "2026-10-28T10:26:45.143258+00:00",
+        "run_status": "completed_with_issues",
+        "conditions": {
+          "uses_order_contract": null,
+          "is_used_equipment": {
+            "value": false,
+            "source": "manual_demo",
+            "location": "采购计划明确全新设备"
+          }
+        },
+        "material_snapshot": [
+          {
+            "material_id": "9e682d6340864ef1aa9f69fcd0a56792",
+            "version_no": 1,
+            "material_type": "设备报价单",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "3147acf01da945a39b0cf5a08292622d",
+            "version_no": 1,
+            "material_type": "未签约说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "6cf0a0e19ea84ca5a9d16a0baf605994",
+            "version_no": 1,
+            "material_type": "授信申请表",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "e92ffb50aa3b4e9099789f5f41dbf66f",
+            "version_no": 1,
+            "material_type": "主体登记资料",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+            "version_no": 1,
+            "material_type": "经营情况说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+            "version_no": 1,
+            "material_type": "设备采购计划",
+            "parse_status": "parsed"
+          }
+        ],
+        "skipped_versions": [],
+        "name_hints": [],
+        "checklist": [
+          {
+            "code": "M-C01",
+            "name": "授信申请表",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "授信申请表",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "6cf0a0e19ea84ca5a9d16a0baf605994",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C01"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-C02",
+            "name": "主体登记资料",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "主体登记资料",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "e92ffb50aa3b4e9099789f5f41dbf66f",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C02"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-C03",
+            "name": "经营情况说明",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "requirement": "经营情况说明",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-C03"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-E01",
+            "name": "设备采购计划",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "设备采购计划",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "M-E01"
+              ],
+              "missing": [],
+              "pending": []
+            },
+            "readability": "parsed",
+            "field_status": "checked"
+          },
+          {
+            "code": "M-E02",
+            "name": "采购价格依据",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "（已签采购合同 或 （设备报价单 ＋ 未签约说明））",
+            "condition": null,
+            "materials": [
+              {
+                "material_id": "9e682d6340864ef1aa9f69fcd0a56792",
+                "version_no": 1,
+                "parse_status": "parsed"
+              },
+              {
+                "material_id": "3147acf01da945a39b0cf5a08292622d",
+                "version_no": 1,
+                "parse_status": "parsed"
+              }
+            ],
+            "status": "present",
+            "combination": {
+              "state": "present",
+              "matched": [
+                "D-QUOTE",
+                "D-UNSIGNED"
+              ],
+              "missing": [],
+              "pending": [],
+              "alternatives": [
+                {
+                  "state": "missing",
+                  "matched": [],
+                  "missing": [
+                    "D-SIGNED"
+                  ],
+                  "pending": []
+                },
+                {
+                  "state": "present",
+                  "matched": [
+                    "D-QUOTE",
+                    "D-UNSIGNED"
+                  ],
+                  "missing": [],
+                  "pending": []
+                }
+              ]
+            },
+            "readability": "parsed",
+            "field_status": "pending"
+          },
+          {
+            "code": "M-E03",
+            "name": "二手设备使用及来源说明",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "requirement": "二手设备使用及来源说明",
+            "condition": "is_used_equipment",
+            "materials": [],
+            "status": "not_applicable",
+            "readability": "not_available",
+            "field_status": "not_available"
+          }
+        ],
+        "missing_items": [],
+        "abnormal_items": [],
+        "pending_items": [
+          {
+            "kind": "sufficiency_review",
+            "code": "M-E02",
+            "message": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "field": null,
+            "evidence_location": null,
+            "action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ]
+          }
+        ],
+        "warnings": [],
+        "node_trace": [
+          {
+            "node_id": "N01",
+            "type": "validate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.019
+          },
+          {
+            "node_id": "N02",
+            "type": "snapshot",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.012
+          },
+          {
+            "node_id": "N03",
+            "type": "match",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.005
+          },
+          {
+            "node_id": "N04",
+            "type": "model_hint",
+            "status": "skipped",
+            "branch": "no_unclassified_materials",
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.003
+          },
+          {
+            "node_id": "N05",
+            "type": "readability",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.047
+          },
+          {
+            "node_id": "N06",
+            "type": "requirements",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 1,
+            "elapsed_ms": 0.083
+          },
+          {
+            "node_id": "N07",
+            "type": "fields",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.068
+          },
+          {
+            "node_id": "N08",
+            "type": "aggregate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.032
+          }
+        ],
+        "suggested_actions": [
+          "人工核验组合对应关系、替代条件和证据充分性。"
+        ],
+        "notice": "按F3虚构教学清单演示；已声明提交不代表内容真实或充分，不改变审批或复核状态。"
+      },
+      "risk": {
+        "run_id": "dd4ec320bbe848a382c396ae73256e00",
+        "application_id": "APP-DOC-AMOUNT",
+        "generated_at": "2026-10-28T10:26:45.266217+00:00",
+        "material_snapshot": [
+          {
+            "material_id": "9e682d6340864ef1aa9f69fcd0a56792",
+            "version_no": 1,
+            "material_type": "设备报价单",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "3147acf01da945a39b0cf5a08292622d",
+            "version_no": 1,
+            "material_type": "未签约说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "6cf0a0e19ea84ca5a9d16a0baf605994",
+            "version_no": 1,
+            "material_type": "授信申请表",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "e92ffb50aa3b4e9099789f5f41dbf66f",
+            "version_no": 1,
+            "material_type": "主体登记资料",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+            "version_no": 1,
+            "material_type": "经营情况说明",
+            "parse_status": "parsed"
+          },
+          {
+            "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+            "version_no": 1,
+            "material_type": "设备采购计划",
+            "parse_status": "parsed"
+          }
+        ],
+        "risk_items": [
+          {
+            "item_id": "material-1",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "evidence_location": null,
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "suggested_human_action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "title": "material_evidence_gap",
+            "rule_id": "material-1",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第四条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-1",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "采购计划中的设备单价、总价与供应商报价单不一致，需人工核验价格依据及差异原因。",
+            "evidence": [
+              {
+                "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "单价：60000\n总价：120000",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第六条"
+            ],
+            "suggested_human_action": "核对采购计划与报价单的设备、数量、金额单位及费用口径，记录单价60000与报价单75000、总价120000与150000的差异并要求解释资金构成，不得仅凭数值差异认定违规或自动调整额度。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第六条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-2",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "申请金额120000低于报价单总价150000，需人工核验差额用途或资金构成。",
+            "evidence": [
+              {
+                "material_id": "6cf0a0e19ea84ca5a9d16a0baf605994",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "授信申请表\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n申请产品：设备更新贷（教学产品）\n申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序\n联系人：教学联系人林禾\n提交日期：2026-10-28\n真实性确认：本教学申请与所附虚构材料保持一致；真实业务须另行核验原件",
+                "quote": "申请金额：120000",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第六条"
+            ],
+            "suggested_human_action": "记录申请金额与设备预算的差异，要求申请人解释差额用途或资金构成，交人工确认。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第六条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-3",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "采购计划引用报价编号QH-Q-20261028，但计划单价总价与对应报价单不一致，价格依据存在待核验缺口。",
+            "evidence": [
+              {
+                "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "报价编号：QH-Q-20261028",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-REV-001",
+              "1.0",
+              "第五条"
+            ],
+            "suggested_human_action": "将设备价格依据不一致列为关键证据缺口，要求补件或提交有关部门确认，不得仅写通过后转交审批。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-REV-001",
+                "1.0",
+                "第五条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-4",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "未签约说明表明采购尚处询价阶段、报价不等于合同成立，需人工核验采购安排与报价有效性。",
+            "evidence": [
+              {
+                "material_id": "3147acf01da945a39b0cf5a08292622d",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "未签约说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n申请主体：澄川青禾包装科技有限公司（虚构）\n报价编号：QH-Q-20261028\n未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "quote": "未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第九条"
+            ],
+            "suggested_human_action": "列出待核验事项并提出补件要求，按CC-REV-001记录人工意见后转交后续审批。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第九条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-5",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "经营情况说明中设备投产收益属预测，需人工区分事实陈述与预测。",
+            "evidence": [
+              {
+                "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "设备投产收益属于预测，不作收益保证",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第二条"
+            ],
+            "suggested_human_action": "核验经营情况说明是否区分事实陈述和预测，将收益预测留作审批关注事项。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第二条"
+              ]
+            ]
+          },
+          {
+            "item_id": "model-6",
+            "category": "semantic_review",
+            "origin": "model",
+            "description": "需核验设备用途、使用场所与现有业务关系及增加新设备的经营活动说明。",
+            "evidence": [
+              {
+                "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第二条"
+            ],
+            "suggested_human_action": "核对拟购设备名称、主要用途、使用场所及其与现有业务的关系，确认增加新设备拟开展的经营活动说明是否充分。",
+            "title": "semantic_review",
+            "rule_id": null,
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第二条"
+              ]
+            ]
+          },
+          {
+            "item_id": "uploaded-1",
+            "origin": "rule",
+            "category": "amount_review",
+            "description": "同口径采购计划120000元与报价150000元不一致。",
+            "evidence": [
+              {
+                "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+                "version_no": 1,
+                "location": "段落7",
+                "quote": "120000",
+                "source": "uploaded_document",
+                "application_id": "APP-DOC-AMOUNT"
+              },
+              {
+                "material_id": "9e682d6340864ef1aa9f69fcd0a56792",
+                "version_no": 1,
+                "location": "段落7",
+                "quote": "150000",
+                "source": "uploaded_document",
+                "application_id": "APP-DOC-AMOUNT"
+              }
+            ],
+            "policy_ref": [
+              "CC-POL-002",
+              "1.0",
+              "第六条"
+            ],
+            "suggested_human_action": "核对双方原文与口径，记录解释；不自动作授信决定。",
+            "title": "amount_review",
+            "rule_id": "uploaded-1",
+            "policy_refs": [
+              [
+                "CC-POL-002",
+                "1.0",
+                "第六条"
+              ]
+            ]
+          }
+        ],
+        "need_human_review": true,
+        "material_run_status": "completed_with_issues",
+        "node_trace": [
+          {
+            "node_id": "snapshot",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 17.895
+          },
+          {
+            "node_id": "materials",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 35.067
+          },
+          {
+            "node_id": "policy",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 0.004
+          },
+          {
+            "node_id": "deterministic",
+            "status": "executed",
+            "branch": "facts_unavailable",
+            "elapsed_ms": 0.0
+          },
+          {
+            "node_id": "model",
+            "status": "executed",
+            "branch": "completed",
+            "elapsed_ms": 10263.729
+          },
+          {
+            "node_id": "validate",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 1.783
+          },
+          {
+            "node_id": "aggregate",
+            "status": "executed",
+            "branch": "continue",
+            "elapsed_ms": 0.003
+          }
+        ],
+        "limitations": [
+          "教学摘录不能替代全文解析和人工核验。",
+          "模型仅基于教学摘录提出线索，引用校验不保证语义正确。"
+        ],
+        "workflow_version": "1.0",
+        "rule_version": "1.0",
+        "model_status": "completed",
+        "retrieval_status": "completed",
+        "missing_info": [
+          {
+            "item_id": "material-1",
+            "category": "material_evidence_gap",
+            "origin": "rule",
+            "description": "声明组合已提交，不代表能证明收入或价格事实。",
+            "material_id": null,
+            "version_no": null,
+            "evidence_location": null,
+            "policy_ref": [
+              "CC-MAT-001",
+              "1.0",
+              "第四条"
+            ],
+            "suggested_human_action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "title": "material_evidence_gap",
+            "rule_id": "material-1",
+            "evidence": [],
+            "policy_refs": [
+              [
+                "CC-MAT-001",
+                "1.0",
+                "第四条"
+              ]
+            ]
+          }
+        ],
+        "human_review_items": [
+          {
+            "item_id": "material-1",
+            "action": "人工核验组合对应关系、替代条件和证据充分性。",
+            "evidence": []
+          },
+          {
+            "item_id": "model-1",
+            "action": "核对采购计划与报价单的设备、数量、金额单位及费用口径，记录单价60000与报价单75000、总价120000与150000的差异并要求解释资金构成，不得仅凭数值差异认定违规或自动调整额度。",
+            "evidence": [
+              {
+                "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "单价：60000\n总价：120000",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-2",
+            "action": "记录申请金额与设备预算的差异，要求申请人解释差额用途或资金构成，交人工确认。",
+            "evidence": [
+              {
+                "material_id": "6cf0a0e19ea84ca5a9d16a0baf605994",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "授信申请表\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主体名称：澄川青禾包装科技有限公司（虚构）\n统一社会信用代码：DEMO-QH-001（教学标识）\n申请产品：设备更新贷（教学产品）\n申请金额：120000\n金额单位：元\n用途：购置两台全新QH-P200包装设备，用于现有纸盒封装工序\n联系人：教学联系人林禾\n提交日期：2026-10-28\n真实性确认：本教学申请与所附虚构材料保持一致；真实业务须另行核验原件",
+                "quote": "申请金额：120000",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-3",
+            "action": "将设备价格依据不一致列为关键证据缺口，要求补件或提交有关部门确认，不得仅写通过后转交审批。",
+            "evidence": [
+              {
+                "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "设备采购计划\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n设备名称：全新自动包装设备\n规格：QH-P200，每分钟20盒\n数量：2\n单价：60000\n总价：120000\n供应商：澄川示例设备制造有限公司（虚构）\n采购时间：2026-11-10\n安装安排：2026-11-15在三号厂房安装，由供应商培训操作人员\n费用构成：总价含税、运输及安装，不另收附加费用\n设备新旧属性：全新\n币种：CNY\n金额单位：元\n含税口径：含税\n报价编号：QH-Q-20261028",
+                "quote": "报价编号：QH-Q-20261028",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-4",
+            "action": "列出待核验事项并提出补件要求，按CC-REV-001记录人工意见后转交后续审批。",
+            "evidence": [
+              {
+                "material_id": "3147acf01da945a39b0cf5a08292622d",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "未签约说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n申请主体：澄川青禾包装科技有限公司（虚构）\n报价编号：QH-Q-20261028\n未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同\n后续安排：完成设备与场地适配核对后再决定是否签约；报价不等于合同成立",
+                "quote": "未签约原因：正在核实安装条件，采购目前处于询价阶段，尚未签订采购合同",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-5",
+            "action": "核验经营情况说明是否区分事实陈述和预测，将收益预测留作审批关注事项。",
+            "evidence": [
+              {
+                "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "设备投产收益属于预测，不作收益保证",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "model-6",
+            "action": "核对拟购设备名称、主要用途、使用场所及其与现有业务的关系，确认增加新设备拟开展的经营活动说明是否充分。",
+            "evidence": [
+              {
+                "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+                "version_no": 1,
+                "location": "实际上传文件段落",
+                "text": "经营情况说明\n本文件全部主体、交易和标识均为虚构教学设定，不是真实登记证明、合同或融资承诺。\n主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序\n经营场所：澄川教学园区三号厂房\n主要交易情况：采用按批交付、月度对账方式；本材料不作为具体营业收入证明\n融资需求：申请120000元购置设备，改善封装工序，设备投产收益属于预测，不作收益保证",
+                "quote": "主要业务：为教学示例食品企业加工纸盒，现有人工装盒及半自动封装工序",
+                "application_id": "APP-DOC-AMOUNT",
+                "source": "teaching_excerpt"
+              }
+            ]
+          },
+          {
+            "item_id": "uploaded-1",
+            "action": "核对双方原文与口径，记录解释；不自动作授信决定。",
+            "evidence": [
+              {
+                "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+                "version_no": 1,
+                "location": "段落7",
+                "quote": "120000",
+                "source": "uploaded_document",
+                "application_id": "APP-DOC-AMOUNT"
+              },
+              {
+                "material_id": "9e682d6340864ef1aa9f69fcd0a56792",
+                "version_no": 1,
+                "location": "段落7",
+                "quote": "150000",
+                "source": "uploaded_document",
+                "application_id": "APP-DOC-AMOUNT"
+              }
+            ]
+          }
+        ],
+        "input_snapshot": {
+          "product": "设备更新贷（教学产品）",
+          "materials": [
+            {
+              "material_id": "9e682d6340864ef1aa9f69fcd0a56792",
+              "version_no": 1,
+              "material_type": "设备报价单",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "3147acf01da945a39b0cf5a08292622d",
+              "version_no": 1,
+              "material_type": "未签约说明",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "6cf0a0e19ea84ca5a9d16a0baf605994",
+              "version_no": 1,
+              "material_type": "授信申请表",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "e92ffb50aa3b4e9099789f5f41dbf66f",
+              "version_no": 1,
+              "material_type": "主体登记资料",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "d858027494344bb1bc2f13a1f1dacc40",
+              "version_no": 1,
+              "material_type": "经营情况说明",
+              "parse_status": "parsed"
+            },
+            {
+              "material_id": "0fbd560c428e47e5ad9bda7de5257416",
+              "version_no": 1,
+              "material_type": "设备采购计划",
+              "parse_status": "parsed"
+            }
+          ],
+          "source": "legacy_metadata"
+        },
+        "run_status": "completed",
+        "material_node_trace": [
+          {
+            "node_id": "N01",
+            "type": "validate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.018
+          },
+          {
+            "node_id": "N02",
+            "type": "snapshot",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.01
+          },
+          {
+            "node_id": "N03",
+            "type": "match",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.005
+          },
+          {
+            "node_id": "N04",
+            "type": "model_hint",
+            "status": "skipped",
+            "branch": "no_unclassified_materials",
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.003
+          },
+          {
+            "node_id": "N05",
+            "type": "readability",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.038
+          },
+          {
+            "node_id": "N06",
+            "type": "requirements",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 1,
+            "elapsed_ms": 0.068
+          },
+          {
+            "node_id": "N07",
+            "type": "fields",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.055
+          },
+          {
+            "node_id": "N08",
+            "type": "aggregate",
+            "status": "executed",
+            "branch": null,
+            "input_count": 6,
+            "output_count": 0,
+            "elapsed_ms": 0.034
+          },
+          {
+            "node_id": "risk_retrieval",
+            "type": "retrieval",
+            "status": "executed",
+            "branch": null,
+            "elapsed_ms": 6385.387
+          },
+          {
+            "node_id": "risk_model",
+            "type": "model",
+            "status": "completed",
+            "branch": null,
+            "elapsed_ms": 3811.993
+          }
+        ]
+      }
+    }
+  }
+}

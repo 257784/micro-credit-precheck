@@ -5,9 +5,9 @@
 # 项目结构
 
 - 前端：`frontend/src/` 是 React 页面、组件和取数代码；`frontend/package.json` 管理 Vite 命令和依赖。
-- 后端：`backend/app/main.py` 是 FastAPI 入口；`backend/app/data.py` 负责数据访问与关联校验；`backend/app/models.py` 定义对象和响应结构；`backend/pyproject.toml` 与 `backend/uv.lock` 管理 Python 依赖。
-- 测试：`tests/`。
-- 业务规则和接口契约：业务开发任务卡存放在 `specs/`，本轮为 `specs/02-application-detail.md`，新业务任务参考 `specs/TEMPLATE.md`；配置维护不创建任务卡。上级目录 `../06-F2-MVP范围表.md`、`../06-F2交接清单.md`；接口及对象说明 `docs/data-contract.md`；代码约定 `docs/coding-standards.md`。虚构数据在 `mock_data/seed.json`。
+- 后端：`backend/app/main.py` 装配FastAPI；`api/`为路由，`services/`为共享业务入口，`repositories/`为数据访问，`schemas/`为Pydantic契约；`workflows/`、`rules/`、`rag/`、`llm/`、`agents/`及`tools/`按职责分包。旧顶层兼容模块已删除，所有代码使用新包路径。`db/`存连接及建表SQL，实际数据仍在被忽略的`backend/.data/`。依赖仍由`backend/pyproject.toml`与`backend/uv.lock`管理。
+- 测试：用户已要求删除自动测试文件；当前无自动单元测试目录。`scripts/check_project.py`仅检查空白、Python语法和前端构建。
+- 业务规则和接口契约：业务开发任务卡存放在 `specs/`，本轮为 `specs/20-unified-business-database.md`，新业务任务参考 `specs/TEMPLATE.md`；配置维护不创建任务卡。架构见`docs/architecture/README.md`，数据库说明见`backend/app/db/README.md`。上级目录 `../06-F2-MVP范围表.md`、`../06-F2交接清单.md`；接口及对象说明 `docs/data-contract.md`；代码约定 `docs/coding-standards.md`。mock_data/seed.json是迁移/测试来源，当前业务数据统一存MySQL，禁止测试重置开发库。
 
 # 开始任务前
 

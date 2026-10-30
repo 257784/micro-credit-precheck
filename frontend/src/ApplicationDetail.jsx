@@ -51,7 +51,7 @@ function ReportSection({ reports }) {
   );
 }
 
-export default function ApplicationDetail({ detail, error, loading, onRetry }) {
+export default function ApplicationDetail({ detail, error, loading, onRetry, onOpenMaterials, onOpenReport, onOpenReview }) {
   const statusHistory = detail?.status_history ?? [];
 
   return (
@@ -97,6 +97,8 @@ export default function ApplicationDetail({ detail, error, loading, onRetry }) {
               <dd>{detail.application.product_type}</dd>
               <dt>申请金额</dt>
               <dd>{formatAmount(detail.application.requested_amount)}</dd>
+              <dt>资金用途</dt>
+              <dd>{detail.application.purpose || '未提供'}</dd>
               <dt>当前状态</dt>
               <dd>{detail.application.status}</dd>
               <dt>客户经理</dt>
@@ -124,6 +126,9 @@ export default function ApplicationDetail({ detail, error, loading, onRetry }) {
 
           <section id="detail-materials">
             <h3>申请材料</h3>
+            <button type="button" className="retry-button" onClick={onOpenMaterials}>
+              查看材料清单与教学预览
+            </button>
             {detail.materials.length === 0 && <p>暂无材料，需人工核实。</p>}
             {detail.materials.map((material) => (
               <div className="record" key={material.material_id}>
@@ -133,7 +138,7 @@ export default function ApplicationDetail({ detail, error, loading, onRetry }) {
                 </p>
                 <small>
                   提交于 {formatTime(material.submitted_at)} ·{' '}
-                  {material.preview_url ? '已有预览地址' : '暂无样例文件预览'}
+                  {material.sample_excerpt ? '有教学静态摘录' : '暂无教学静态摘录'}
                 </small>
                 {material.check_status === '解析失败' && (
                   <p className="notice">材料无法解析，请人工核对或联系客户经理补交可读取版本。</p>
@@ -143,6 +148,10 @@ export default function ApplicationDetail({ detail, error, loading, onRetry }) {
           </section>
 
           <ReportSection reports={detail.reports} />
+          <div className="page-actions">
+            <button type="button" className="retry-button" onClick={onOpenReport}>查看完整 AI 预审报告</button>
+            <button type="button" className="secondary-button" onClick={onOpenReview}>查看人工复核</button>
+          </div>
         </>
       )}
     </section>

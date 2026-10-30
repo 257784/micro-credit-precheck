@@ -1,0 +1,470 @@
+[
+  {
+    "application_id": "APP-FICT-001",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-001",
+      "enterprise_name": "澄川教学示例01号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-001",
+      "enterprise_id": "ENT-FICT-001",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "normal_1",
+    "description": "正常完整材料",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-001\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-001\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-001\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-001\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-001\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-001\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-002",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-002",
+      "enterprise_name": "澄川教学示例02号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-002",
+      "enterprise_id": "ENT-FICT-002",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "normal_2",
+    "description": "正常完整材料",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-002\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-002\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-002\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-002\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-002\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-002\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-003",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-003",
+      "enterprise_name": "澄川教学示例03号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-003",
+      "enterprise_id": "ENT-FICT-003",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "missing_quote",
+    "description": "缺少报价单",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-003\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-003\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-003\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-003\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-003\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-004",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-004",
+      "enterprise_name": "澄川教学示例04号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-004",
+      "enterprise_id": "ENT-FICT-004",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "missing_registration",
+    "description": "缺少主体登记材料",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-004\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-004\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-004\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-004\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-004\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-005",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-005",
+      "enterprise_name": "澄川教学示例05号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-005",
+      "enterprise_id": "ENT-FICT-005",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "amount_difference",
+    "description": "报价与计划金额不一致",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-005\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-005\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-005\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-005\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-005\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-005\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-006",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-006",
+      "enterprise_name": "澄川教学示例06号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-006",
+      "enterprise_id": "ENT-FICT-006",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "name_difference",
+    "description": "申请与登记主体名称不一致",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-006\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-006\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-006\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-006\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-006\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-006\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-007",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-007",
+      "enterprise_name": "澄川教学示例07号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-007",
+      "enterprise_id": "ENT-FICT-007",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "missing_price",
+    "description": "报价缺少价格字段",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-007\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-007\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-007\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-007\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-007\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-007\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-008",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-008",
+      "enterprise_name": "澄川教学示例08号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-008",
+      "enterprise_id": "ENT-FICT-008",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "missing_tax",
+    "description": "报价缺少含税口径",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-008\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-008\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-008\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-008\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-008\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-008\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-009",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-009",
+      "enterprise_name": "澄川教学示例09号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-009",
+      "enterprise_id": "ENT-FICT-009",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "invalid_quote",
+    "description": "报价文件无法解析",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-009\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-009\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-009\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "M-E01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-009\\M-E01-设备采购计划.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-009\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-009\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  },
+  {
+    "application_id": "APP-FICT-010",
+    "enterprise": {
+      "enterprise_id": "ENT-FICT-010",
+      "enterprise_name": "澄川教学示例10号包装科技有限公司（虚构）",
+      "industry": "包装加工（虚构）",
+      "registered_region": "澄川教学园区（虚构）",
+      "created_at": "2026-10-29T15:09:57+00:00"
+    },
+    "application": {
+      "application_id": "APP-FICT-010",
+      "enterprise_id": "ENT-FICT-010",
+      "product_type": "设备更新贷（教学产品）",
+      "requested_amount": 120000,
+      "status": "待风控复核",
+      "account_manager_id": "MANAGER-TEACHING",
+      "account_manager_name": "教学客户经理",
+      "submitted_at": "2026-10-29T15:09:57+00:00"
+    },
+    "scenario": "missing_plan",
+    "description": "缺少设备采购计划",
+    "files": [
+      {
+        "category": "M-C01",
+        "file": "fixtures\\fictional_applications\\APP-FICT-010\\M-C01-授信申请表.docx"
+      },
+      {
+        "category": "M-C02",
+        "file": "fixtures\\fictional_applications\\APP-FICT-010\\M-C02-主体登记资料.docx"
+      },
+      {
+        "category": "M-C03",
+        "file": "fixtures\\fictional_applications\\APP-FICT-010\\M-C03-经营情况说明.docx"
+      },
+      {
+        "category": "D-QUOTE",
+        "file": "fixtures\\fictional_applications\\APP-FICT-010\\D-QUOTE-供应商报价单.docx"
+      },
+      {
+        "category": "D-UNSIGNED",
+        "file": "fixtures\\fictional_applications\\APP-FICT-010\\D-UNSIGNED-未签约说明.docx"
+      }
+    ]
+  }
+]

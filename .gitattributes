@@ -8,3 +8,5 @@
 *.toml text eol=lf
 *.md text eol=lf
 .githooks/* text eol=lf
+*.pdf binary
+*.docx binary

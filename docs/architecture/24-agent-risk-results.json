@@ -1,0 +1,53 @@
+{
+  "mode": "simulated_model_temporary_sqlite",
+  "total": 11,
+  "passed": 11,
+  "failures": 0,
+  "errors": 0,
+  "cases": [
+    {
+      "id": "test_01_correct_status",
+      "passed": true
+    },
+    {
+      "id": "test_02_missing_policy",
+      "passed": true
+    },
+    {
+      "id": "test_03_tool_failure",
+      "passed": true
+    },
+    {
+      "id": "test_04_induced_unauthorized_tool",
+      "passed": true
+    },
+    {
+      "id": "test_05_cross_application_access",
+      "passed": true
+    },
+    {
+      "id": "test_06_structured_invalid_input",
+      "passed": true
+    },
+    {
+      "id": "test_07_structured_tool_result",
+      "passed": true
+    },
+    {
+      "id": "test_08_hallucination_discarded",
+      "passed": true
+    },
+    {
+      "id": "test_09_human_review_required",
+      "passed": true
+    },
+    {
+      "id": "test_10_audit_failure",
+      "passed": true
+    },
+    {
+      "id": "test_11_untrusted_document_instruction",
+      "passed": true
+    }
+  ]
+}

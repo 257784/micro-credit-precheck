@@ -1,0 +1,1786 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "小微企业授信智能预审系统 F2",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/policy/conversations": {
+      "post": {
+        "summary": "Create Conversation",
+        "operationId": "create_conversation_api_policy_conversations_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Create Conversation Api Policy Conversations Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/policy/conversations/{cid}": {
+      "get": {
+        "summary": "Get Conversation",
+        "operationId": "get_conversation_api_policy_conversations__cid__get",
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Conversation Api Policy Conversations  Cid  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Conversation",
+        "operationId": "delete_conversation_api_policy_conversations__cid__delete",
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/policy/conversations/{cid}/messages/stream": {
+      "post": {
+        "summary": "Stream Message",
+        "operationId": "stream_message_api_policy_conversations__cid__messages_stream_post",
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications/{application_id}/documents": {
+      "post": {
+        "summary": "Upload Document",
+        "operationId": "upload_document_api_applications__application_id__documents_post",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Category"
+            }
+          },
+          {
+            "name": "filename",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Filename"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List Documents",
+        "operationId": "list_documents_api_applications__application_id__documents_get",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications/{application_id}/documents/{document_id}": {
+      "get": {
+        "summary": "Download Document",
+        "operationId": "download_document_api_applications__application_id__documents__document_id__get",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          },
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "description": "供本地启动检查使用。",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Api Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/policy/ask": {
+      "post": {
+        "summary": "Ask Policy",
+        "description": "教学政策解释；与复核写入服务分开，每次独立提问。",
+        "operationId": "ask_policy_api_policy_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications/{application_id}/materials/check": {
+      "post": {
+        "summary": "Check Materials",
+        "description": "只读教学Workflow；从服务器读取材料，不接收替换材料或状态操作。",
+        "operationId": "check_materials_api_applications__application_id__materials_check_post",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckRequest"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Submission"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Check Materials Api Applications  Application Id  Materials Check Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications/{application_id}/risk-precheck": {
+      "post": {
+        "summary": "Risk Precheck",
+        "description": "只读执行风险预审，材料和申请均从服务端读取。",
+        "operationId": "risk_precheck_api_applications__application_id__risk_precheck_post",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CheckRequest"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Submission"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Risk Precheck Api Applications  Application Id  Risk Precheck Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/enterprises": {
+      "get": {
+        "summary": "List Enterprises",
+        "description": "列出虚构企业客户。",
+        "operationId": "list_enterprises_api_enterprises_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Enterprise"
+                  },
+                  "type": "array",
+                  "title": "Response List Enterprises Api Enterprises Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications": {
+      "get": {
+        "summary": "List Applications",
+        "description": "列出申请及其企业名称和最新报告状态。",
+        "operationId": "list_applications_api_applications_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ApplicationSummary"
+                  },
+                  "type": "array",
+                  "title": "Response List Applications Api Applications Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications/{application_id}": {
+      "get": {
+        "summary": "Get Application",
+        "description": "返回单笔申请详情，不存在时返回 404。",
+        "operationId": "get_application_api_applications__application_id__get",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications/{application_id}/review/start": {
+      "post": {
+        "summary": "Start Review",
+        "description": "从待风控复核进入风控复核中。",
+        "operationId": "start_review_api_applications__application_id__review_start_post",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          },
+          {
+            "name": "x-demo-role",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "customer_manager",
+              "title": "X-Demo-Role"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/applications/{application_id}/review/submit": {
+      "post": {
+        "summary": "Submit Review",
+        "description": "保存逐项处理和意见，并更新到待审批或待企业补充材料。",
+        "operationId": "submit_review_api_applications__application_id__review_submit_post",
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Application Id"
+            }
+          },
+          {
+            "name": "x-demo-role",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "customer_manager",
+              "title": "X-Demo-Role"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewSubmission"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Application": {
+        "properties": {
+          "application_id": {
+            "type": "string",
+            "title": "Application Id"
+          },
+          "enterprise_id": {
+            "type": "string",
+            "title": "Enterprise Id"
+          },
+          "product_type": {
+            "type": "string",
+            "title": "Product Type"
+          },
+          "requested_amount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Requested Amount"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "account_manager_id": {
+            "type": "string",
+            "title": "Account Manager Id"
+          },
+          "account_manager_name": {
+            "type": "string",
+            "title": "Account Manager Name"
+          },
+          "submitted_at": {
+            "type": "string",
+            "title": "Submitted At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id",
+          "enterprise_id",
+          "product_type",
+          "requested_amount",
+          "status",
+          "account_manager_id",
+          "account_manager_name",
+          "submitted_at"
+        ],
+        "title": "Application",
+        "description": "一笔申请只对应一种教学产品需求，金额单位为元。"
+      },
+      "ApplicationDetail": {
+        "properties": {
+          "application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "enterprise": {
+            "$ref": "#/components/schemas/Enterprise"
+          },
+          "status_history": {
+            "items": {
+              "$ref": "#/components/schemas/StatusEvent"
+            },
+            "type": "array",
+            "title": "Status History"
+          },
+          "materials": {
+            "items": {
+              "$ref": "#/components/schemas/Material"
+            },
+            "type": "array",
+            "title": "Materials"
+          },
+          "reports": {
+            "items": {
+              "$ref": "#/components/schemas/Report"
+            },
+            "type": "array",
+            "title": "Reports"
+          },
+          "reviews": {
+            "items": {
+              "$ref": "#/components/schemas/ReviewRecord"
+            },
+            "type": "array",
+            "title": "Reviews"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application",
+          "enterprise",
+          "status_history",
+          "materials",
+          "reports"
+        ],
+        "title": "ApplicationDetail",
+        "description": "同一申请下的企业、材料和历次报告。"
+      },
+      "ApplicationSummary": {
+        "properties": {
+          "application_id": {
+            "type": "string",
+            "title": "Application Id"
+          },
+          "enterprise_id": {
+            "type": "string",
+            "title": "Enterprise Id"
+          },
+          "product_type": {
+            "type": "string",
+            "title": "Product Type"
+          },
+          "requested_amount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Requested Amount"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "account_manager_id": {
+            "type": "string",
+            "title": "Account Manager Id"
+          },
+          "account_manager_name": {
+            "type": "string",
+            "title": "Account Manager Name"
+          },
+          "submitted_at": {
+            "type": "string",
+            "title": "Submitted At"
+          },
+          "enterprise_name": {
+            "type": "string",
+            "title": "Enterprise Name"
+          },
+          "report_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Report Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "application_id",
+          "enterprise_id",
+          "product_type",
+          "requested_amount",
+          "status",
+          "account_manager_id",
+          "account_manager_name",
+          "submitted_at",
+          "enterprise_name",
+          "report_status"
+        ],
+        "title": "ApplicationSummary"
+      },
+      "CheckRequest": {
+        "properties": {
+          "use_model": {
+            "type": "boolean",
+            "title": "Use Model",
+            "default": false
+          },
+          "conditions": {
+            "$ref": "#/components/schemas/Conditions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "CheckRequest"
+      },
+      "Conditions": {
+        "properties": {
+          "uses_order_contract": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Fact"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "is_used_equipment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Fact"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "Conditions"
+      },
+      "Enterprise": {
+        "properties": {
+          "enterprise_id": {
+            "type": "string",
+            "title": "Enterprise Id"
+          },
+          "enterprise_name": {
+            "type": "string",
+            "title": "Enterprise Name"
+          },
+          "industry": {
+            "type": "string",
+            "title": "Industry"
+          },
+          "registered_region": {
+            "type": "string",
+            "title": "Registered Region"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "enterprise_id",
+          "enterprise_name",
+          "industry",
+          "registered_region",
+          "created_at"
+        ],
+        "title": "Enterprise"
+      },
+      "Evidence": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^S[1-6]$",
+            "title": "Source Id"
+          },
+          "quote": {
+            "type": "string",
+            "maxLength": 1200,
+            "minLength": 8,
+            "title": "Quote"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source_id",
+          "quote"
+        ],
+        "title": "Evidence"
+      },
+      "EvidenceRef": {
+        "properties": {
+          "material_id": {
+            "type": "string",
+            "title": "Material Id"
+          },
+          "file_name": {
+            "type": "string",
+            "title": "File Name"
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Page"
+          },
+          "quote": {
+            "type": "string",
+            "title": "Quote"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "material_id",
+          "file_name",
+          "page",
+          "quote"
+        ],
+        "title": "EvidenceRef"
+      },
+      "Fact": {
+        "properties": {
+          "value": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "manual_demo",
+              "fixture",
+              "application_field"
+            ],
+            "title": "Source"
+          },
+          "location": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Location"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "value",
+          "source",
+          "location"
+        ],
+        "title": "Fact"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ItemReview": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "corrected"
+            ],
+            "title": "Decision"
+          },
+          "correction_note": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correction Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "decision"
+        ],
+        "title": "ItemReview"
+      },
+      "KnowledgeItem": {
+        "properties": {
+          "knowledge_id": {
+            "type": "string",
+            "title": "Knowledge Id"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "requirement": {
+            "type": "string",
+            "title": "Requirement"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "knowledge_id",
+          "version",
+          "requirement"
+        ],
+        "title": "KnowledgeItem"
+      },
+      "Material": {
+        "properties": {
+          "material_id": {
+            "type": "string",
+            "title": "Material Id"
+          },
+          "application_id": {
+            "type": "string",
+            "title": "Application Id"
+          },
+          "material_type": {
+            "type": "string",
+            "title": "Material Type"
+          },
+          "file_name": {
+            "type": "string",
+            "title": "File Name"
+          },
+          "version_no": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Version No"
+          },
+          "check_status": {
+            "type": "string",
+            "title": "Check Status"
+          },
+          "preview_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preview Url"
+          },
+          "submitted_at": {
+            "type": "string",
+            "title": "Submitted At"
+          },
+          "sample_location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sample Location"
+          },
+          "sample_excerpt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sample Excerpt"
+          }
+        },
+        "type": "object",
+        "required": [
+          "material_id",
+          "application_id",
+          "material_type",
+          "file_name",
+          "version_no",
+          "check_status",
+          "preview_url",
+          "submitted_at"
+        ],
+        "title": "Material"
+      },
+      "MessageRequest": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Question"
+          },
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{8,80}$",
+            "title": "Request Id"
+          },
+          "retry_of": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{8,80}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retry Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "question",
+          "request_id"
+        ],
+        "title": "MessageRequest"
+      },
+      "PolicySource": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "chunk_id": {
+            "type": "string",
+            "title": "Chunk Id"
+          },
+          "document_id": {
+            "type": "string",
+            "title": "Document Id"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "clause": {
+            "type": "string",
+            "title": "Clause"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "source_path": {
+            "type": "string",
+            "title": "Source Path"
+          },
+          "source_line": {
+            "type": "integer",
+            "title": "Source Line"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "cosine_distance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cosine Distance"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id",
+          "chunk_id",
+          "document_id",
+          "version",
+          "clause",
+          "title",
+          "source_path",
+          "source_line",
+          "text",
+          "cosine_distance"
+        ],
+        "title": "PolicySource"
+      },
+      "QuestionRequest": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Question"
+          },
+          "product": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "working_capital",
+                  "equipment"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product"
+          },
+          "rerank": {
+            "type": "boolean",
+            "title": "Rerank",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "QuestionRequest"
+      },
+      "QuestionResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "answered",
+              "insufficient_evidence",
+              "needs_clarification",
+              "out_of_scope",
+              "configuration_error",
+              "retrieval_error",
+              "generation_error"
+            ],
+            "title": "Status"
+          },
+          "answer": {
+            "type": "string",
+            "title": "Answer"
+          },
+          "statements": {
+            "items": {
+              "$ref": "#/components/schemas/Statement"
+            },
+            "type": "array",
+            "title": "Statements"
+          },
+          "missing_information": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Missing Information"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/PolicySource"
+            },
+            "type": "array",
+            "title": "Sources"
+          },
+          "cited_source_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cited Source Ids"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "prompt_version": {
+            "type": "string",
+            "title": "Prompt Version",
+            "default": "policy-qa-v1"
+          },
+          "retrieval_k": {
+            "type": "integer",
+            "title": "Retrieval K",
+            "default": 8
+          },
+          "context_k": {
+            "type": "integer",
+            "title": "Context K",
+            "default": 6
+          },
+          "elapsed_seconds": {
+            "type": "number",
+            "title": "Elapsed Seconds",
+            "default": 0
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code"
+          },
+          "notice": {
+            "type": "string",
+            "title": "Notice",
+            "default": "仅依据虚构教学政策解释，不构成授信、审批或放款决定。"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "answer"
+        ],
+        "title": "QuestionResponse"
+      },
+      "Report": {
+        "properties": {
+          "report_id": {
+            "type": "string",
+            "title": "Report Id"
+          },
+          "application_id": {
+            "type": "string",
+            "title": "Application Id"
+          },
+          "generated_at": {
+            "type": "string",
+            "title": "Generated At"
+          },
+          "analysis_status": {
+            "type": "string",
+            "title": "Analysis Status"
+          },
+          "knowledge_version": {
+            "type": "string",
+            "title": "Knowledge Version"
+          },
+          "error_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Message"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReportItem"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "material_completeness": {
+            "$ref": "#/components/schemas/ReportAspect"
+          },
+          "risk_prompts": {
+            "items": {
+              "$ref": "#/components/schemas/ReportAspect"
+            },
+            "type": "array",
+            "title": "Risk Prompts"
+          },
+          "policy_match": {
+            "$ref": "#/components/schemas/ReportAspect"
+          },
+          "precheck_advice": {
+            "$ref": "#/components/schemas/ReportAspect"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "report_id",
+          "application_id",
+          "generated_at",
+          "analysis_status",
+          "knowledge_version",
+          "error_message",
+          "items",
+          "material_completeness",
+          "risk_prompts",
+          "policy_match",
+          "precheck_advice"
+        ],
+        "title": "Report",
+        "description": "一次预审运行的结果；失败时保留原因，不能按空报告处理。"
+      },
+      "ReportAspect": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "needs_review",
+              "insufficient_evidence",
+              "not_evaluated"
+            ],
+            "title": "Status"
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Summary"
+          },
+          "material_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Material Ids"
+          },
+          "item_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Item Ids"
+          },
+          "knowledge_refs": {
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeItem"
+            },
+            "type": "array",
+            "title": "Knowledge Refs"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "summary"
+        ],
+        "title": "ReportAspect",
+        "description": "报告摘要维度；引用已有材料、关注项和教学知识，不给审批结论。"
+      },
+      "ReportItem": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "item_type": {
+            "type": "string",
+            "title": "Item Type"
+          },
+          "field_name": {
+            "type": "string",
+            "title": "Field Name"
+          },
+          "match_status": {
+            "type": "string",
+            "title": "Match Status"
+          },
+          "application_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application Value"
+          },
+          "material_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material Value"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceRef"
+            },
+            "type": "array",
+            "title": "Evidence"
+          },
+          "knowledge_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KnowledgeItem"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "confidence": {
+            "type": "string",
+            "title": "Confidence"
+          },
+          "suggested_human_action": {
+            "type": "string",
+            "title": "Suggested Human Action"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "item_id",
+          "item_type",
+          "field_name",
+          "match_status",
+          "application_value",
+          "material_value",
+          "evidence",
+          "knowledge_ref",
+          "reason",
+          "confidence",
+          "suggested_human_action"
+        ],
+        "title": "ReportItem",
+        "description": "一条预审线索；证据和知识依据供人工核验，不是审批结论。"
+      },
+      "ReviewRecord": {
+        "properties": {
+          "review_result": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "request_supplement"
+            ],
+            "title": "Review Result"
+          },
+          "review_note": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Review Note"
+          },
+          "item_reviews": {
+            "items": {
+              "$ref": "#/components/schemas/ItemReview"
+            },
+            "type": "array",
+            "title": "Item Reviews"
+          },
+          "review_id": {
+            "type": "string",
+            "title": "Review Id"
+          },
+          "application_id": {
+            "type": "string",
+            "title": "Application Id"
+          },
+          "report_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Report Id"
+          },
+          "reviewer_id": {
+            "type": "string",
+            "title": "Reviewer Id"
+          },
+          "reviewed_at": {
+            "type": "string",
+            "title": "Reviewed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "review_result",
+          "review_note",
+          "item_reviews",
+          "review_id",
+          "application_id",
+          "report_id",
+          "reviewer_id",
+          "reviewed_at"
+        ],
+        "title": "ReviewRecord"
+      },
+      "ReviewSubmission": {
+        "properties": {
+          "review_result": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "request_supplement"
+            ],
+            "title": "Review Result"
+          },
+          "review_note": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Review Note"
+          },
+          "item_reviews": {
+            "items": {
+              "$ref": "#/components/schemas/ItemReview"
+            },
+            "type": "array",
+            "title": "Item Reviews"
+          }
+        },
+        "type": "object",
+        "required": [
+          "review_result",
+          "review_note",
+          "item_reviews"
+        ],
+        "title": "ReviewSubmission"
+      },
+      "Statement": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Text"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            },
+            "type": "array",
+            "maxItems": 6,
+            "minItems": 1,
+            "title": "Evidence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "evidence"
+        ],
+        "title": "Statement"
+      },
+      "StatusEvent": {
+        "properties": {
+          "event_id": {
+            "type": "string",
+            "title": "Event Id"
+          },
+          "application_id": {
+            "type": "string",
+            "title": "Application Id"
+          },
+          "event_label": {
+            "type": "string",
+            "title": "Event Label"
+          },
+          "occurred_at": {
+            "type": "string",
+            "title": "Occurred At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "event_id",
+          "application_id",
+          "event_label",
+          "occurred_at"
+        ],
+        "title": "StatusEvent",
+        "description": "一条虚构进度事件，不代表正式审计记录。"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

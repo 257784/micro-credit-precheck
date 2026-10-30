@@ -1,0 +1,60 @@
+{
+  "dataset_id": "chengchuan-credit-teaching-v1",
+  "dataset_version": "1.0",
+  "mode": "offline_teaching",
+  "fictional": true,
+  "status": "teaching_draft",
+  "effective_from": null,
+  "effective_to": null,
+  "created_at": "2026-10-26",
+  "publisher": "澄川普惠融资服务中心（虚构）",
+  "index_policy": "Only the five allowlisted document paths are corpus sources; no recursive import of the parent directory.",
+  "excluded": ["README.md", "corpus-manifest.json", "management/**"],
+  "documents": [
+    {
+      "document_id": "CC-POL-001",
+      "title": "经营周转贷预审政策",
+      "version": "1.0",
+      "path": "corpus/CC-POL-001-经营周转贷预审政策.md",
+      "product_scope": ["经营周转贷（教学产品）"],
+      "stage_scope": ["申请受理", "材料初检", "预审", "人工复核"],
+      "clause_count": 10
+    },
+    {
+      "document_id": "CC-POL-002",
+      "title": "设备更新贷预审政策",
+      "version": "1.0",
+      "path": "corpus/CC-POL-002-设备更新贷预审政策.md",
+      "product_scope": ["设备更新贷（教学产品）"],
+      "stage_scope": ["申请受理", "材料初检", "预审", "人工复核"],
+      "clause_count": 9
+    },
+    {
+      "document_id": "CC-MAT-001",
+      "title": "授信申请材料清单与核验要求",
+      "version": "1.0",
+      "path": "corpus/CC-MAT-001-授信申请材料清单与核验要求.md",
+      "product_scope": ["经营周转贷（教学产品）", "设备更新贷（教学产品）"],
+      "stage_scope": ["申请受理", "材料初检", "补件", "人工复核"],
+      "clause_count": 6
+    },
+    {
+      "document_id": "CC-REV-001",
+      "title": "人工预审复核规程",
+      "version": "1.0",
+      "path": "corpus/CC-REV-001-人工预审复核规程.md",
+      "product_scope": ["经营周转贷（教学产品）", "设备更新贷（教学产品）"],
+      "stage_scope": ["人工复核", "复核补件", "转交审批"],
+      "clause_count": 10
+    },
+    {
+      "document_id": "CC-OPS-001",
+      "title": "补件与材料版本管理办法",
+      "version": "1.0",
+      "path": "corpus/CC-OPS-001-补件与材料版本管理办法.md",
+      "product_scope": ["经营周转贷（教学产品）", "设备更新贷（教学产品）"],
+      "stage_scope": ["材料初检", "预审", "人工复核", "补件"],
+      "clause_count": 8
+    }
+  ]
+}
