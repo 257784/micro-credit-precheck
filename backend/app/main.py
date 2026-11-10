@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from app.db.session import verify_database, get_engine
 from sqlalchemy.exc import SQLAlchemyError
 from fastapi.responses import JSONResponse
-from app.api import applications, documents, prechecks, reviews as review_routes, conversations, credit_assistant, auth
+from app.api import applications, documents, prechecks, reviews as review_routes, conversations, credit_assistant, auth, operation_audit
 from app.core.authorization import can_access_application
 import re
 from urllib.parse import urlsplit
@@ -72,12 +72,25 @@ async def authenticated_api(request: Request, call_next):
             return JSONResponse(status_code=403, content={'detail': '无权提交审批。'})
         elif suffix == 'documents' and request.method == 'POST' and principal.role != 'enterprise':
             return JSONResponse(status_code=403, content={'detail': '仅企业客户可上传材料。'})
-    return await call_next(request)
+    response = await call_next(request)
+    if match and request.method == 'POST' and response.status_code in (409, 422, 500, 503):
+        application_id, suffix = match.groups()
+        action = {'resubmit': 'submit', 'review/start': 'review_start', 'review/submit': 'review_submit',
+                  'approval/start': 'approval_start', 'approval/approve': 'approve',
+                  'approval/reject': 'reject', 'risk-precheck': 'risk_report'}.get(suffix)
+        if action:
+            from app.observability.operation_audit import record_failure
+            reason = 'state_conflict' if response.status_code == 409 else 'invalid_input' if response.status_code == 422 else 'dependency_failure'
+            try:
+                record_failure(principal, application_id, action, reason)
+            except SQLAlchemyError:
+                return JSONResponse(status_code=503, content={'detail': '操作日志暂不可用，请稍后重试。'})
+    return response
 
 
 @app.exception_handler(SQLAlchemyError)
 async def database_error(request, exc):
     return JSONResponse(status_code=503, content={'detail': '数据库暂不可用，请稍后重试。'})
 
-for routes in (auth, conversations, documents, applications, prechecks, review_routes, credit_assistant):
+for routes in (auth, conversations, documents, applications, prechecks, review_routes, credit_assistant, operation_audit):
     app.include_router(routes.router)

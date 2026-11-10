@@ -11,6 +11,7 @@ from app.db.session import get_engine
 from app.repositories.reviews import ReviewConflict, STATUS_BY_ACTION
 from app.schemas.business import Application, ApplicationDetail, ApplicationSummary, Enterprise, Material, Report, StatusEvent
 from app.rules.application_states import ACTIVE_STATES, EDITABLE_STATES, RISK_REPORT_STATES, InvalidTransition, next_status
+from app.observability.operation_audit import record as audit_operation
 
 
 def checked_transition(current, action):
@@ -103,6 +104,9 @@ class ApplicationRepository:
                 raise ReviewConflict('请填写审批意见。')
             now = datetime.now(timezone.utc).isoformat(timespec='microseconds')
             record = {'action': action, 'actor_id': actor, 'note': note, 'occurred_at': now}
+            audit_operation(session, actor_id=actor, actor_role='approver', object_id=application_id,
+                action='approval_start' if action == 'start' else action,
+                before={'status': row.status}, after={'status': status})
             session.add(ApprovalRow(id='APR-' + uuid4().hex, application_id=application_id, occurred_at=now, payload=record))
             row.status = status
             event = StatusEvent(event_id='EVT-' + uuid4().hex, application_id=application_id,
@@ -128,7 +132,7 @@ class ApplicationRepository:
                                   payload={**event.model_dump(), 'actor_id': actor}))
             return row.status
 
-    def save_workflow_report(self, report, signature, expected_status):
+    def save_workflow_report(self, report, signature, expected_status, actor_id):
         with Session(get_engine()) as session, session.begin():
             row = session.scalar(select(ApplicationRow).where(ApplicationRow.id == report.application_id).with_for_update())
             if row is None or row.status != expected_status or row.status not in RISK_REPORT_STATES:
@@ -139,6 +143,10 @@ class ApplicationRepository:
                 raise ReviewConflict('材料版本已变化，请重新运行预审。')
             session.add(ReportRow(id=report.report_id, application_id=report.application_id,
                 generated_at=report.generated_at, payload=report.model_dump(mode='json')))
+            audit_operation(session, actor_id=actor_id, actor_role='risk_reviewer', object_id=report.application_id,
+                action='risk_report', before={'status': row.status},
+                after={'status': row.status, 'report_id': report.report_id, 'analysis_status': report.analysis_status},
+                result='degraded' if report.analysis_status == 'failed' else 'success')
 
     def list_for_admin(self):
         from app.db.auth_models import ApplicationOwnerRow
@@ -226,6 +234,8 @@ class ApplicationRepository:
             elif row.payload.get('account_manager_id') in (None, '', 'UNASSIGNED'):
                 row.payload = {**row.payload, 'assignment_pending': True}
             now = datetime.now(timezone.utc).isoformat(timespec='seconds')
+            audit_operation(session, actor_id=owner_id, actor_role='enterprise', object_id=application_id,
+                action='submit', before={'status': row.status}, after={'status': target_status})
             row.status = target_status
             event = StatusEvent(event_id='EVT-' + uuid4().hex, application_id=application_id,
                 event_label='企业补充材料并重新提交，待风控复核', occurred_at=now)
@@ -269,6 +279,8 @@ class ApplicationRepository:
             if owner_id is not None:
                 from app.db.auth_models import ApplicationOwnerRow
                 session.add(ApplicationOwnerRow(application_id=application.application_id, user_id=owner_id))
+                audit_operation(session, actor_id=owner_id, actor_role='enterprise', object_id=application.application_id,
+                    action='create_draft', after={'status': application.status})
 
     def list_enterprises(self):
         with Session(get_engine()) as session:
@@ -355,4 +367,7 @@ class ReviewRepository:
                 review_note=review_note, item_reviews_json=json.dumps([item.model_dump() for item in (item_reviews or [])], ensure_ascii=False))
             session.add(ReviewRow(id=identifier, application_id=application_id, report_id=report_id,
                 sequence=sequence, occurred_at=occurred, payload=payload))
+            audit_operation(session, actor_id=reviewer_id, actor_role='risk_reviewer', object_id=application_id,
+                action={'start': 'review_start', 'complete': 'review_complete', 'request_supplement': 'request_supplement'}[kind],
+                before={'status': application.status}, after={'status': target_status})
             application.status = target_status

@@ -66,7 +66,7 @@ def risk_precheck(application_id: str, request: Request, submission: CheckReques
             if principal.user_id != request.state.principal.user_id or not can_access_application(principal, application_id):
                 raise HTTPException(404, '申请不可访问。')
             report = build_risk_report(application_id, result, DocumentService().list(application_id), signature)
-            dependencies.repository.save_workflow_report(report, signature, detail.application.status)
+            dependencies.repository.save_workflow_report(report, signature, detail.application.status, principal.user_id)
             result['saved_report_id'] = report.report_id
         else:
             result['saved_report_id'] = None

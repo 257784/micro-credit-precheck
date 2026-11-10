@@ -93,6 +93,9 @@
 # 创建材料检查与审批记录表（幂等）
 .\backend\.venv\Scripts\python.exe scripts/init_submission_approval_tables.py
 
+# 创建关键操作日志表（幂等）
+.\backend\.venv\Scripts\python.exe scripts/init_operation_audit.py
+
 # 2. 交互式创建教学账号，可为 enterprise / customer_manager / risk_reviewer / approver / admin
 .\backend\.venv\Scripts\python.exe scripts/create_local_user.py
 # 使用客户经理助手前，再创建审计表：

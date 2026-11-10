@@ -80,6 +80,23 @@ class ApprovalRow(Base):
     __table_args__ = (Index('ix_approval_application_time', 'application_id', 'occurred_at'),)
 
 
+class OperationAuditRow(Base):
+    __tablename__ = 'operation_audit'
+    id = Column(String(64), primary_key=True)
+    occurred_at = Column(String(40), nullable=False)
+    actor_id = Column(String(80), nullable=False)
+    actor_role = Column(String(32), nullable=False)
+    object_type = Column(String(32), nullable=False)
+    object_id = Column(String(100), nullable=False)
+    action = Column(String(64), nullable=False)
+    before_value = Column(JSON, nullable=True)
+    after_value = Column(JSON, nullable=True)
+    result = Column(String(24), nullable=False)
+    reason_code = Column(String(40), nullable=True)
+    __table_args__ = (Index('ix_operation_audit_object_time', 'object_type', 'object_id', 'occurred_at'),
+                      Index('ix_operation_audit_actor_time', 'actor_id', 'occurred_at'))
+
+
 class KnowledgeRow(Base):
     __tablename__ = 'knowledge_items'
     id = Column(String(100), primary_key=True)

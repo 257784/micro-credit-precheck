@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 export default function AdminPage({ principal, onLogout }) {
   const [users, setUsers] = useState([]);
   const [audit, setAudit] = useState([]);
+  const [operations, setOperations] = useState([]);
   const [message, setMessage] = useState('');
   const [form, setForm] = useState({ username: '', display_name: '', role: 'enterprise', credential: '' });
   const roles = ['enterprise', 'customer_manager', 'risk_reviewer', 'approver', 'admin'];
@@ -13,6 +14,7 @@ export default function AdminPage({ principal, onLogout }) {
   }
   useEffect(() => { fetchJson('/api/auth/users').then(setUsers).catch(error => setMessage(error.message)); }, []);
   async function loadAudit() { try { setAudit(await fetchJson('/api/credit-assistant/audit')); } catch (error) { setMessage(error.message); } }
+  async function loadOperations() { try { setOperations(await fetchJson('/api/operation-audit')); } catch (error) { setMessage(error.message); } }
   async function save(path, method, payload) {
     try {
       const response = await fetch(path, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -41,5 +43,9 @@ export default function AdminPage({ principal, onLogout }) {
       <button type="button" disabled={user.user_id === principal.user_id} onClick={() => save('/api/auth/users/' + user.user_id, 'PATCH', { active: !user.active })}>{user.active ? '停用' : '启用'}</button></p>)}
     <h2>助手工具审计</h2><button type="button" onClick={loadAudit}>读取最近审计记录</button>
     {audit.map(entry => <p key={entry.event_id}>{entry.occurred_at} · {entry.actor} · {entry.application_id || '无申请'} · {entry.tool_name} · {entry.status}</p>)}
+    <h2>关键操作日志</h2><button type="button" onClick={loadOperations}>读取最近操作</button>
+    {operations.map(entry => <p key={entry.id}>{entry.occurred_at} · {entry.actor_id} ({entry.actor_role}) · {entry.object_id} · {entry.action} · {entry.result}
+      {entry.before?.status && ' · ' + entry.before.status}{entry.after?.status && ' → ' + entry.after.status}
+      {entry.after?.report_id && ' · 报告 ' + entry.after.report_id}{entry.reason_code && ' · ' + entry.reason_code}</p>)}
   </section></main>;
 }

@@ -1,10 +1,12 @@
 """穷举状态转换并验证持久化边界；只使用隔离 SQLite。"""
 import sys
 from pathlib import Path
+from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'backend'))
-from sqlalchemy import create_engine, func, select
+from sqlalchemy import create_engine, event, func, select
 from sqlalchemy.orm import Session
-from app.db.models import ApplicationRow, ApprovalRow, Base, EnterpriseRow, ReviewRow, StatusRow
+from sqlalchemy.exc import SQLAlchemyError
+from app.db.models import ApplicationRow, ApprovalRow, Base, EnterpriseRow, OperationAuditRow, ReviewRow, StatusRow
 from app.repositories.reviews import ReviewConflict
 from app.rules.application_states import InvalidTransition, TRANSITIONS, next_status
 import app.repositories.sql_business as business
@@ -49,6 +51,32 @@ def main():
     with Session(engine) as session:
         assert session.get(ApplicationRow, 'a').status == '待审批'
         assert session.scalar(select(func.count()).select_from(ReviewRow)) == 0
+    with patch('app.repositories.sql_business.audit_operation', side_effect=SQLAlchemyError('simulated audit failure')):
+        try:
+            repo.approval('a', 'approver', 'start')
+        except SQLAlchemyError:
+            pass
+        else:
+            raise AssertionError('日志写入失败应阻止状态变更')
+    with Session(engine) as session:
+        assert session.get(ApplicationRow, 'a').status == '待审批'
+        assert session.scalar(select(func.count()).select_from(ApprovalRow)) == 0
+    def fail_insert(_mapper, _connection, _target):
+        raise SQLAlchemyError('simulated log insert failure')
+    event.listen(OperationAuditRow, 'before_insert', fail_insert)
+    try:
+        try:
+            repo.approval('a', 'approver', 'start')
+        except SQLAlchemyError:
+            pass
+        else:
+            raise AssertionError('日志插入失败应回滚事务')
+    finally:
+        event.remove(OperationAuditRow, 'before_insert', fail_insert)
+    with Session(engine) as session:
+        assert session.get(ApplicationRow, 'a').status == '待审批'
+        assert session.scalar(select(func.count()).select_from(ApprovalRow)) == 0
+        assert session.scalar(select(func.count()).select_from(StatusRow)) == 0
     assert repo.approval('a', 'approver', 'start') == '审批中'
     assert repo.approval('a', 'approver', 'approve', '已人工确认') == '审批通过'
     for action in ('start', 'approve', 'reject', 'unknown'):

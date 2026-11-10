@@ -16,6 +16,8 @@ import app.core.authorization as authorization
 import app.repositories.sql_business as business
 import app.repositories.sql_documents as documents
 import app.observability.assistant_audit as audit_module
+import app.observability.operation_audit as operation_audit
+import app.api.operation_audit as operation_audit_api
 from app.main import app
 
 
@@ -23,7 +25,7 @@ def main():
     engine = create_engine('sqlite://', connect_args={'check_same_thread': False}, poolclass=StaticPool)
     Base.metadata.create_all(engine)
     audit_module.events.create(engine)
-    api.get_engine = auth.get_engine = authorization.get_engine = business.get_engine = documents.get_engine = audit_module.get_engine = lambda: engine
+    api.get_engine = auth.get_engine = authorization.get_engine = business.get_engine = documents.get_engine = audit_module.get_engine = operation_audit.get_engine = operation_audit_api.get_engine = lambda: engine
     accounts = {'e1': 'enterprise', 'e2': 'enterprise', 'm1': 'customer_manager',
                 'm2': 'customer_manager', 'r1': 'risk_reviewer', 'admin1': 'admin'}
     with Session(engine) as session, session.begin():
@@ -126,6 +128,17 @@ def main():
         assert submitted.status_code == 200, submitted.text
         assert submitted.json()['application']['status'] == '待审批'
         assert submitted.json()['reviews'][-1]['report_id'] == report_id
+        assert clients['m1'].get('/api/operation-audit').status_code == 403
+        audit_response = clients['admin1'].get('/api/operation-audit', params={'application_id': identifier})
+        assert audit_response.status_code == 200, audit_response.text
+        operation_logs = audit_response.json()
+        assert any(e['action'] == 'create_draft' and e['actor_id'] == 'e1' for e in operation_logs)
+        assert any(e['action'] == 'submit' and e['before']['status'] == '草稿' and e['after']['status'] == '待风控复核' for e in operation_logs if e['result'] == 'success')
+        assert any(e['action'] == 'risk_report' and e['actor_id'] == 'r1' and e['result'] == 'degraded' for e in operation_logs)
+        assert any(e['action'] == 'risk_report' and e['result'] == 'failed' and e['reason_code'] == 'dependency_failure' for e in operation_logs)
+        assert any(e['action'] == 'review_complete' and e['before']['status'] == '风控复核中' and e['after']['status'] == '待审批' for e in operation_logs)
+        assert any(e['action'] == 'review_submit' and e['result'] == 'failed' and e['reason_code'] == 'state_conflict' for e in operation_logs)
+        assert '人工核验完毕' not in audit_response.text and 'not a document' not in audit_response.text
     assert clients['e1'].post('/api/applications', json=payload, headers={'Origin': 'https://untrusted.invalid'}).status_code == 403
     cid = clients['e1'].post('/api/policy/conversations').json()['conversation_id']
     assert clients['e2'].get(f'/api/policy/conversations/{cid}').status_code == 404

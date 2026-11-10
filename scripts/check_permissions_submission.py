@@ -14,13 +14,15 @@ import app.core.authentication as auth
 import app.core.authorization as authorization
 import app.repositories.sql_business as business
 import app.repositories.sql_documents as documents
+import app.observability.operation_audit as operation_audit
+import app.api.operation_audit as operation_audit_api
 from app.main import app
 
 
 def main():
     engine = create_engine('sqlite://', connect_args={'check_same_thread': False}, poolclass=StaticPool)
     Base.metadata.create_all(engine)
-    api.get_engine = auth.get_engine = authorization.get_engine = business.get_engine = documents.get_engine = lambda: engine
+    api.get_engine = auth.get_engine = authorization.get_engine = business.get_engine = documents.get_engine = operation_audit.get_engine = operation_audit_api.get_engine = lambda: engine
     roles = {'e1': 'enterprise', 'e2': 'enterprise', 'm1': 'customer_manager', 'm2': 'customer_manager',
              'r': 'risk_reviewer', 'p': 'approver', 'admin': 'admin'}
     with Session(engine) as session, session.begin():
@@ -75,6 +77,10 @@ def main():
     assert clients['p'].post('/api/applications/' + identifier + '/approval/approve', json={'note': '人工确认'}).status_code == 200
     assert clients['p'].post('/api/applications/' + identifier + '/approval/reject', json={'note': '重复'}).status_code == 409
     assert clients['p'].get('/api/applications/' + identifier + '/approval-records').json()[-1]['action'] == 'approve'
+    audit = clients['admin'].get('/api/operation-audit', params={'application_id': identifier})
+    assert audit.status_code == 200
+    assert any(e['action'] == 'approve' and e['actor_id'] == 'p' and e['after']['status'] == '审批通过' for e in audit.json())
+    assert '人工确认' not in audit.text and '请补充信息' not in audit.text
     assert clients['admin'].post('/api/policy/conversations').status_code == 403
     with Session(engine) as session, session.begin():
         session.get(UserRow, 'm1').active = False
