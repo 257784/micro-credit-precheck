@@ -127,6 +127,9 @@
 .policy-page .policy-send { width: 40px; height: 40px; padding: 0; border-radius: 50%; background: #5278ee; border: 0; font-size: 23px; line-height: 1; }
 .policy-page .policy-stop { border: 1px solid #c9d6f7; color: #315ed0; background: #eef3ff; font-size: 13px; }
 .policy-chat-disclaimer { text-align: center; color: #9aa5b5; font-size: 12px; }
+.credit-equipment { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.policy-page .credit-equipment select { width: auto; color: #526079; background: #f5f7fb; border-color: #e2e8f1; padding: 6px 8px; font-size: 12px; }
+.credit-chat .assistant-message .record { margin: 0; }
 @media (max-width: 720px) { .policy-chat-header { padding: 14px; flex-wrap: wrap; } .policy-chat-body { min-height: 460px; padding: 18px 14px; } .policy-welcome h2 { font-size: 20px; } .policy-page .user-message { max-width: 95%; } }
 
 * {

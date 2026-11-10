@@ -43,7 +43,7 @@ class ConversationStore:
             raise SessionError(404, "对话已过期或后端已重启，请开启新对话。")
         return session
 
-    def create(self) -> dict:
+    def create(self, owner_id: str | None = None) -> dict:
         with self.lock:
             self.sessions = {key: item for key, item in self.sessions.items()
                              if self.clock() - item["updated"] < 1800}
@@ -51,25 +51,32 @@ class ConversationStore:
                 raise SessionError(429, "临时对话数量已达上限，请结束已有对话或稍后再试。")
             cid = uuid4().hex
             self.sessions[cid] = {
-                "conversation_id": cid, "updated": self.clock(), "turns": [],
+                "conversation_id": cid, "owner_id": owner_id, "updated": self.clock(), "turns": [],
                 "state": {"product": None, "facts": [], "pending_question": None,
                           "missing_slots": [], "clarification_count": 0},
             }
             return {"conversation_id": cid, "expires_in_seconds": 1800}
 
-    def get(self, cid: str) -> dict:
+    def get(self, cid: str, owner_id: str | None = None) -> dict:
         with self.lock:
             session = self._session(cid)
+            if session['owner_id'] != owner_id:
+                raise SessionError(404, "对话不存在或已过期。")
             session["updated"] = self.clock()
             return deepcopy(session)
 
-    def delete(self, cid: str) -> None:
-        with self.lock:
-            self.sessions.pop(cid, None)
-
-    def begin(self, cid: str, request: MessageRequest) -> tuple[dict, dict, bool]:
+    def delete(self, cid: str, owner_id: str | None = None) -> None:
         with self.lock:
             session = self._session(cid)
+            if session['owner_id'] != owner_id:
+                raise SessionError(404, "对话不存在或已过期。")
+            self.sessions.pop(cid, None)
+
+    def begin(self, cid: str, request: MessageRequest, owner_id: str | None = None) -> tuple[dict, dict, bool]:
+        with self.lock:
+            session = self._session(cid)
+            if session['owner_id'] != owner_id:
+                raise SessionError(404, "对话不存在或已过期。")
             existing = next((t for t in session["turns"] if t["request_id"] == request.request_id), None)
             if existing:
                 if existing["question"] != request.question:

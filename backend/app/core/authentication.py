@@ -40,11 +40,14 @@ def token_digest(token):
     return hashlib.sha256(token.encode()).hexdigest()
 
 
-def issue_session(user_id):
+def issue_session(user_id, session=None):
     token = secrets.token_urlsafe(32)
     expires = datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(hours=8)
-    with Session(get_engine()) as session, session.begin():
+    if session is not None:
         session.add(LoginSessionRow(token_hash=token_digest(token), user_id=user_id, expires_at=expires))
+    else:
+        with Session(get_engine()) as new_session, new_session.begin():
+            new_session.add(LoginSessionRow(token_hash=token_digest(token), user_id=user_id, expires_at=expires))
     return token
 
 

@@ -15,8 +15,8 @@ from app.db.session import get_engine
 def main():
     username = input('账号：').strip()
     display_name = input('显示名称：').strip()
-    role = input('角色（enterprise / customer_manager / risk_reviewer）：').strip()
-    if not username or len(username) > 100 or not display_name or len(display_name) > 100 or role not in ('enterprise', 'customer_manager', 'risk_reviewer'):
+    role = input('角色（enterprise / customer_manager / risk_reviewer / approver / admin）：').strip()
+    if not username or len(username) > 100 or not display_name or len(display_name) > 100 or role not in ('enterprise', 'customer_manager', 'risk_reviewer', 'approver', 'admin'):
         raise ValueError('账号、显示名称或角色无效')
     secret_value = getpass.getpass('登录凭据（至少 12 字符）：')
     if secret_value != getpass.getpass('确认登录凭据：'):

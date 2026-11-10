@@ -8,7 +8,7 @@ class DocumentService:
         _, rules, _ = load_configuration()
         if category not in rules['types']:
             raise ValueError('未知材料类别')
-        return DocumentStore().upload(application_id, category, filename, content)
+        return DocumentStore().upload(application_id, category, filename, content, enforce_status=True)
 
     def list(self, application_id):
         from app.repositories.documents import DocumentStore

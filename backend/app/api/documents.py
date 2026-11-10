@@ -7,6 +7,7 @@ from app.schemas.materials import CheckRequest
 from app.services.reviews import ReviewConflict, ReviewInputError
 from app.api import dependencies
 from app.services.documents import DocumentService
+from app.rules.application_states import InvalidTransition
 
 router = APIRouter()
 
@@ -26,6 +27,8 @@ async def upload_document(application_id: str, category: str, filename: str, req
             raise HTTPException(413, "超过10MB工程限制")
     try:
         return DocumentService().upload(application_id, category, filename, bytes(content))
+    except InvalidTransition as error:
+        raise HTTPException(409, str(error)) from None
     except ValueError as error:
         raise HTTPException(422, str(error)) from None
 

@@ -28,7 +28,7 @@ def rendered(results):
             parts.append('检索到的政策依据：' + ('；'.join(f"{x['document_id']} {x['version']} {x['clause']}（{x['source_path']}:{x['source_line']}）" for x in result['sources']) or '没有找到匹配条款，需人工核对。'))
         else:
             data = result['workflow']
-            issues = data.get('missing_items', []) + data.get('abnormal_items', []) + data.get('pending_items', []) if name == 'check_materials' else data.get('risk_items', []) + data.get('missing_info', [])
+            issues = data.get('missing_items', []) + data.get('abnormal_items', []) + data.get('pending_items', []) if name == 'get_material_check' else data.get('risk_items', []) + data.get('missing_info', [])
             lines = []
             for issue in issues[:30]:
                 message = issue.get('message') or issue.get('description') or '请人工核对。'

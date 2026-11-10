@@ -53,6 +53,7 @@ export default function ReviewPage({
       review_result: result,
       review_note: reviewNote.trim(),
       item_reviews: itemReviews,
+      report_id: latestReport?.report_id || null,
     }));
   }
 

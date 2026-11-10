@@ -42,7 +42,7 @@ class AuditStore:
                 raise RuntimeError('audit event missing')
 
     def query(self, context, actor=None, application_id=None, run_id=None, start=None, limit=100):
-        if context.role != 'demo_admin':
+        if context.role not in ('demo_admin', 'admin'):
             raise PermissionError('not authorized')
         query = select(events).order_by(events.c.occurred_at.desc()).limit(min(max(limit, 1), 100))
         for column, value in ((events.c.actor, actor), (events.c.application_id, application_id),

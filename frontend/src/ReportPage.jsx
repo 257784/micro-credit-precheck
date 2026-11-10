@@ -83,7 +83,7 @@ function Finding({ item, reportId, onOpenMaterials }) {
         {item.evidence.length === 0 && <p className="notice">暂无材料证据，需人工核实。</p>}
         {item.evidence.map((ref, index) => (
           <p key={ref.material_id + '-' + index}>
-            {ref.file_name} · 第 {ref.page} 页 · “{ref.quote}”
+            {ref.file_name} · {ref.location || (ref.page ? '第 ' + ref.page + ' 页' : '位置待核对')} {ref.version_no ? '· 第 ' + ref.version_no + ' 版' : ''} · “{ref.quote}”
             <br /><small>材料编号：{ref.material_id}</small>
             <br /><button type="button" className="text-button" onClick={() => onOpenMaterials(ref.material_id)}>
               查看这份材料及版本 →
@@ -95,7 +95,7 @@ function Finding({ item, reportId, onOpenMaterials }) {
   );
 }
 
-export default function ReportPage({ detail, error, loading, onRetry, onOpenMaterials, onOpenReview }) {
+export default function ReportPage({ detail, error, loading, onRetry, onOpenMaterials, onOpenReview, role }) {
   const reports = [...(detail?.reports ?? [])].sort((a, b) =>
     new Date(b.generated_at) - new Date(a.generated_at),
   );
@@ -118,7 +118,7 @@ export default function ReportPage({ detail, error, loading, onRetry, onOpenMate
         <>
           <p className="materials-context">{detail.enterprise.enterprise_name} · {detail.application.application_id}</p>
           <p className="helper-text">AI 预审仅整理待核验线索，不作授信审批结论。证据与正式材料须人工核对。</p>
-          <RiskPrecheck key={detail.application.application_id} applicationId={detail.application.application_id} />
+          {role === 'risk_reviewer' && <RiskPrecheck key={detail.application.application_id} applicationId={detail.application.application_id} role={role} onSaved={onRetry} />}
           <div className="page-actions">
             <button type="button" className="secondary-button" onClick={() => onOpenMaterials()}>查看本申请材料</button>
             <button type="button" className="retry-button" onClick={onOpenReview}>进入人工复核</button>
@@ -184,6 +184,11 @@ export default function ReportPage({ detail, error, loading, onRetry, onOpenMate
                 <p className="notice">当前报告缺少结构化摘要，请重启后端并刷新页面。</p>
               )}
               <h4>关注项明细</h4>
+              {report.workflow_result && <details><summary>查看本次 Workflow 的运行范围与限制</summary>
+                <p>运行状态：{report.workflow_result.run_status} · 政策检索：{report.workflow_result.retrieval_status} · 模型：{report.workflow_result.model_status}</p>
+                {(report.workflow_result.limitations || []).map((item, index) => <p key={index}>{item}</p>)}
+                <p>材料快照：{(report.workflow_result.material_snapshot || []).map((item) => item.material_id + ' 第' + item.version_no + '版').join('；') || '无材料快照'}</p>
+              </details>}
               {report.items.length === 0 && report.analysis_status !== 'failed' && (
                 <p className="notice">报告暂无关注项，仍需人工核实，不代表无风险。</p>
               )}

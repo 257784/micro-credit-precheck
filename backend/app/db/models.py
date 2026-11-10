@@ -62,6 +62,24 @@ class ReviewRow(Base):
                       Index('ix_review_application_time', 'application_id', 'occurred_at'))
 
 
+class MaterialCheckRow(Base):
+    __tablename__ = 'material_checks'
+    id = Column(String(100), primary_key=True)
+    application_id = Column(String(100), ForeignKey('applications.id'), nullable=False)
+    checked_at = Column(String(50), nullable=False)
+    payload = Column(JSON, nullable=False)
+    __table_args__ = (Index('ix_material_checks_application_time', 'application_id', 'checked_at'),)
+
+
+class ApprovalRow(Base):
+    __tablename__ = 'approval_actions'
+    id = Column(String(100), primary_key=True)
+    application_id = Column(String(100), ForeignKey('applications.id'), nullable=False)
+    occurred_at = Column(String(50), nullable=False)
+    payload = Column(JSON, nullable=False)
+    __table_args__ = (Index('ix_approval_application_time', 'application_id', 'occurred_at'),)
+
+
 class KnowledgeRow(Base):
     __tablename__ = 'knowledge_items'
     id = Column(String(100), primary_key=True)

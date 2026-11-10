@@ -7,7 +7,11 @@ export default defineConfig(({ mode }) => {
     server: {
       host: '127.0.0.1',
       proxy: {
-        '/api': env.BACKEND_URL || 'http://127.0.0.1:8000',
+        '/api': {
+          target: env.BACKEND_URL || 'http://127.0.0.1:8000',
+          // 保留浏览器访问前端时的 Host，供后端校验 Origin。
+          changeOrigin: false,
+        },
       },
     },
   };

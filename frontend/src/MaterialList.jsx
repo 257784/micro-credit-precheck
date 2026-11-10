@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatTime } from './formatters.js';
-import MaterialCheck from './MaterialCheck.jsx';
 import DocumentUpload from './DocumentUpload.jsx';
 
 export default function MaterialList({ detail, error, loading, onRetry, onOpenReport, requestedMaterialId }) {
   const [selectedMaterialId, setSelectedMaterialId] = useState(requestedMaterialId ?? null);
+  const [checks, setChecks] = useState([]);
+  const [checkError, setCheckError] = useState('');
+  useEffect(() => {
+    if (!detail) return;
+    fetch('/api/applications/' + encodeURIComponent(detail.application.application_id) + '/material-checks')
+      .then(r => { if (!r.ok) throw new Error('无法读取检查记录'); return r.json(); })
+      .then(setChecks).catch(e => setCheckError(e.message));
+  }, [detail?.application.application_id]);
   const materials = [...(detail?.materials ?? [])].sort((left, right) =>
     left.material_type.localeCompare(right.material_type, 'zh-CN') ||
     right.version_no - left.version_no ||
@@ -40,8 +47,11 @@ export default function MaterialList({ detail, error, loading, onRetry, onOpenRe
             {detail.enterprise.enterprise_name} · {detail.application.application_id}
           </p>
           <p className="helper-text">以下为虚构教学数据。静态摘录仅供核对流程演示，不能替代 PDF/DOCX 正式原件。</p>
-          <MaterialCheck key={detail.application.application_id} applicationId={detail.application.application_id} />
-          <DocumentUpload key={'upload-'+detail.application.application_id} applicationId={detail.application.application_id} />
+          <h3>企业材料检查记录</h3>{checkError && <p role="alert">{checkError}</p>}
+          {!checks.length && <p>尚无检查结果。</p>}
+          {checks.map(c => <details key={c.check_id}><summary>{c.checked_at} · {c.stale ? '已过期' : '当前材料版本'}</summary>
+            {[...c.result.missing_items, ...c.result.abnormal_items, ...c.result.pending_items].map((i, n) => <p key={n}>{i.message} {i.action}</p>)}</details>)}
+          <DocumentUpload key={'upload-'+detail.application.application_id} applicationId={detail.application.application_id} readOnly />
           <button type="button" className="secondary-button" onClick={onOpenReport}>
             查看本申请的 AI 预审报告 →
           </button>

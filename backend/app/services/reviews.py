@@ -11,12 +11,7 @@ class ReviewService:
         self.store = store
 
     def list_applications(self) -> list[ApplicationSummary]:
-        summaries = self.repository.list_applications()
-        for summary in summaries:
-            actions = self.store.actions_for(summary.application_id)
-            if actions:
-                summary.status = STATUS_BY_ACTION[actions[-1]["kind"]]
-        return summaries
+        return self.repository.list_applications()
 
     def get_application(self, application_id: str) -> ApplicationDetail | None:
         detail = self.repository.get_application(application_id)
@@ -25,8 +20,6 @@ class ReviewService:
         # 返回对象与种子模型可能共享引用；合并状态前先复制，保持种子只读。
         detail = detail.model_copy(deep=True)
         actions = self.store.actions_for(application_id)
-        if actions:
-            detail.application.status = STATUS_BY_ACTION[actions[-1]["kind"]]
         for action in actions:
             detail.status_history.append(
                 StatusEvent(
@@ -76,11 +69,13 @@ class ReviewService:
             key=lambda report: datetime.fromisoformat(report.generated_at),
             default=None,
         )
+        if latest_report and latest_report.workflow_result is not None and submission.report_id != latest_report.report_id:
+            raise ReviewConflict('预审报告已更新，请刷新后重新复核。')
         if submission.review_result == "complete" and (
             latest_report is None or latest_report.analysis_status == "failed"
         ):
             raise ReviewInputError("无可用报告或报告处理失败，不能直接完成复核；请核实后要求补件。")
-        expected_ids = {item.item_id for item in latest_report.items} if latest_report else set()
+        expected_ids = {item.item_id for item in latest_report.items} if latest_report and latest_report.analysis_status != 'failed' else set()
         submitted_ids = [item.item_id for item in submission.item_reviews]
         if set(submitted_ids) != expected_ids or len(submitted_ids) != len(expected_ids):
             raise ReviewInputError("请逐项确认或修正当前报告的所有关注项。")

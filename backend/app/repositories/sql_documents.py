@@ -11,6 +11,7 @@ from app.core.config import DATA_ROOT
 from app.db.models import ApplicationRow, MaterialRow
 from app.db.session import get_engine
 from app.documents.parsers import parse_document
+from app.rules.application_states import EDITABLE_STATES, InvalidTransition
 
 
 class SQLDocumentStore:
@@ -27,7 +28,7 @@ class SQLDocumentStore:
             row = session.get(MaterialRow, identifier)
             return row.payload if row and row.application_id == application and row.source == 'upload' else None
 
-    def upload(self, application, category, filename, content):
+    def upload(self, application, category, filename, content, enforce_status=False):
         if not filename or filename != Path(filename).name or '/' in filename or '\\' in filename:
             raise ValueError('无效文件名')
         if Path(filename).suffix.lower() not in ('.pdf', '.docx') or not content or len(content) > 10 * 1024 * 1024:
@@ -43,6 +44,8 @@ class SQLDocumentStore:
                 application_row = session.scalar(select(ApplicationRow).where(ApplicationRow.id == application).with_for_update())
                 if application_row is None:
                     raise ValueError('申请不存在')
+                if enforce_status and application_row.status not in EDITABLE_STATES:
+                    raise InvalidTransition('当前状态不允许上传材料，请刷新申请状态。')
                 latest = session.scalar(select(MaterialRow).where(MaterialRow.application_id == application,
                     MaterialRow.category == category, MaterialRow.source == 'upload').order_by(MaterialRow.version.desc()).limit(1))
                 if latest and latest.payload['sha256'] == digest:

@@ -24,14 +24,14 @@ class ToolExecutor:
     definitions = {
         'get_application': ('读取申请状态和基本信息', ApplicationInput),
         'list_materials': ('查看上传材料类别、版本及解析状态', ApplicationInput),
-        'check_materials': ('运行材料完整性检查', ApplicationInput),
-        'run_risk_precheck': ('运行规则风险预审，不调用额外模型', ApplicationInput),
+        'get_material_check': ('读取企业已运行的材料完整性检查结果', ApplicationInput),
         'search_policy': ('检索教学政策，当前可能不可用', PolicyInput),
     }
 
-    def __init__(self, application_service, audit=None):
+    def __init__(self, application_service, audit=None, authorization_check=None):
         self.application_service = application_service
         self.audit = audit or AuditStore()
+        self.authorization_check = authorization_check
 
     def schemas(self):
         return [{'type': 'function', 'function': {'name': name, 'description': description,
@@ -76,7 +76,9 @@ class ToolExecutor:
                     reason, result = 'invalid_arguments', {'status': 'invalid_arguments'}
                 if args is not None and name != 'search_policy':
                     target = args.application_id
-                    if target not in context.allowed_applications:
+                    if target not in context.allowed_applications or (
+                        self.authorization_check is not None and not self.authorization_check(context, target)
+                    ):
                         reason, result = 'unauthorized', {'status': 'not_accessible', 'message': '申请不可访问。'}
                     else:
                         detail = self.application_service.get_application(target)
@@ -91,9 +93,12 @@ class ToolExecutor:
                                 {'id': d['id'], 'category': d['category'], 'version': d['version'],
                                  'filename': d['filename'], 'parse_status': d['parsed']['status']} for d in docs]}
                         else:
-                            options = CheckRequest.model_validate({'use_model': False, 'conditions': conditions or {}})
-                            workflow = check_materials(detail, options) if name == 'check_materials' else check_risks(detail, options)
-                            result = {'status': 'ok', 'application_id': target, 'workflow': workflow}
+                            from app.api import dependencies
+                            checks = dependencies.repository.material_checks(target)
+                            if not checks or checks[0]['stale']:
+                                result = {'status': 'needs_clarification', 'message': '没有有效的材料检查结果，请企业重新检查。'}
+                            else:
+                                result = {'status': 'ok', 'application_id': target, 'workflow': checks[0]['result']}
                 elif args is not None:
                     if args.product not in ('equipment', 'working_capital'):
                         reason, result = 'needs_clarification', {'status': 'needs_clarification',

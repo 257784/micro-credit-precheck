@@ -18,7 +18,7 @@ function ReportFinding({ item }) {
       {item.evidence.length === 0 && <p>暂无材料证据，需人工核验。</p>}
       {item.evidence.map((evidence, index) => (
         <p key={item.item_id + '-' + evidence.material_id + '-' + index}>
-          证据：{evidence.file_name} 第 {evidence.page} 页 · “{evidence.quote}”
+          证据：{evidence.file_name} · {evidence.location || (evidence.page ? '第 ' + evidence.page + ' 页' : '位置待核对')} · “{evidence.quote}”
         </p>
       ))}
       <p>知识依据：{knowledgeLabel(item.knowledge_ref)}</p>

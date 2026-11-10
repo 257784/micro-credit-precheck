@@ -33,7 +33,7 @@ def build_result(run_id, application_id, results, documents=None):
                     missing.append('政策来源无法核验，已移除该来源。')
                     continue
                 sources.append({key: source[key] for key in ('source_id', 'document_id', 'version', 'clause', 'source_path', 'source_line')})
-        elif name in ('check_materials', 'run_risk_precheck'):
+        elif name in ('get_material_check', 'check_materials', 'run_risk_precheck'):
             workflow = result['workflow']
             if workflow.get('application_id') != application_id:
                 raise ValueError('Workflow结果申请编号不匹配')
@@ -41,7 +41,7 @@ def build_result(run_id, application_id, results, documents=None):
             if workflow.get('run_status') in ('degraded', 'dependency_degraded', 'input_invalid'):
                 failed = True
                 limitations.append('Workflow未完整执行：' + str(workflow['run_status']))
-            if name == 'check_materials':
+            if name in ('get_material_check', 'check_materials'):
                 for category in ('missing_items', 'abnormal_items', 'pending_items'):
                     for item in workflow.get(category, []):
                         if item.get('material_id') and (item['material_id'], item.get('version_no')) not in verified:

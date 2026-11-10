@@ -134,12 +134,22 @@ class HarnessTests(unittest.TestCase):
         self.assertEqual(result['status'], 'invalid_arguments')
         self.assertEqual(self.repo.calls, 0)
 
-    def test_session_replay_and_demo_identity_boundary(self):
+    def test_workflow_execution_tools_are_forbidden(self):
+        for name in ('check_materials', 'run_risk_precheck'):
+            result = self.tools.execute(self.context, name, '{"application_id":"APP-1"}', name)
+            self.assertEqual(result['status'], 'unknown_tool')
+        self.assertEqual(self.repo.calls, 0)
+
+    def test_session_replay_and_identity_boundary(self):
         async def check():
             import httpx
             from app.main import app
             from app.api.credit_assistant import sessions
-            with patch.dict('os.environ', {'CREDIT_DEMO_ADMIN': '0'}):
+            from app.core.authentication import Principal
+            principal = Principal('actor-a', 'customer_manager', 'Manager')
+            with patch('app.api.auth.require_principal', return_value=principal), \
+                 patch('app.api.credit_assistant.allowed_application_ids', return_value=frozenset({'APP-FICT-001'})), \
+                 patch('app.api.credit_assistant.can_access_application', return_value=True):
                 async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://test') as client:
                     session = (await client.post('/api/credit-assistant/conversations')).json()['conversation_id']
                     path = '/api/credit-assistant/conversations/' + session
@@ -153,7 +163,7 @@ class HarnessTests(unittest.TestCase):
                     self.assertEqual(changed.status_code, 422)
                     denied = await client.get('/api/credit-assistant/audit')
                     self.assertEqual(denied.status_code, 403)
-                    with patch.dict('os.environ', {'CREDIT_DEMO_ADMIN': '1'}):
+                    with patch('app.api.auth.require_principal', return_value=Principal('actor-b', 'customer_manager', 'Other')):
                         self.assertEqual((await client.get(path)).status_code, 404)
                     sessions.pop(session, None)
         asyncio.run(check())
@@ -164,25 +174,29 @@ class HarnessTests(unittest.TestCase):
             from app.main import app
             from app.api.credit_assistant import sessions
             model = Model([{'tool_calls': [call('get_application', '{"application_id":"APP-FICT-001"}')]}, {'content': 'done'}])
-            with patch.dict('os.environ', {'CREDIT_DEMO_ADMIN': '0'}), \
+            from app.core.authentication import Principal
+            principal = Principal('actor-a', 'customer_manager', 'Manager')
+            with patch('app.api.auth.require_principal', return_value=principal), \
+                 patch('app.api.credit_assistant.current_principal', return_value=principal), \
+                 patch('app.api.credit_assistant.allowed_application_ids', return_value=frozenset({'APP-FICT-001'})), \
+                 patch('app.api.credit_assistant.can_access_application', return_value=True), \
                  patch('app.api.credit_assistant.ToolClient', return_value=model), \
                  patch('app.api.credit_assistant.ToolExecutor', return_value=self.tools):
                 self.context = RequestContext('actor-a', 'customer_manager', frozenset({'APP-FICT-001'}), 'c', 'request-2', 'r')
-                with patch('app.api.credit_assistant.teaching_context', return_value=self.context):
-                    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://test') as client:
-                        cid = (await client.post('/api/credit-assistant/conversations')).json()['conversation_id']
-                        response = await client.post('/api/credit-assistant/conversations/' + cid + '/messages/stream',
-                            json={'question': 'status', 'application_id': 'APP-FICT-001', 'request_id': 'request-234'})
-                        self.assertIn('event: tool_start', response.text)
-                        self.assertIn('event: result', response.text)
-                        self.assertIn('event: done', response.text)
-                        self.assertIn('APP-FICT-001', response.text)
-                        frame = next(part for part in response.text.split('\n\n') if part.startswith('event: result'))
-                        structured = json.loads(frame.split('data: ', 1)[1])['result']
-                        self.assertEqual(structured['schema_version'], '1.0')
-                        self.assertEqual(structured['application_id'], 'APP-FICT-001')
-                        self.assertTrue(structured['facts'])
-                        sessions.pop(cid, None)
+                async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://test') as client:
+                    cid = (await client.post('/api/credit-assistant/conversations')).json()['conversation_id']
+                    response = await client.post('/api/credit-assistant/conversations/' + cid + '/messages/stream',
+                        json={'question': 'status', 'application_id': 'APP-FICT-001', 'request_id': 'request-234'})
+                    self.assertIn('event: tool_start', response.text)
+                    self.assertIn('event: result', response.text)
+                    self.assertIn('event: done', response.text)
+                    self.assertIn('APP-FICT-001', response.text)
+                    frame = next(part for part in response.text.split('\n\n') if part.startswith('event: result'))
+                    structured = json.loads(frame.split('data: ', 1)[1])['result']
+                    self.assertEqual(structured['schema_version'], '1.0')
+                    self.assertEqual(structured['application_id'], 'APP-FICT-001')
+                    self.assertTrue(structured['facts'])
+                    sessions.pop(cid, None)
             with self.engine.connect() as connection:
                 self.assertEqual(connection.execute(select(events.c.status)).scalar_one(), 'completed')
         asyncio.run(check())

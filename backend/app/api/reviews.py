@@ -19,11 +19,13 @@ def require_risk_reviewer(role: str) -> str:
 
 @router.post("/api/applications/{application_id}/review/start", response_model=ApplicationDetail)
 def start_review(
-    application_id: str, x_demo_role: str = Header(default="customer_manager")
+    application_id: str, request: Request
 ) -> ApplicationDetail:
     """从待风控复核进入风控复核中。"""
 
-    reviewer_id = require_risk_reviewer(x_demo_role)
+    if request.state.principal.role != 'risk_reviewer':
+        raise HTTPException(403, '只有风控专员可以提交复核操作')
+    reviewer_id = request.state.principal.user_id
     try:
         detail = dependencies.reviews.start(application_id, reviewer_id)
     except ReviewConflict as error:
@@ -37,11 +39,13 @@ def start_review(
 def submit_review(
     application_id: str,
     submission: ReviewSubmission,
-    x_demo_role: str = Header(default="customer_manager"),
+    request: Request,
 ) -> ApplicationDetail:
     """保存逐项处理和意见，并更新到待审批或待企业补充材料。"""
 
-    reviewer_id = require_risk_reviewer(x_demo_role)
+    if request.state.principal.role != 'risk_reviewer':
+        raise HTTPException(403, '只有风控专员可以提交复核操作')
+    reviewer_id = request.state.principal.user_id
     try:
         detail = dependencies.reviews.submit(application_id, reviewer_id, submission)
     except ReviewConflict as error:

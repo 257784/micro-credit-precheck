@@ -87,7 +87,10 @@ class ResultTests(unittest.TestCase):
             import httpx
             from app.main import app
             from app.api.credit_assistant import sessions
-            with patch.dict('os.environ', {'CREDIT_DEMO_ADMIN': '0'}):
+            from app.core.authentication import Principal
+            principal = Principal('actor-a', 'customer_manager', 'Manager')
+            with patch('app.api.auth.require_principal', return_value=principal), \
+                 patch('app.api.credit_assistant.allowed_application_ids', return_value=frozenset({'APP-FICT-001'})):
                 async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://test') as client:
                     cid = (await client.post('/api/credit-assistant/conversations')).json()['conversation_id']
                     path = '/api/credit-assistant/conversations/' + cid + '/messages/stream'
@@ -114,7 +117,12 @@ class ResultTests(unittest.TestCase):
                 return 'unused', [('search_policy', {'status': 'dependency_unavailable', 'message': 'unavailable'})]
             async def failed(*args, **kwargs):
                 raise GenerationError('timeout', 'timeout')
-            with patch.dict('os.environ', {'CREDIT_DEMO_ADMIN': '0'}):
+            from app.core.authentication import Principal
+            principal = Principal('actor-a', 'customer_manager', 'Manager')
+            with patch('app.api.auth.require_principal', return_value=principal), \
+                 patch('app.api.credit_assistant.current_principal', return_value=principal), \
+                 patch('app.api.credit_assistant.can_access_application', return_value=True), \
+                 patch('app.api.credit_assistant.allowed_application_ids', return_value=frozenset({'APP-FICT-001'})):
                 async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://test') as client:
                     cid = (await client.post('/api/credit-assistant/conversations')).json()['conversation_id']
                     path = '/api/credit-assistant/conversations/' + cid + '/messages/stream'

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-export default function RiskPrecheck({ applicationId }) {
+export default function RiskPrecheck({ applicationId, role, onSaved }) {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [useModel, setUseModel] = useState(false);
-  const [used, setUsed] = useState('unknown');
-  const [contract, setContract] = useState('unknown');
   const active = useRef(null);
   useEffect(() => () => active.current?.abort(), [applicationId]);
   async function run() {
@@ -17,14 +15,14 @@ export default function RiskPrecheck({ applicationId }) {
     try {
       const response = await fetch('/api/applications/' + encodeURIComponent(applicationId) + '/risk-precheck', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ use_model: useModel, conditions: {
-          is_used_equipment: used === 'unknown' ? null : { value: used === 'yes', source: 'manual_demo', location: '风险预审页人工演示声明' },
-          uses_order_contract: contract === 'unknown' ? null : { value: contract === 'yes', source: 'manual_demo', location: '风险预审页人工演示声明' },
-        } }), signal: controller.signal,
+        body: JSON.stringify({ use_model: useModel }), signal: controller.signal,
       });
-      if (!response.ok) throw new Error('风险预审失败（' + response.status + '），请检查后重试。');
+      if (!response.ok) {
+        const body = await response.json().catch(() => null);
+        throw new Error(typeof body?.detail === 'string' ? body.detail : '风险预审失败（' + response.status + '），请检查后重试。');
+      }
       const value = await response.json();
-      if (!controller.signal.aborted) setResult(value);
+      if (!controller.signal.aborted) { setResult(value); if (value.saved_report_id) onSaved(); }
     } catch (failure) {
       if (!controller.signal.aborted) setError(failure.message || '风险预审失败，请重试。');
     } finally {
@@ -33,15 +31,17 @@ export default function RiskPrecheck({ applicationId }) {
   }
   return <section className="review-item" aria-label="风险预审运行">
     <h3>运行风险预审</h3>
-    <p>仅供教学和人工核验，不作授信决定。结果为临时结果，刷新后需要重新运行。</p>
-    <label>设备是否为二手（设备贷）<select value={used} onChange={(event) => setUsed(event.target.value)}><option value="unknown">未知</option><option value="yes">是</option><option value="no">否</option></select></label>
-    <label>是否以订单或合同作为用途依据（经营周转贷）<select value={contract} onChange={(event) => setContract(event.target.value)}><option value="unknown">未知</option><option value="yes">是</option><option value="no">否</option></select></label>
+    <p>仅供教学和人工核验，不作授信决定。{role === 'risk_reviewer' ? '风控运行后自动保存报告。' : '客户经理运行仅作为临时预览。'}</p>
+    <p>自动使用企业声明和材料检查结果；候选事实需人工核实。</p>
     <label><input type="checkbox" checked={useModel} onChange={(event) => setUseModel(event.target.checked)} /> 启用 AI 辅助（调用 DeepSeek，可能产生费用）</label>
     <button type="button" onClick={run} disabled={loading}>{loading ? '预审运行中…' : '运行风险预审'}</button>
     {error && <p role="alert">{error}</p>}
     {result && <div aria-live="polite">
-      <p>本次运行结果，尚未纳入原有逐项复核记录。</p>
+      <p>{result.saved_report_id ? '已保存报告：' + result.saved_report_id : '本次为临时预览，未保存报告。'}</p>
       <p>运行：{result.run_status} · 检索：{result.retrieval_status} · 模型：{result.model_status}</p>
+      {Object.entries(result.conditions || {}).filter(([, fact]) => fact?.value != null).map(([key, fact]) => <p key={key}>已使用{key === 'is_used_equipment' ? '设备是否为二手' : '是否以订单或合同为依据'}：{fact.value ? '是' : '否'} · 来源：{fact.location}</p>)}
+      {(result.condition_candidates || []).map((item, index) => <p key={index}>材料候选（待核实）：{item.quote} · 材料 {item.material_id} 第 {item.version} 版 · {item.location}</p>)}
+      {(result.condition_conflicts || []).length > 0 && <p role="alert">材料候选与企业声明冲突，请人工确认。</p>}
       {result.limitations.map((item, index) => <p key={index}>{item}</p>)}
       <h4>风险线索与人工复核事项</h4>
       {!result.risk_items.length && <p>本次没有形成线索，仍需人工核实，不代表无风险。</p>}

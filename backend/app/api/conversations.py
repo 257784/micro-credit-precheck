@@ -9,6 +9,7 @@ from fastapi.responses import StreamingResponse
 
 from app.agents.policy_assistant import ConversationAgent
 from app.agents.memory import ConversationStore, MessageRequest, SessionError
+from app.core.authentication import current_principal
 
 router = APIRouter(prefix="/api/policy/conversations")
 store = ConversationStore()
@@ -16,33 +17,37 @@ agent = ConversationAgent(store)
 
 
 @router.post("")
-def create_conversation() -> dict:
+def create_conversation(request: Request) -> dict:
     try:
-        return store.create()
+        return store.create(request.state.principal.user_id)
     except SessionError as error:
         raise HTTPException(error.status, str(error)) from None
 
 
 @router.get("/{cid}")
-def get_conversation(cid: str) -> dict:
+def get_conversation(cid: str, request: Request) -> dict:
     try:
-        result = store.get(cid)
+        result = store.get(cid, request.state.principal.user_id)
         result.pop("updated", None)
+        result.pop("owner_id", None)
         return result
     except SessionError as error:
         raise HTTPException(error.status, str(error)) from None
 
 
 @router.delete("/{cid}", status_code=204)
-def delete_conversation(cid: str) -> Response:
-    store.delete(cid)
+def delete_conversation(cid: str, request: Request) -> Response:
+    try:
+        store.delete(cid, request.state.principal.user_id)
+    except SessionError as error:
+        raise HTTPException(error.status, str(error)) from None
     return Response(status_code=204)
 
 
 @router.post("/{cid}/messages/stream")
 async def stream_message(cid: str, message: MessageRequest, request: Request):
     try:
-        session, turn, replay = store.begin(cid, message)
+        session, turn, replay = store.begin(cid, message, request.state.principal.user_id)
     except SessionError as error:
         raise HTTPException(error.status, str(error)) from None
 
@@ -67,6 +72,9 @@ async def stream_message(cid: str, message: MessageRequest, request: Request):
         try:
             while True:
                 if await request.is_disconnected():
+                    break
+                principal = current_principal(request.cookies.get('credit_session'))
+                if principal is None or principal.user_id != request.state.principal.user_id:
                     break
                 try:
                     item = await asyncio.wait_for(queue.get(), timeout=5)

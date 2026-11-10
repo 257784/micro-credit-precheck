@@ -25,6 +25,7 @@ class Application(BaseModel):
     account_manager_name: str
     submitted_at: str
     purpose: str | None = None
+    condition_facts: dict = Field(default_factory=dict)
 
 
 class ApplicationSubmission(BaseModel):
@@ -36,6 +37,8 @@ class ApplicationSubmission(BaseModel):
     product_type: Literal['经营周转贷（教学产品）', '设备更新贷（教学产品）']
     requested_amount: int = Field(gt=0, le=100000000)
     purpose: str = Field(min_length=1, max_length=1000)
+    is_used_equipment: bool | None = Field(default=None, strict=True)
+    uses_order_contract: bool | None = Field(default=None, strict=True)
 
 
 class StatusEvent(BaseModel):
@@ -73,8 +76,10 @@ class EvidenceRef(BaseModel):
 
     material_id: str
     file_name: str
-    page: int = Field(ge=1)
+    page: int | None = Field(default=None, ge=1)
     quote: str
+    location: str | None = None
+    version_no: int | None = Field(default=None, ge=1)
 
 
 class ReportItem(BaseModel):
@@ -123,6 +128,8 @@ class Report(BaseModel):
     risk_prompts: list[ReportAspect]
     policy_match: ReportAspect
     precheck_advice: ReportAspect
+    workflow_result: dict | None = None
+    material_signature: list[list[str | int]] | None = None
 
 
 class ItemReview(BaseModel):
@@ -135,6 +142,7 @@ class ReviewSubmission(BaseModel):
     review_result: Literal["complete", "request_supplement"]
     review_note: str = Field(min_length=1, max_length=2000)
     item_reviews: list[ItemReview]
+    report_id: str | None = None
 
 
 class ReviewRecord(ReviewSubmission):

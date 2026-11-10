@@ -51,7 +51,8 @@ def load_risk_configuration():
 def run_material_risk_stage(detail, conditions=None):
     """读取同一申请的材料快照，不修改申请、报告或复核记录。"""
     workflow = MaterialWorkflow()
-    options = CheckRequest(conditions=conditions or {})
+    from app.schemas.materials import Conditions
+    options = CheckRequest.model_construct(use_model=False, conditions=Conditions.model_validate(conditions or {}))
     data = adapt_application(detail, options, workflow.rules["products"])
     result = workflow.run(data, use_model=False)
     issues = result["missing_items"] + result["abnormal_items"] + result["pending_items"]

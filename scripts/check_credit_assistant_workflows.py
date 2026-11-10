@@ -23,6 +23,9 @@ async def main():
     from app.agents.credit_assistant import run_turn
     from app.agents.assistant_result import build_result
     from app.agents.context import RequestContext
+    from app.schemas.materials import CheckRequest
+    from app.services.prechecks import check_materials, check_risks
+    from app.api.dependencies import repository
 
     manifest = json.loads((ROOT / 'fixtures/fictional_applications/manifest.json').read_text(encoding='utf-8'))
     chosen = [case for case in manifest if case['scenario'] in ('normal_1', 'missing_quote', 'invalid_quote', 'amount_difference')]
@@ -62,8 +65,7 @@ async def main():
                 async def complete(self, messages, tools):
                     self.steps += 1
                     if self.steps == 1:
-                        return {'tool_calls': [{'id': 'one', 'type': 'function', 'function': {'name': 'check_materials', 'arguments': json.dumps({'application_id': self.identifier})}},
-                                               {'id': 'two', 'type': 'function', 'function': {'name': 'run_risk_precheck', 'arguments': json.dumps({'application_id': self.identifier})}}]}
+                        return {'tool_calls': [{'id': 'one', 'type': 'function', 'function': {'name': 'get_material_check', 'arguments': json.dumps({'application_id': self.identifier})}}]}
                     return {'content': 'ignored unverified output'}
             async def emit(name, payload): pass
             with Session(engine) as session:
@@ -71,9 +73,13 @@ async def main():
             for case in chosen:
                 app_id = case['application_id']
                 ctx = RequestContext('test-manager', 'customer_manager', frozenset({app_id}), 'conv', app_id, 'run')
+                detail = service.get_application(app_id)
+                options = CheckRequest.model_validate({'use_model': False, 'conditions': conditions})
+                material = check_materials(detail, options)
+                risk = check_risks(detail, options)
+                repository.save_material_check(app_id, 'test-enterprise', repository.material_signature(app_id), detail.application.condition_facts, material)
                 answer, results = await run_turn('check', ctx, executor, FakeModel(app_id), [], emit, conditions)
-                assert len(results) == 2 and all(value['status'] == 'ok' for _, value in results)
-                material, risk = results[0][1]['workflow'], results[1][1]['workflow']
+                assert len(results) == 1 and results[0][1]['status'] == 'ok'
                 structured = build_result(ctx.run_id, app_id, results, store.list(app_id))
                 assert structured.application_id == app_id and structured.need_human_review
                 assert risk['need_human_review'] is True
@@ -82,15 +88,15 @@ async def main():
                 if case['scenario'] == 'invalid_quote': assert any(i['kind'] == 'unreadable' for i in material['abnormal_items'])
                 if case['scenario'] == 'amount_difference':
                     assert any(i['category'] == 'amount_review' for i in risk['risk_items'])
-                    matches = [i for i in structured.risk_items if i.category == 'amount_review']
-                    assert len(matches) == 1 and len(matches[0].evidence) == 2
-                    assert {x.quote for x in matches[0].evidence} == {'120000', '150000'}
+                    matches = [i for i in risk['risk_items'] if i['category'] == 'amount_review']
+                    assert len(matches) == 1 and len(matches[0]['evidence']) == 2
+                    assert {x['quote'] for x in matches[0]['evidence']} == {'120000', '150000'}
                 assert 'ignored unverified output' not in answer
                 print(case['scenario'], 'verified')
             with Session(engine) as session:
                 after = [(x.id, x.status) for x in session.scalars(select(ApplicationRow).order_by(ApplicationRow.id))]
                 assert before == after and session.scalar(select(func.count()).select_from(ReviewRow)) == 0
-                assert session.execute(select(func.count()).select_from(events)).scalar_one() == 8
+                assert session.execute(select(func.count()).select_from(events)).scalar_one() == 4
         finally:
             engine.dispose()
             get_engine.cache_clear()

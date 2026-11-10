@@ -4,8 +4,6 @@ export default function MaterialCheck({ applicationId }) {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [used, setUsed] = useState('unknown');
-  const [contract, setContract] = useState('unknown');
   const [useModel, setUseModel] = useState(false);
   const active = useRef(null);
   useEffect(() => () => active.current?.abort(), [applicationId]);
@@ -15,15 +13,10 @@ export default function MaterialCheck({ applicationId }) {
     const controller = new AbortController();
     active.current = controller;
     setLoading(true); setError(''); setResult(null);
-    const fact = (value) => value === 'unknown' ? null : {
-      value: value === 'yes', source: 'manual_demo', location: '材料页人工演示声明',
-    };
     try {
       const response = await fetch('/api/applications/' + encodeURIComponent(applicationId) + '/materials/check', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
-        body: JSON.stringify({ use_model: useModel, conditions: {
-          is_used_equipment: fact(used), uses_order_contract: fact(contract),
-        } }),
+        body: JSON.stringify({ use_model: useModel }),
       });
       if (!response.ok) throw new Error('检查失败（' + response.status + '），请重试。');
       const body = await response.json();
@@ -37,21 +30,15 @@ export default function MaterialCheck({ applicationId }) {
   return <section className="review-item" aria-labelledby="check-heading">
     <h3 id="check-heading">材料完整性教学检查</h3>
     <p>按虚构F3清单检查声明提交情况；教学摘录不能代替全文解析和人工核验。</p>
-    <label>设备是否为二手（仅设备产品适用）
-      <select value={used} onChange={(event) => setUsed(event.target.value)}>
-        <option value="unknown">未知</option><option value="yes">是</option><option value="no">否</option>
-      </select>
-    </label>
-    <label>是否以具体订单或合同为用途依据（仅经营周转适用）
-      <select value={contract} onChange={(event) => setContract(event.target.value)}>
-        <option value="unknown">未知</option><option value="yes">是</option><option value="no">否</option>
-      </select>
-    </label>
+    <p>自动使用企业声明；材料候选仅供人工确认。</p>
     <label><input type="checkbox" checked={useModel} onChange={(event) => setUseModel(event.target.checked)} /> 启用名称辅助（可能调用模型）</label>
     <button type="button" onClick={run} disabled={loading}>{loading ? '检查中…' : '运行完整性检查'}</button>
     {error && <p role="alert">{error}</p>}
     {result && <div aria-live="polite">
       <p>{result.notice}</p><p>运行状态：{result.run_status} · 规则版本：{result.rules_version}</p>
+      {Object.entries(result.conditions || {}).filter(([, fact]) => fact?.value != null).map(([key, fact]) => <p key={key}>已使用{key === 'is_used_equipment' ? '设备是否为二手' : '是否以订单或合同为依据'}：{fact.value ? '是' : '否'} · 来源：{fact.location}</p>)}
+      {(result.condition_candidates || []).map((item, index) => <p key={index}>材料候选（待核实）：{item.quote} · 材料 {item.material_id} 第 {item.version} 版 · {item.location}</p>)}
+      {(result.condition_conflicts || []).length > 0 && <p role="alert">材料候选与已有声明冲突，请联系企业确认。</p>}
       {result.warnings.map((item, index) => <p role="status" key={index}>{item}</p>)}
       {result.name_hints.map((hint) => <p key={hint.material_id}>名称候选：{hint.material_id} → {hint.candidate_codes.join('、') || '无'}；{hint.reason}（待人工确认）</p>)}
       {['missing_items', 'abnormal_items', 'pending_items'].map((key) => <div key={key}>
