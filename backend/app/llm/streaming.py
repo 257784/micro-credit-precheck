@@ -5,6 +5,7 @@ import json
 import httpx
 
 from app.llm.deepseek import GenerationError, Settings
+from app.core.redaction import redact_value
 
 
 def check_status(status: int) -> None:
@@ -22,7 +23,7 @@ class AsyncDeepSeek:
         self.transport = transport
 
     def _payload(self, messages: list, stream: bool) -> dict:
-        return {"model": self.settings.model, "messages": messages, "stream": stream,
+        return {"model": self.settings.model, "messages": redact_value(messages, 'model'), "stream": stream,
                 "response_format": {"type": "json_object"}, "thinking": {"type": "disabled"},
                 "temperature": 0, "max_tokens": 4000}
 

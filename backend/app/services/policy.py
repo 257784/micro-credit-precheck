@@ -115,10 +115,6 @@ class PolicyQA:
         except (OSError, ValueError, KeyError):
             return QuestionResponse(status="retrieval_error", answer="政策语料校验失败，请检查本地知识库。",
                                     error_code="invalid_corpus")
-        try:
-            client = self.client_factory()
-        except GenerationError as error:
-            return QuestionResponse(status="configuration_error", answer=str(error), error_code=error.code)
         warnings = []
         try:
             candidates = self.retriever(request.question, request.product)
@@ -141,6 +137,10 @@ class PolicyQA:
         if sum(len(source.text) for source in sources) > 24000:
             return QuestionResponse(status="generation_error", answer="本次政策上下文过长，未截断条款，请缩小问题范围。",
                                     sources=sources, error_code="context_too_long")
+        try:
+            client = self.client_factory()
+        except GenerationError as error:
+            return QuestionResponse(status="configuration_error", answer=str(error), error_code=error.code)
         messages = [
             {"role": "system", "content": PROMPT},
             {"role": "user", "content": json.dumps({

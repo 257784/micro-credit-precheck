@@ -134,12 +134,13 @@ class Report(BaseModel):
 
 class ItemReview(BaseModel):
     item_id: str
-    decision: Literal["confirmed", "corrected"]
+    decision: Literal["accepted", "partial", "rejected", "confirmed", "corrected"]
     correction_note: str | None = Field(default=None, max_length=1000)
 
 
 class ReviewSubmission(BaseModel):
     review_result: Literal["complete", "request_supplement"]
+    overall_adoption: Literal['accepted', 'partial', 'rejected'] | None = None
     review_note: str = Field(min_length=1, max_length=2000)
     item_reviews: list[ItemReview]
     report_id: str | None = None

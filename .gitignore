@@ -11,3 +11,7 @@ backend/.data/
 .env.*
 !.env.example
 /models/
+
+# 本地任务卡和企业上传原件
+/specs/
+/backend/.data/documents/

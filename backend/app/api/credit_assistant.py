@@ -20,6 +20,7 @@ from app.api.dependencies import reviews
 from app.llm.deepseek import GenerationError
 from app.llm.tool_client import ToolClient
 from app.tools.assistant_tools import ToolExecutor
+from app.core.redaction import redact_value
 
 router = APIRouter(prefix='/api/credit-assistant')
 sessions = {}
@@ -66,7 +67,7 @@ def get_session(cid: str, request: Request):
         session = require_session(cid, request.state.principal.user_id)
         if session['application_id'] and not can_access_application(request.state.principal, session['application_id']):
             raise HTTPException(404, '会话不可访问。')
-        return {'conversation_id': cid, 'application_id': session['application_id'], 'history': list(session['history'])}
+        return redact_value({'conversation_id': cid, 'application_id': session['application_id'], 'history': list(session['history'])})
 
 
 @router.get('/audit')
@@ -248,7 +249,7 @@ async def stream(cid: str, request: Request, turn: TurnRequest):
                         current['pending_tool'] = next_tool
                         current['history'] = (history + [{'role': 'user', 'content': question}, {'role': 'assistant', 'content': final_answer}])[-8:]
                         current['requests'][turn.request_id].update(status='complete', answer=final_answer, result=final_result)
-                yield f'event: {event}\ndata: {json.dumps(data, ensure_ascii=False)}\n\n'
+                yield f'event: {event}\ndata: {json.dumps(redact_value(data), ensure_ascii=False)}\n\n'
         finally:
             task.cancel()
             await asyncio.gather(task, return_exceptions=True)

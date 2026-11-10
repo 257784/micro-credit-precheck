@@ -2,12 +2,13 @@
 import httpx
 from app.llm.deepseek import GenerationError, Settings
 from app.llm.streaming import check_status
+from app.core.redaction import redact_value
 
 
 class ToolClient:
     async def complete(self, messages, tools):
         settings = Settings.from_environment()
-        payload = {'model': settings.model, 'messages': messages, 'tools': tools,
+        payload = {'model': settings.model, 'messages': redact_value(messages, 'model'), 'tools': tools,
             'tool_choice': 'auto', 'stream': False, 'thinking': {'type': 'disabled'}, 'max_tokens': 2000}
         try:
             async with httpx.AsyncClient(timeout=min(settings.timeout, 60), follow_redirects=False) as client:

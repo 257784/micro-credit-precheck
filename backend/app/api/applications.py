@@ -11,6 +11,7 @@ from app.services.submissions import submit_application
 from app.core.authorization import allowed_application_ids
 from pydantic import BaseModel, ConfigDict, Field
 from datetime import datetime, timezone
+from app.core.redaction import redact_value
 
 router = APIRouter()
 
@@ -46,7 +47,7 @@ def update_conditions(application_id: str, body: ResubmitInput, request: Request
 
 @router.get('/api/applications/{application_id}/material-checks')
 def material_check_history(application_id: str):
-    return dependencies.repository.material_checks(application_id)
+    return redact_value(dependencies.repository.material_checks(application_id))
 
 
 @router.post('/api/applications/{application_id}/supplement-suggestion')
@@ -83,7 +84,7 @@ def decide_approval(application_id: str, decision: str, body: ActionNote, reques
 
 @router.get('/api/applications/{application_id}/approval-records')
 def approval_records(application_id: str):
-    return dependencies.repository.approval_records(application_id)
+    return redact_value(dependencies.repository.approval_records(application_id))
 
 
 @router.post('/api/applications', response_model=Application, status_code=201)
@@ -91,7 +92,7 @@ def create_application(submission: ApplicationSubmission, request: Request):
     principal = request.state.principal
     if principal.role != 'enterprise':
         raise HTTPException(403, '仅企业客户可以提交申请')
-    return submit_application(dependencies.repository, submission, owner_id=principal.user_id)
+    return redact_value(submit_application(dependencies.repository, submission, owner_id=principal.user_id).model_dump())
 
 
 @router.get('/api/applications/unassigned')
@@ -165,7 +166,7 @@ def resubmit_application(application_id: str, body: ResubmitInput, request: Requ
             dependencies.repository.save_material_check(application_id, principal.user_id, signature, expected_facts, result, conditions)
         except ReviewConflict as error:
             raise HTTPException(409, str(error)) from None
-        raise HTTPException(422, detail={'message': '初检发现缺失、异常或待确认项，请补充后重新提交。', 'issues': blocking})
+        raise HTTPException(422, detail=redact_value({'message': '初检发现缺失、异常或待确认项，请补充后重新提交。', 'issues': blocking}))
     outcome = dependencies.repository.resubmit(application_id, principal.user_id, signature, conditions, expected_facts, result)
     if outcome == 'not_found':
         raise HTTPException(404, '申请不可访问')
@@ -173,7 +174,7 @@ def resubmit_application(application_id: str, body: ResubmitInput, request: Requ
         raise HTTPException(409, '申请状态或材料已变化，请刷新后重试。')
     return {'application_id': application_id, 'status': '待风控复核',
             'notice': '材料已进入人工风控复核，提交不代表材料真实充分或授信通过。',
-            'pending_human_review': result['pending_items']}
+            'pending_human_review': redact_value(result['pending_items'])}
 
 @router.get("/api/health")
 def health() -> dict[str, str]:
@@ -196,8 +197,8 @@ def list_applications(request: Request) -> list[ApplicationSummary]:
     ids = allowed_application_ids(request.state.principal)
     items = [item for item in dependencies.reviews.list_applications() if item.application_id in ids]
     if request.state.principal.role == 'enterprise':
-        return [item.model_copy(update={'report_status': None}) for item in items]
-    return items
+        items = [item.model_copy(update={'report_status': None}) for item in items]
+    return [redact_value(item.model_dump()) for item in items]
 
 
 @router.get("/api/applications/{application_id}", response_model=ApplicationDetail)
@@ -209,4 +210,4 @@ def get_application(application_id: str, request: Request) -> ApplicationDetail:
         raise HTTPException(status_code=404, detail="申请不存在")
     if request.state.principal.role == 'enterprise':
         detail = detail.model_copy(update={'reports': [], 'reviews': []})
-    return detail
+    return redact_value(detail.model_dump())

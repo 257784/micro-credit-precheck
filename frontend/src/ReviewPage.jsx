@@ -11,6 +11,7 @@ export default function ReviewPage({
 }) {
   const [decisions, setDecisions] = useState({});
   const [reviewNote, setReviewNote] = useState('');
+  const [overallAdoption, setOverallAdoption] = useState('');
   const [actionError, setActionError] = useState('');
   const [pending, setPending] = useState(false);
   const isRisk = role === 'risk_reviewer';
@@ -35,6 +36,10 @@ export default function ReviewPage({
   }
 
   function submit(result) {
+    if (result === 'complete' && !overallAdoption) {
+      setActionError('请先选择对 AI 预审报告的总体处理方式。');
+      return;
+    }
     if (!reviewNote.trim()) {
       setActionError('请填写人工复核意见或补件原因。');
       return;
@@ -45,12 +50,13 @@ export default function ReviewPage({
       correction_note: decisions[item.item_id]?.correctionNote || null,
     }));
     if (itemReviews.some((item) => !item.decision ||
-      (item.decision === 'corrected' && !item.correction_note?.trim()))) {
-      setActionError('请逐项确认或修正关注项，修正时填写说明。');
+      (['partial', 'rejected'].includes(item.decision) && !item.correction_note?.trim()))) {
+      setActionError('请逐项选择采纳方式，部分采纳或不采纳时填写说明。');
       return;
     }
     runAction(() => onSubmit({
       review_result: result,
+      overall_adoption: overallAdoption || null,
       review_note: reviewNote.trim(),
       item_reviews: itemReviews,
       report_id: latestReport?.report_id || null,
@@ -91,6 +97,9 @@ export default function ReviewPage({
           {isRisk && detail.application.status === '风控复核中' && (
             <div className="review-section">
               <h3>逐项人工处理</h3>
+              <label>AI 报告总体处理<select value={overallAdoption} onChange={event => setOverallAdoption(event.target.value)}>
+                <option value="">请选择</option><option value="accepted">采纳</option><option value="partial">部分采纳</option><option value="rejected">不采纳</option>
+              </select></label>
               {latestReport?.analysis_status === 'failed' && (
                 <p className="notice">报告处理失败，不能直接完成复核。请核对材料后填写补件原因。</p>
               )}
@@ -111,13 +120,14 @@ export default function ReviewPage({
                       }))}
                     >
                       <option value="">请选择</option>
-                      <option value="confirmed">确认该关注项</option>
-                      <option value="corrected">修正该关注项</option>
+                      <option value="accepted">采纳</option>
+                      <option value="partial">部分采纳</option>
+                      <option value="rejected">不采纳</option>
                     </select>
                   </label>
-                  {decisions[item.item_id]?.decision === 'corrected' && (
+                  {['partial', 'rejected'].includes(decisions[item.item_id]?.decision) && (
                     <label>
-                      修正说明
+                      修改内容或不采纳原因
                       <textarea
                         value={decisions[item.item_id]?.correctionNote || ''}
                         onChange={(event) => setDecisions((current) => ({
@@ -161,10 +171,11 @@ export default function ReviewPage({
                 <strong>{resultLabel[record.review_result]}</strong>
                 <p>复核人：{record.reviewer_id} · {formatTime(record.reviewed_at)}</p>
                 <p>关联报告：{record.report_id || '无可用报告'}</p>
+                <p>报告处理：{({ accepted: '采纳', partial: '部分采纳', rejected: '不采纳' })[record.overall_adoption] || '历史记录未填写'}</p>
                 <p>意见：{record.review_note}</p>
                 {record.item_reviews.map((item) => (
                   <p key={item.item_id}>
-                    {item.item_id}：{item.decision === 'confirmed' ? '确认' : '修正'}
+                    {item.item_id}：{({ accepted: '采纳', partial: '部分采纳', rejected: '不采纳', confirmed: '确认（历史）', corrected: '修正（历史）' })[item.decision]}
                     {item.correction_note ? ' · ' + item.correction_note : ''}
                   </p>
                 ))}

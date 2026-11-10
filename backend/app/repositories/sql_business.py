@@ -320,7 +320,7 @@ class ReviewRepository:
                 ReviewRow.application_id == application_id).order_by(ReviewRow.sequence))]
 
     def append(self, application_id, base_status, expected_status, kind, reviewer_id,
-               report_id=None, review_note=None, item_reviews=None):
+               report_id=None, review_note=None, item_reviews=None, overall_adoption=None):
         # 行锁使状态检查、动作记录及状态更新成为一个原子操作。
         with Session(get_engine()) as session, session.begin():
             application = session.scalar(select(ApplicationRow).where(ApplicationRow.id == application_id).with_for_update())
@@ -332,6 +332,8 @@ class ReviewRepository:
                 raise ReviewConflict('请填写复核意见或补件原因。')
             if kind == 'complete' and not report_id:
                 raise ReviewConflict('无可用报告，不能完成复核。')
+            if kind == 'complete' and overall_adoption not in ('accepted', 'partial', 'rejected'):
+                raise ReviewConflict('请对 AI 报告选择采纳、部分采纳或不采纳。')
             if kind != 'start' and report_id is None and session.scalar(
                 select(ReportRow.id).where(ReportRow.application_id == application_id).limit(1)
             ):
@@ -351,8 +353,8 @@ class ReviewRepository:
                     submitted_items = [item.item_id for item in (item_reviews or [])]
                     if set(submitted_items) != expected_items or len(submitted_items) != len(expected_items):
                         raise ReviewConflict('报告关注项已变化，请重新复核。')
-                    if any(item.decision == 'corrected' and not (item.correction_note or '').strip() for item in (item_reviews or [])):
-                        raise ReviewConflict('修正关注项时请填写修正说明。')
+                    if any(item.decision in ('corrected', 'partial', 'rejected') and not (item.correction_note or '').strip() for item in (item_reviews or [])):
+                        raise ReviewConflict('修正、部分采纳或不采纳时请填写说明。')
                 signature = report.payload.get('material_signature')
                 if signature is not None and kind == 'complete':
                     current = sorted((m.id, m.category, m.version) for m in session.scalars(
@@ -364,7 +366,8 @@ class ReviewRepository:
             occurred = datetime.now(timezone.utc).isoformat(timespec='seconds')
             payload = dict(action_id=identifier, application_id=application_id, kind=kind,
                 reviewer_id=reviewer_id, occurred_at=occurred, report_id=report_id,
-                review_note=review_note, item_reviews_json=json.dumps([item.model_dump() for item in (item_reviews or [])], ensure_ascii=False))
+                review_note=review_note, overall_adoption=overall_adoption,
+                item_reviews_json=json.dumps([item.model_dump() for item in (item_reviews or [])], ensure_ascii=False))
             session.add(ReviewRow(id=identifier, application_id=application_id, report_id=report_id,
                 sequence=sequence, occurred_at=occurred, payload=payload))
             audit_operation(session, actor_id=reviewer_id, actor_role='risk_reviewer', object_id=application_id,

@@ -69,6 +69,10 @@ def main():
             response = clients['e1'].post(f'/api/applications/{identifier}/documents',
                 params={'category': category, 'filename': path.name}, content=path.read_bytes())
             assert response.status_code == 200, response.text
+        quoted = next(item for item in clients['e1'].get(f'/api/applications/{identifier}/documents').json()
+                      if item['category'] == 'D-QUOTE' and item['parsed']['status'] == 'parsed')
+        original = next(fixture.glob('D-QUOTE-*.docx')).read_bytes()
+        assert clients['e1'].get(f"/api/applications/{identifier}/documents/{quoted['id']}").content == original
         response = clients['e1'].post(f'/api/applications/{identifier}/resubmit', json={'is_used_equipment': False})
         assert response.status_code == 200, response.text
         assert response.json()['status'] == '待风控复核'
@@ -120,14 +124,20 @@ def main():
         report = next(item for item in detail['reports'] if item['report_id'] == report_id)
         assert report['workflow_result']['application_id'] == identifier and report['material_signature']
         assert clients['r1'].post(f'/api/applications/{identifier}/review/start').status_code == 200
-        reviews = [{'item_id': item['item_id'], 'decision': 'confirmed'} for item in report['items']]
-        payload_review = {'review_result': 'complete', 'review_note': '人工核验完毕', 'item_reviews': reviews, 'report_id': first_id}
+        options = ('accepted', 'partial', 'rejected')
+        reviews = [{'item_id': item['item_id'], 'decision': options[index % 3],
+                    **({'correction_note': '人工处理说明'} if index % 3 else {})}
+                   for index, item in enumerate(report['items'])]
+        payload_review = {'review_result': 'complete', 'overall_adoption': 'partial', 'review_note': '人工核验完毕', 'item_reviews': reviews, 'report_id': first_id}
         assert clients['r1'].post(f'/api/applications/{identifier}/review/submit', json=payload_review).status_code == 409
         payload_review['report_id'] = report_id
         submitted = clients['r1'].post(f'/api/applications/{identifier}/review/submit', json=payload_review)
         assert submitted.status_code == 200, submitted.text
         assert submitted.json()['application']['status'] == '待审批'
         assert submitted.json()['reviews'][-1]['report_id'] == report_id
+        assert submitted.json()['reviews'][-1]['overall_adoption'] == 'partial'
+        assert submitted.json()['reviews'][-1]['item_reviews'] == [
+            {**item, 'correction_note': item.get('correction_note')} for item in reviews]
         assert clients['m1'].get('/api/operation-audit').status_code == 403
         audit_response = clients['admin1'].get('/api/operation-audit', params={'application_id': identifier})
         assert audit_response.status_code == 200, audit_response.text
@@ -139,6 +149,18 @@ def main():
         assert any(e['action'] == 'review_complete' and e['before']['status'] == '风控复核中' and e['after']['status'] == '待审批' for e in operation_logs)
         assert any(e['action'] == 'review_submit' and e['result'] == 'failed' and e['reason_code'] == 'state_conflict' for e in operation_logs)
         assert '人工核验完毕' not in audit_response.text and 'not a document' not in audit_response.text
+        sensitive = '电话13800138000 身份证11010519491231002X'
+        with Session(engine) as session, session.begin():
+            row = session.get(ApplicationRow, identifier)
+            row.payload = {**row.payload, 'purpose': sensitive}
+        for path in ('/api/applications', f'/api/applications/{identifier}'):
+            display = clients['e1'].get(path)
+            assert display.status_code == 200
+            assert '13800138000' not in display.text and '11010519491231002X' not in display.text
+            assert '138****8000' in display.text
+        with patch('app.api.documents.DocumentService.list', return_value=[{'id': 'D1', 'parsed': {'text': sensitive}}]):
+            display = clients['r1'].get(f'/api/applications/{identifier}/documents')
+            assert display.status_code == 200 and '13800138000' not in display.text and '11010519491231002X' not in display.text
     assert clients['e1'].post('/api/applications', json=payload, headers={'Origin': 'https://untrusted.invalid'}).status_code == 403
     cid = clients['e1'].post('/api/policy/conversations').json()['conversation_id']
     assert clients['e2'].get(f'/api/policy/conversations/{cid}').status_code == 404

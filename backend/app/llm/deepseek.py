@@ -7,6 +7,7 @@ import os
 import socket
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
+from app.core.redaction import redact_value
 
 
 class GenerationError(Exception):
@@ -53,7 +54,7 @@ class DeepSeekClient:
 
     def complete(self, messages: list[dict]) -> str:
         payload = {
-            "model": self.settings.model, "messages": messages,
+            "model": self.settings.model, "messages": redact_value(messages, 'model'),
             "response_format": {"type": "json_object"},
             "thinking": {"type": "disabled"}, "stream": False,
             "temperature": 0, "max_tokens": 3000,

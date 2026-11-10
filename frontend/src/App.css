@@ -140,6 +140,84 @@ body {
   margin: 0;
 }
 
+/* 没有专用类名的业务控件也使用统一样式；卡片和聊天按钮保留各自样式。 */
+:where(button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 14px;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  background: #3868d5;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+:where(button:hover:not(:disabled)) {
+  background: #2e57b6;
+}
+
+:where(button:disabled) {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+:where(button, input, select, textarea):focus-visible {
+  outline: 2px solid #5278ee;
+  outline-offset: 2px;
+}
+
+:where(select, textarea, input:not([type='checkbox']):not([type='radio']):not([type='file'])) {
+  max-width: 100%;
+  padding: 9px 11px;
+  color: #243244;
+  font: inherit;
+  background: #fff;
+  border: 1px solid #c6d3df;
+  border-radius: 8px;
+}
+
+:where(select, input, textarea):disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+:where(input[type='checkbox'], input[type='radio']) {
+  accent-color: #3868d5;
+}
+
+:where(input[type='file']) {
+  max-width: 100%;
+  color: #59697a;
+  font: inherit;
+  font-size: 14px;
+}
+
+:where(input[type='file'])::file-selector-button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  color: #2466a5;
+  font: inherit;
+  font-weight: 600;
+  background: #f0f7ff;
+  border: 1px solid #a6c8e5;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.review-item > label:has(input[type='checkbox']) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0;
+}
+
 .prototype-shell { min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr); }
 .prototype-sidebar { background: #172639; color: #d8e0ea; padding: 26px 15px; display: flex; flex-direction: column; }
 .prototype-brand { display: flex; gap: 12px; align-items: center; padding: 0 10px; }

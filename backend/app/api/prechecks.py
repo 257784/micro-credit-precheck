@@ -6,6 +6,7 @@ from app.schemas.policy import QuestionRequest, QuestionResponse
 from app.schemas.materials import CheckRequest
 from app.services.reviews import ReviewConflict, ReviewInputError
 from app.api import dependencies
+from app.core.redaction import redact_value
 
 router = APIRouter()
 
@@ -34,7 +35,7 @@ def check_materials(application_id: str, request: Request, submission: CheckRequ
         result = execute(detail, CheckRequest())
         record = dependencies.repository.save_material_check(application_id, request.state.principal.user_id,
             signature, detail.application.condition_facts, result)
-        return {**result, 'check_id': record['check_id'], 'checked_at': record['checked_at']}
+        return redact_value({**result, 'check_id': record['check_id'], 'checked_at': record['checked_at']})
     except ReviewConflict as error:
         raise HTTPException(409, str(error)) from None
     except WorkflowInputError as error:
@@ -70,7 +71,7 @@ def risk_precheck(application_id: str, request: Request, submission: CheckReques
             result['saved_report_id'] = report.report_id
         else:
             result['saved_report_id'] = None
-        return result
+        return redact_value(result)
     except ReviewConflict as error:
         raise HTTPException(409, str(error)) from None
     except WorkflowInputError as error:

@@ -6,6 +6,7 @@ from app.schemas.policy import QuestionRequest, QuestionResponse
 from app.schemas.materials import CheckRequest
 from app.services.reviews import ReviewConflict, ReviewInputError
 from app.api import dependencies
+from app.core.redaction import redact_value
 
 router = APIRouter()
 
@@ -32,7 +33,7 @@ def start_review(
         raise HTTPException(status_code=409, detail=str(error)) from error
     if detail is None:
         raise HTTPException(status_code=404, detail="申请不存在")
-    return detail
+    return redact_value(detail.model_dump())
 
 
 @router.post("/api/applications/{application_id}/review/submit", response_model=ApplicationDetail)
@@ -54,4 +55,4 @@ def submit_review(
         raise HTTPException(status_code=422, detail=str(error)) from error
     if detail is None:
         raise HTTPException(status_code=404, detail="申请不存在")
-    return detail
+    return redact_value(detail.model_dump())

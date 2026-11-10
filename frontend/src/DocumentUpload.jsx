@@ -23,6 +23,7 @@ export default function DocumentUpload({ applicationId, readOnly = false, onUplo
   }
   return <section className="review-item" aria-label="真实文件上传">
     <h3>上传教学材料原件</h3><p>PDF或DOCX，最大10MB；扫描件需另行OCR。字段按“字段名：内容”识别，未知版式需人工核验。</p>
+    <p>页面对常见手机号和身份证号做部分隐藏；下载的材料原件未脱敏，请仅使用虚构教学数据。</p>
     {!readOnly && <><select aria-label="上传材料类别" value={category} onChange={e=>setCategory(e.target.value)}>{Object.entries(types).map(([key,value])=><option key={key} value={key}>{value}</option>)}</select>
     <input type="file" accept=".pdf,.docx" onChange={e=>setFile(e.target.files[0])}/>
     <button type="button" onClick={upload} disabled={busy||!file}>{busy?'上传中…':'上传并解析'}</button></>}

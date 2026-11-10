@@ -38,6 +38,7 @@ class ReviewService:
                         reviewer_id=action["reviewer_id"],
                         reviewed_at=action["occurred_at"],
                         review_result=action["kind"],
+                        overall_adoption=action.get('overall_adoption'),
                         review_note=action["review_note"],
                         item_reviews=json.loads(action["item_reviews_json"]),
                     )
@@ -64,6 +65,8 @@ class ReviewService:
         note = submission.review_note.strip()
         if not note:
             raise ReviewInputError("请填写人工复核意见或补件原因。")
+        if submission.review_result == 'complete' and submission.overall_adoption is None:
+            raise ReviewInputError('请对 AI 报告选择采纳、部分采纳或不采纳。')
         latest_report = max(
             detail.reports,
             key=lambda report: datetime.fromisoformat(report.generated_at),
@@ -80,8 +83,8 @@ class ReviewService:
         if set(submitted_ids) != expected_ids or len(submitted_ids) != len(expected_ids):
             raise ReviewInputError("请逐项确认或修正当前报告的所有关注项。")
         for item in submission.item_reviews:
-            if item.decision == "corrected" and not (item.correction_note or "").strip():
-                raise ReviewInputError("修正关注项时请填写修正说明。")
+            if item.decision in ("corrected", "partial", "rejected") and not (item.correction_note or "").strip():
+                raise ReviewInputError("修正、部分采纳或不采纳时请填写说明。")
         self.store.append(
             application_id,
             detail.application.status,
@@ -91,5 +94,6 @@ class ReviewService:
             latest_report.report_id if latest_report else None,
             note,
             submission.item_reviews,
+            submission.overall_adoption,
         )
         return self.get_application(application_id)
